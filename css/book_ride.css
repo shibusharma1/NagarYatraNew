@@ -1,0 +1,50 @@
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+  .card:hover {
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+  }
+  .btn-theme {
+    background-color: #092448;
+    color: white;
+  }
+  .map-container {
+    height: 300px;
+    width: 100%;
+    border-radius: 15px;
+  }
+  .search-btn{
+    background-color: #092448;
+    color: white;
+  }
+  .title{
+    text-align: left;
+    color: #092448;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .recent-rides{
+    text-align: left;
+    
+  }
+  .vehicle-option {
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.vehicle-option img {
+    /* max-width: 80px; */
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.vehicle-option.selected {
+    border-color: #092448;
+    background-color: #f0f8ff;
+}

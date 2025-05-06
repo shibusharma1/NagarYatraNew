@@ -1,0 +1,81 @@
+/* assets/css/vehicle-form-style.css */
+
+.vehicle-form-style {
+    /* max-width: 700px; */
+    /* margin: 30px auto; */
+    /* padding: 25px; */
+    background-color: #ffffff;
+    /* border: 2px solid #092448; */
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 12px rgba(9, 36, 72, 0.2); */
+    /* font-family: 'Segoe UI', sans-serif; */
+}
+
+.vehicle-form-style h2 {
+    color: #092448;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.vehicle-form-style .form-group {
+    margin-bottom: 20px;
+}
+
+.vehicle-form-style .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #092448;
+}
+
+.vehicle-form-style .form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.vehicle-form-style .form-input:focus {
+    border-color: #092448;
+    outline: none;
+}
+
+.vehicle-form-style .custom-btn {
+    width: 100%;
+    background-color: #092448;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vehicle-form-style .custom-btn:hover {
+    background-color: #0c3b67;
+}
+
+.vehicle-form-style .error {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
+    display: block;
+}
+
+.vehicle-form-style textarea.form-input {
+    height: 100px;
+    resize: vertical;
+}
+
+.note-toolbar {
+    border-color: #092448 !important;
+    background-color: #f9f9f9;
+}
+
+.note-editor.note-frame {
+    border-color: #092448;
+}

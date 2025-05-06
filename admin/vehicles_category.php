@@ -1,0 +1,76 @@
+<?php
+$title = "NagarYatra | Vehicle Category";
+$current_page = "vehicles_category";
+
+include_once 'master_header.php';
+require_once '../config/connection.php';
+
+// Fetch all vehicle categories
+$sql = "SELECT * FROM vehicle_category WHERE 1";
+$result = mysqli_query($conn, $sql);
+?>
+
+<div class="table-heading">
+  <div class="heading-2">
+    <h2>Vehicle Categories</h2>
+  </div>
+  <div class="add-button">
+    <a href="add_vehicles_category.php">
+      <button><i class="fa fa-plus" aria-hidden="true"></i> Add Category</button>
+    </a>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Image</th>
+      <th>Seats</th>
+      <th>Min Cost (Rs)</th>
+      <th>Per KM Cost (Rs)</th>
+      <th>Fuel Type</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    if (mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <tr>
+          <td><?php echo $row['id']; ?></td>
+          <td><?php echo htmlspecialchars($row['name']); ?></td>
+          <td>
+            <?php if (!empty($row['image'])): ?>
+              <img src="<?php echo htmlspecialchars($row['image']); ?>" alt="Image" style="height: 60px; border:1px solid #ccc;" />
+            <?php else: ?>
+              N/A
+            <?php endif; ?>
+          </td>
+          <td><?php echo $row['seats']; ?></td>
+          <td><?php echo $row['min_cost']; ?></td>
+          <td><?php echo $row['per_km_cost']; ?></td>
+          <td><?php echo htmlspecialchars($row['Fuel_type']); ?></td>
+          <td>
+            <!-- Edit Action -->
+            <a href="edit_vehicle_category.php?id=<?php echo $row['id']; ?>" class="action-btn">
+              <i class="fa fa-edit" aria-hidden="true"></i>
+            </a>
+
+            <!-- Delete Action (Confirmation dialog) -->
+            <a href="delete_vehicle_category.php?id=<?php echo $row['id']; ?>"
+              onclick="return confirm('Are you sure you want to delete this vehicle?');" class="action-btn">
+              <i class="fa fa-trash-o" aria-hidden="true"></i></td>
+        </tr>
+        <?php
+      }
+    } else {
+      echo "<tr><td colspan='8'>No vehicle categories available.</td></tr>";
+    }
+    ?>
+  </tbody>
+</table>
+
+<?php include_once 'master_footer.php'; ?>

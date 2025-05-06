@@ -1,0 +1,95 @@
+/* Styling for the Invite Friends Section */
+.invite-section {
+    /* background-color: #092448; */
+    color:  #092448;
+    /* padding: 30px; */
+    /* border-radius: 10px; */
+    /* box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); */
+    width: 100%;
+    max-width: 500px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.invite-content h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.invite-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.invite-code {
+    margin-bottom: 20px;
+}
+
+.invite-code label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.input-field {
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.copy-btn {
+    padding: 10px 20px;
+    background-color: #092448;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #1a3d7f;
+}
+
+.invite-btn-container {
+    margin-top: 20px;
+}
+
+.invite-btn {
+    padding: 12px 20px;
+    background-color: #092448;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.invite-btn:hover {
+    background-color: #1a3d7f;
+}
+
+.terms {
+    font-size: 14px;
+    margin-top: 20px;
+    /* color: #ddd; */
+}
+
+.terms a {
+    /* color: #fff; */
+    text-decoration: underline;
+}
+
+.terms a:hover {
+    color: #1a3d7f;
+}

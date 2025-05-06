@@ -1,0 +1,1802 @@
+[
+    {
+      "name": "Raju Auto Care",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 12,
+      "contact": "+9779800000001",
+      "lat": 27.17699,
+      "lng": 83.042854
+    },
+    {
+      "name": "Kiran Auto Care",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 12,
+      "contact": "+9779800000002",
+      "lat": 26.877969,
+      "lng": 84.59717
+    },
+    {
+      "name": "Kiran Auto Service",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 15,
+      "contact": "+9779800000003",
+      "lat": 26.900169,
+      "lng": 85.758881
+    },
+    {
+      "name": "Ajay Auto Repair",
+      "province": "Bagmati",
+      "district": "Hetauda",
+      "ward": 9,
+      "contact": "+9779800000004",
+      "lat": 29.169003,
+      "lng": 83.634071
+    },
+    {
+      "name": "Hari Auto Service",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 12,
+      "contact": "+9779800000005",
+      "lat": 30.024312,
+      "lng": 82.377267
+    },
+    {
+      "name": "Raju Auto Garage",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 2,
+      "contact": "+9779800000006",
+      "lat": 29.358906,
+      "lng": 80.744108
+    },
+    {
+      "name": "Bikash Auto Repair",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 19,
+      "contact": "+9779800000007",
+      "lat": 27.599253,
+      "lng": 84.810155
+    },
+    {
+      "name": "Bikash Auto Garage",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 2,
+      "contact": "+9779800000008",
+      "lat": 27.566489,
+      "lng": 85.64857
+    },
+    {
+      "name": "Ajay Auto Repair",
+      "province": "Bagmati",
+      "district": "Chitwan",
+      "ward": 2,
+      "contact": "+9779800000009",
+      "lat": 26.232598,
+      "lng": 80.668064
+    },
+    {
+      "name": "Rita Auto Service",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 5,
+      "contact": "+9779800000010",
+      "lat": 27.502241,
+      "lng": 80.344058
+    },
+    {
+      "name": "Hari Auto Garage",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 2,
+      "contact": "+9779800000011",
+      "lat": 29.536351,
+      "lng": 82.589288
+    },
+    {
+      "name": "Bikash Auto Garage",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 5,
+      "contact": "+9779800000012",
+      "lat": 30.239191,
+      "lng": 80.403938
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Gandaki",
+      "district": "Gorkha",
+      "ward": 7,
+      "contact": "+9779800000013",
+      "lat": 30.477773,
+      "lng": 87.967975
+    },
+    {
+      "name": "Sita Auto Repair",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 12,
+      "contact": "+9779800000014",
+      "lat": 28.563202,
+      "lng": 81.5088
+    },
+    {
+      "name": "Muna Auto Care",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 19,
+      "contact": "+9779800000015",
+      "lat": 29.887178,
+      "lng": 83.192908
+    },
+    {
+      "name": "Rita Auto Repair",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 6,
+      "contact": "+9779800000016",
+      "lat": 26.783098,
+      "lng": 82.051603
+    },
+    {
+      "name": "Hari Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 10,
+      "contact": "+9779800000017",
+      "lat": 26.326893,
+      "lng": 85.05213
+    },
+    {
+      "name": "Manoj Auto Garage",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 13,
+      "contact": "+9779800000018",
+      "lat": 28.559174,
+      "lng": 81.94271
+    },
+    {
+      "name": "Muna Auto Service",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 10,
+      "contact": "+9779800000019",
+      "lat": 30.190893,
+      "lng": 82.819837
+    },
+    {
+      "name": "Rita Auto Service",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 14,
+      "contact": "+9779800000020",
+      "lat": 26.983317,
+      "lng": 84.382557
+    },
+    {
+      "name": "Muna Auto Repair",
+      "province": "Sudurpashchim",
+      "district": "Dadeldhura",
+      "ward": 20,
+      "contact": "+9779800000021",
+      "lat": 28.326727,
+      "lng": 86.436683
+    },
+    {
+      "name": "Shiva Auto Care",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 14,
+      "contact": "+9779800000022",
+      "lat": 27.439016,
+      "lng": 82.448582
+    },
+    {
+      "name": "Kiran Auto Service",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 8,
+      "contact": "+9779800000023",
+      "lat": 26.883185,
+      "lng": 85.626095
+    },
+    {
+      "name": "Bikash Auto Repair",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 6,
+      "contact": "+9779800000024",
+      "lat": 27.910234,
+      "lng": 85.060202
+    },
+    {
+      "name": "Manoj Auto Service",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 7,
+      "contact": "+9779800000025",
+      "lat": 29.411695,
+      "lng": 82.224572
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 15,
+      "contact": "+9779800000026",
+      "lat": 28.40681,
+      "lng": 80.72386
+    },
+    {
+      "name": "Ajay Auto Service",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 5,
+      "contact": "+9779800000027",
+      "lat": 26.369184,
+      "lng": 80.393766
+    },
+    {
+      "name": "Shiva Auto Care",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 5,
+      "contact": "+9779800000028",
+      "lat": 27.229278,
+      "lng": 85.932571
+    },
+    {
+      "name": "Kiran Auto Garage",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 18,
+      "contact": "+9779800000029",
+      "lat": 26.442607,
+      "lng": 81.425986
+    },
+    {
+      "name": "Sita Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 5,
+      "contact": "+9779800000030",
+      "lat": 26.36035,
+      "lng": 80.729675
+    },
+    {
+      "name": "Rita Auto Repair",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 10,
+      "contact": "+9779800000031",
+      "lat": 26.068959,
+      "lng": 81.26166
+    },
+    {
+      "name": "Muna Auto Service",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 12,
+      "contact": "+9779800000032",
+      "lat": 26.777285,
+      "lng": 84.763589
+    },
+    {
+      "name": "Muna Auto Repair",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 10,
+      "contact": "+9779800000033",
+      "lat": 26.032516,
+      "lng": 80.279696
+    },
+    {
+      "name": "Ajay Auto Care",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 2,
+      "contact": "+9779800000034",
+      "lat": 27.98104,
+      "lng": 80.358909
+    },
+    {
+      "name": "Raju Auto Repair",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 15,
+      "contact": "+9779800000035",
+      "lat": 27.930715,
+      "lng": 86.774234
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Sudurpashchim",
+      "district": "Mahendranagar",
+      "ward": 2,
+      "contact": "+9779800000036",
+      "lat": 29.11909,
+      "lng": 81.547609
+    },
+    {
+      "name": "Hari Auto Repair",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 6,
+      "contact": "+9779800000037",
+      "lat": 26.376678,
+      "lng": 84.092753
+    },
+    {
+      "name": "Raju Auto Care",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 2,
+      "contact": "+9779800000038",
+      "lat": 28.291107,
+      "lng": 82.72485
+    },
+    {
+      "name": "Raju Auto Service",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 19,
+      "contact": "+9779800000039",
+      "lat": 29.677923,
+      "lng": 85.791826
+    },
+    {
+      "name": "Kiran Auto Service",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 11,
+      "contact": "+9779800000040",
+      "lat": 29.935605,
+      "lng": 86.143909
+    },
+    {
+      "name": "Ajay Auto Service",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 9,
+      "contact": "+9779800000041",
+      "lat": 28.548965,
+      "lng": 86.204919
+    },
+    {
+      "name": "Shiva Auto Service",
+      "province": "Bagmati",
+      "district": "Kathmandu",
+      "ward": 20,
+      "contact": "+9779800000042",
+      "lat": 26.031553,
+      "lng": 81.560996
+    },
+    {
+      "name": "Raju Auto Garage",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 5,
+      "contact": "+9779800000043",
+      "lat": 26.875437,
+      "lng": 85.949417
+    },
+    {
+      "name": "Rita Auto Service",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 9,
+      "contact": "+9779800000044",
+      "lat": 28.630485,
+      "lng": 86.574415
+    },
+    {
+      "name": "Rita Auto Repair",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 4,
+      "contact": "+9779800000045",
+      "lat": 30.420678,
+      "lng": 86.61695
+    },
+    {
+      "name": "Muna Auto Care",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 11,
+      "contact": "+9779800000046",
+      "lat": 27.04588,
+      "lng": 84.658168
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 3,
+      "contact": "+9779800000047",
+      "lat": 28.231012,
+      "lng": 83.698164
+    },
+    {
+      "name": "Raju Auto Repair",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 9,
+      "contact": "+9779800000048",
+      "lat": 26.823147,
+      "lng": 86.752228
+    },
+    {
+      "name": "Sita Auto Care",
+      "province": "Gandaki",
+      "district": "Gorkha",
+      "ward": 3,
+      "contact": "+9779800000049",
+      "lat": 30.392525,
+      "lng": 87.787823
+    },
+    {
+      "name": "Shiva Auto Repair",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 5,
+      "contact": "+9779800000050",
+      "lat": 29.898291,
+      "lng": 85.226246
+    },
+    {
+      "name": "Hari Auto Care",
+      "province": "Bagmati",
+      "district": "Hetauda",
+      "ward": 12,
+      "contact": "+9779800000051",
+      "lat": 28.472217,
+      "lng": 85.298638
+    },
+    {
+      "name": "Sita Auto Service",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 14,
+      "contact": "+9779800000052",
+      "lat": 28.120687,
+      "lng": 81.590919
+    },
+    {
+      "name": "Manoj Auto Service",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 15,
+      "contact": "+9779800000053",
+      "lat": 28.998983,
+      "lng": 81.5781
+    },
+    {
+      "name": "Kiran Auto Service",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 6,
+      "contact": "+9779800000054",
+      "lat": 26.854754,
+      "lng": 83.790809
+    },
+    {
+      "name": "Rita Auto Repair",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 6,
+      "contact": "+9779800000055",
+      "lat": 26.389545,
+      "lng": 81.878233
+    },
+    {
+      "name": "Raju Auto Repair",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 14,
+      "contact": "+9779800000056",
+      "lat": 27.79198,
+      "lng": 87.098418
+    },
+    {
+      "name": "Bikash Auto Service",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 16,
+      "contact": "+9779800000057",
+      "lat": 28.017481,
+      "lng": 80.841487
+    },
+    {
+      "name": "Ajay Auto Care",
+      "province": "Gandaki",
+      "district": "Gorkha",
+      "ward": 16,
+      "contact": "+9779800000058",
+      "lat": 29.558363,
+      "lng": 81.276202
+    },
+    {
+      "name": "Raju Auto Garage",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 18,
+      "contact": "+9779800000059",
+      "lat": 27.057563,
+      "lng": 87.313913
+    },
+    {
+      "name": "Kiran Auto Repair",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 7,
+      "contact": "+9779800000060",
+      "lat": 28.232159,
+      "lng": 84.59429
+    },
+    {
+      "name": "Rita Auto Care",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 16,
+      "contact": "+9779800000061",
+      "lat": 28.911156,
+      "lng": 87.188424
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Bagmati",
+      "district": "Bhaktapur",
+      "ward": 12,
+      "contact": "+9779800000062",
+      "lat": 29.185116,
+      "lng": 87.664961
+    },
+    {
+      "name": "Ajay Auto Repair",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 15,
+      "contact": "+9779800000063",
+      "lat": 29.197856,
+      "lng": 82.993871
+    },
+    {
+      "name": "Ajay Auto Repair",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 7,
+      "contact": "+9779800000064",
+      "lat": 30.002622,
+      "lng": 85.133393
+    },
+    {
+      "name": "Hari Auto Service",
+      "province": "Bagmati",
+      "district": "Chitwan",
+      "ward": 12,
+      "contact": "+9779800000065",
+      "lat": 28.441048,
+      "lng": 81.387
+    },
+    {
+      "name": "Shiva Auto Service",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 3,
+      "contact": "+9779800000066",
+      "lat": 29.941767,
+      "lng": 84.461381
+    },
+    {
+      "name": "Hari Auto Repair",
+      "province": "Sudurpashchim",
+      "district": "Dadeldhura",
+      "ward": 4,
+      "contact": "+9779800000067",
+      "lat": 30.13214,
+      "lng": 80.943634
+    },
+    {
+      "name": "Rita Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 3,
+      "contact": "+9779800000068",
+      "lat": 28.557018,
+      "lng": 85.89451
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Bagmati",
+      "district": "Hetauda",
+      "ward": 5,
+      "contact": "+9779800000069",
+      "lat": 28.725701,
+      "lng": 82.642921
+    },
+    {
+      "name": "Rita Auto Repair",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 7,
+      "contact": "+9779800000070",
+      "lat": 29.300041,
+      "lng": 84.654807
+    },
+    {
+      "name": "Raju Auto Service",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 6,
+      "contact": "+9779800000071",
+      "lat": 27.661437,
+      "lng": 82.428661
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 17,
+      "contact": "+9779800000072",
+      "lat": 26.309236,
+      "lng": 86.242438
+    },
+    {
+      "name": "Hari Auto Repair",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 13,
+      "contact": "+9779800000073",
+      "lat": 26.436227,
+      "lng": 87.567755
+    },
+    {
+      "name": "Muna Auto Care",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 17,
+      "contact": "+9779800000074",
+      "lat": 26.841723,
+      "lng": 84.711317
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 6,
+      "contact": "+9779800000075",
+      "lat": 30.0999,
+      "lng": 87.694463
+    },
+    {
+      "name": "Ajay Auto Garage",
+      "province": "Sudurpashchim",
+      "district": "Mahendranagar",
+      "ward": 15,
+      "contact": "+9779800000076",
+      "lat": 30.459065,
+      "lng": 87.846319
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 17,
+      "contact": "+9779800000077",
+      "lat": 26.0846,
+      "lng": 86.355388
+    },
+    {
+      "name": "Ajay Auto Garage",
+      "province": "Gandaki",
+      "district": "Gorkha",
+      "ward": 13,
+      "contact": "+9779800000078",
+      "lat": 30.11955,
+      "lng": 84.124426
+    },
+    {
+      "name": "Raju Auto Care",
+      "province": "Sudurpashchim",
+      "district": "Dadeldhura",
+      "ward": 10,
+      "contact": "+9779800000079",
+      "lat": 26.368739,
+      "lng": 87.624436
+    },
+    {
+      "name": "Manoj Auto Garage",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 14,
+      "contact": "+9779800000080",
+      "lat": 27.009069,
+      "lng": 85.800502
+    },
+    {
+      "name": "Kiran Auto Garage",
+      "province": "Bagmati",
+      "district": "Bhaktapur",
+      "ward": 10,
+      "contact": "+9779800000081",
+      "lat": 26.197508,
+      "lng": 80.665124
+    },
+    {
+      "name": "Kiran Auto Service",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 12,
+      "contact": "+9779800000082",
+      "lat": 26.617462,
+      "lng": 86.808581
+    },
+    {
+      "name": "Manoj Auto Care",
+      "province": "Sudurpashchim",
+      "district": "Dhangadhi",
+      "ward": 19,
+      "contact": "+9779800000083",
+      "lat": 30.4096,
+      "lng": 86.4086
+    },
+    {
+      "name": "Sita Auto Garage",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 8,
+      "contact": "+9779800000084",
+      "lat": 26.801011,
+      "lng": 83.428478
+    },
+    {
+      "name": "Sita Auto Service",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 16,
+      "contact": "+9779800000085",
+      "lat": 26.04819,
+      "lng": 83.63271
+    },
+    {
+      "name": "Rita Auto Garage",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 11,
+      "contact": "+9779800000086",
+      "lat": 30.310687,
+      "lng": 84.736966
+    },
+    {
+      "name": "Bikash Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 10,
+      "contact": "+9779800000087",
+      "lat": 28.232935,
+      "lng": 85.047369
+    },
+    {
+      "name": "Rita Auto Garage",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 19,
+      "contact": "+9779800000088",
+      "lat": 27.299403,
+      "lng": 81.421735
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 10,
+      "contact": "+9779800000089",
+      "lat": 27.215644,
+      "lng": 81.806905
+    },
+    {
+      "name": "Raju Auto Service",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 11,
+      "contact": "+9779800000090",
+      "lat": 27.38257,
+      "lng": 83.017614
+    },
+    {
+      "name": "Shiva Auto Repair",
+      "province": "Bagmati",
+      "district": "Chitwan",
+      "ward": 10,
+      "contact": "+9779800000091",
+      "lat": 29.359517,
+      "lng": 85.373313
+    },
+    {
+      "name": "Ajay Auto Care",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 11,
+      "contact": "+9779800000092",
+      "lat": 30.43617,
+      "lng": 87.895785
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 13,
+      "contact": "+9779800000093",
+      "lat": 26.851628,
+      "lng": 80.67574
+    },
+    {
+      "name": "Kiran Auto Service",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 4,
+      "contact": "+9779800000094",
+      "lat": 27.692148,
+      "lng": 80.279002
+    },
+    {
+      "name": "Kiran Auto Service",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 1,
+      "contact": "+9779800000095",
+      "lat": 28.16329,
+      "lng": 87.818605
+    },
+    {
+      "name": "Sita Auto Repair",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 9,
+      "contact": "+9779800000096",
+      "lat": 28.250535,
+      "lng": 81.693041
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 1,
+      "contact": "+9779800000097",
+      "lat": 29.030708,
+      "lng": 87.740378
+    },
+    {
+      "name": "Raju Auto Service",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 12,
+      "contact": "+9779800000098",
+      "lat": 26.07055,
+      "lng": 81.428529
+    },
+    {
+      "name": "Ajay Auto Garage",
+      "province": "Gandaki",
+      "district": "Gorkha",
+      "ward": 4,
+      "contact": "+9779800000099",
+      "lat": 28.021946,
+      "lng": 84.055611
+    },
+    {
+      "name": "Raju Auto Repair",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 1,
+      "contact": "+9779800000100",
+      "lat": 29.143793,
+      "lng": 82.200477
+    },
+    {
+      "name": "Shiva Auto Garage",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 10,
+      "contact": "+9779800000101",
+      "lat": 29.824162,
+      "lng": 85.241777
+    },
+    {
+      "name": "Sita Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 20,
+      "contact": "+9779800000102",
+      "lat": 26.943804,
+      "lng": 82.023031
+    },
+    {
+      "name": "Hari Auto Service",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 9,
+      "contact": "+9779800000103",
+      "lat": 27.577176,
+      "lng": 81.949215
+    },
+    {
+      "name": "Manoj Auto Care",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 7,
+      "contact": "+9779800000104",
+      "lat": 26.195081,
+      "lng": 83.197743
+    },
+    {
+      "name": "Sita Auto Repair",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 17,
+      "contact": "+9779800000105",
+      "lat": 26.506684,
+      "lng": 87.175418
+    },
+    {
+      "name": "Kiran Auto Care",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 12,
+      "contact": "+9779800000106",
+      "lat": 28.374728,
+      "lng": 83.572909
+    },
+    {
+      "name": "Manoj Auto Care",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 18,
+      "contact": "+9779800000107",
+      "lat": 30.032379,
+      "lng": 85.931092
+    },
+    {
+      "name": "Manoj Auto Garage",
+      "province": "Bagmati",
+      "district": "Hetauda",
+      "ward": 19,
+      "contact": "+9779800000108",
+      "lat": 30.410344,
+      "lng": 82.84525
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 17,
+      "contact": "+9779800000109",
+      "lat": 30.029781,
+      "lng": 85.244227
+    },
+    {
+      "name": "Sita Auto Care",
+      "province": "Bagmati",
+      "district": "Lalitpur",
+      "ward": 11,
+      "contact": "+9779800000110",
+      "lat": 27.525937,
+      "lng": 82.1929
+    },
+    {
+      "name": "Hari Auto Care",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 7,
+      "contact": "+9779800000111",
+      "lat": 28.541533,
+      "lng": 81.601918
+    },
+    {
+      "name": "Sita Auto Repair",
+      "province": "Sudurpashchim",
+      "district": "Dhangadhi",
+      "ward": 11,
+      "contact": "+9779800000112",
+      "lat": 29.051863,
+      "lng": 83.373171
+    },
+    {
+      "name": "Kiran Auto Care",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 10,
+      "contact": "+9779800000113",
+      "lat": 26.371607,
+      "lng": 80.985291
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Sudurpashchim",
+      "district": "Mahendranagar",
+      "ward": 16,
+      "contact": "+9779800000114",
+      "lat": 29.358367,
+      "lng": 83.122894
+    },
+    {
+      "name": "Manoj Auto Garage",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 6,
+      "contact": "+9779800000115",
+      "lat": 26.599994,
+      "lng": 81.2459
+    },
+    {
+      "name": "Hari Auto Garage",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 2,
+      "contact": "+9779800000116",
+      "lat": 26.935085,
+      "lng": 81.795764
+    },
+    {
+      "name": "Muna Auto Care",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 2,
+      "contact": "+9779800000117",
+      "lat": 29.89235,
+      "lng": 80.189662
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Sudurpashchim",
+      "district": "Mahendranagar",
+      "ward": 12,
+      "contact": "+9779800000118",
+      "lat": 27.846396,
+      "lng": 83.631015
+    },
+    {
+      "name": "Hari Auto Service",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 15,
+      "contact": "+9779800000119",
+      "lat": 26.750189,
+      "lng": 82.419549
+    },
+    {
+      "name": "Hari Auto Repair",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 5,
+      "contact": "+9779800000120",
+      "lat": 29.485246,
+      "lng": 84.845441
+    },
+    {
+      "name": "Ajay Auto Service",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 16,
+      "contact": "+9779800000121",
+      "lat": 29.703718,
+      "lng": 81.628769
+    },
+    {
+      "name": "Kiran Auto Garage",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 7,
+      "contact": "+9779800000122",
+      "lat": 29.689647,
+      "lng": 81.727291
+    },
+    {
+      "name": "Raju Auto Service",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 18,
+      "contact": "+9779800000123",
+      "lat": 29.824906,
+      "lng": 81.554213
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 15,
+      "contact": "+9779800000124",
+      "lat": 28.285176,
+      "lng": 81.268619
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 3,
+      "contact": "+9779800000125",
+      "lat": 27.525204,
+      "lng": 87.962607
+    },
+    {
+      "name": "Sita Auto Care",
+      "province": "Bagmati",
+      "district": "Hetauda",
+      "ward": 8,
+      "contact": "+9779800000126",
+      "lat": 28.292232,
+      "lng": 82.364036
+    },
+    {
+      "name": "Raju Auto Garage",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 19,
+      "contact": "+9779800000127",
+      "lat": 27.803725,
+      "lng": 86.76422
+    },
+    {
+      "name": "Sita Auto Service",
+      "province": "Sudurpashchim",
+      "district": "Mahendranagar",
+      "ward": 9,
+      "contact": "+9779800000128",
+      "lat": 27.054679,
+      "lng": 86.917091
+    },
+    {
+      "name": "Manoj Auto Care",
+      "province": "Sudurpashchim",
+      "district": "Mahendranagar",
+      "ward": 12,
+      "contact": "+9779800000129",
+      "lat": 30.123496,
+      "lng": 83.622483
+    },
+    {
+      "name": "Raju Auto Garage",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 18,
+      "contact": "+9779800000130",
+      "lat": 29.606349,
+      "lng": 87.861758
+    },
+    {
+      "name": "Raju Auto Service",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 19,
+      "contact": "+9779800000131",
+      "lat": 28.528664,
+      "lng": 87.856156
+    },
+    {
+      "name": "Rita Auto Garage",
+      "province": "Sudurpashchim",
+      "district": "Dhangadhi",
+      "ward": 6,
+      "contact": "+9779800000132",
+      "lat": 28.248392,
+      "lng": 82.806841
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 2,
+      "contact": "+9779800000133",
+      "lat": 26.361312,
+      "lng": 87.582366
+    },
+    {
+      "name": "Ajay Auto Repair",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 16,
+      "contact": "+9779800000134",
+      "lat": 28.621314,
+      "lng": 82.555955
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Bagmati",
+      "district": "Bhaktapur",
+      "ward": 12,
+      "contact": "+9779800000135",
+      "lat": 28.480378,
+      "lng": 83.246458
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 12,
+      "contact": "+9779800000136",
+      "lat": 27.523665,
+      "lng": 87.385585
+    },
+    {
+      "name": "Muna Auto Repair",
+      "province": "Sudurpashchim",
+      "district": "Dhangadhi",
+      "ward": 14,
+      "contact": "+9779800000137",
+      "lat": 26.220143,
+      "lng": 83.995619
+    },
+    {
+      "name": "Shiva Auto Service",
+      "province": "Sudurpashchim",
+      "district": "Dadeldhura",
+      "ward": 11,
+      "contact": "+9779800000138",
+      "lat": 27.40452,
+      "lng": 81.43439
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 8,
+      "contact": "+9779800000139",
+      "lat": 29.804473,
+      "lng": 83.734172
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 15,
+      "contact": "+9779800000140",
+      "lat": 29.041294,
+      "lng": 85.423634
+    },
+    {
+      "name": "Hari Auto Service",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 12,
+      "contact": "+9779800000141",
+      "lat": 28.556779,
+      "lng": 82.212485
+    },
+    {
+      "name": "Shiva Auto Garage",
+      "province": "Bagmati",
+      "district": "Lalitpur",
+      "ward": 1,
+      "contact": "+9779800000142",
+      "lat": 30.166844,
+      "lng": 81.942216
+    },
+    {
+      "name": "Rita Auto Garage",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 8,
+      "contact": "+9779800000143",
+      "lat": 28.48844,
+      "lng": 81.70702
+    },
+    {
+      "name": "Bikash Auto Repair",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 9,
+      "contact": "+9779800000144",
+      "lat": 29.222369,
+      "lng": 80.552665
+    },
+    {
+      "name": "Hari Auto Repair",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 16,
+      "contact": "+9779800000145",
+      "lat": 26.23291,
+      "lng": 80.622475
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 7,
+      "contact": "+9779800000146",
+      "lat": 29.761653,
+      "lng": 80.510737
+    },
+    {
+      "name": "Kiran Auto Care",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 20,
+      "contact": "+9779800000147",
+      "lat": 30.039983,
+      "lng": 87.74327
+    },
+    {
+      "name": "Sita Auto Repair",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 5,
+      "contact": "+9779800000148",
+      "lat": 28.714719,
+      "lng": 81.962603
+    },
+    {
+      "name": "Shiva Auto Garage",
+      "province": "Bagmati",
+      "district": "Kathmandu",
+      "ward": 20,
+      "contact": "+9779800000149",
+      "lat": 28.053396,
+      "lng": 86.402443
+    },
+    {
+      "name": "Shiva Auto Care",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 7,
+      "contact": "+9779800000150",
+      "lat": 26.209675,
+      "lng": 82.391638
+    },
+    {
+      "name": "Bikash Auto Care",
+      "province": "Gandaki",
+      "district": "Gorkha",
+      "ward": 5,
+      "contact": "+9779800000151",
+      "lat": 30.094189,
+      "lng": 84.515424
+    },
+    {
+      "name": "Ajay Auto Garage",
+      "province": "Madhesh",
+      "district": "Birgunj",
+      "ward": 8,
+      "contact": "+9779800000152",
+      "lat": 29.80752,
+      "lng": 83.289051
+    },
+    {
+      "name": "Rita Auto Service",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 9,
+      "contact": "+9779800000153",
+      "lat": 27.147877,
+      "lng": 85.124398
+    },
+    {
+      "name": "Shiva Auto Service",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 3,
+      "contact": "+9779800000154",
+      "lat": 28.030979,
+      "lng": 84.406213
+    },
+    {
+      "name": "Shiva Auto Service",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 20,
+      "contact": "+9779800000155",
+      "lat": 28.044168,
+      "lng": 82.701441
+    },
+    {
+      "name": "Hari Auto Care",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 19,
+      "contact": "+9779800000156",
+      "lat": 29.58036,
+      "lng": 83.280022
+    },
+    {
+      "name": "Raju Auto Service",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 20,
+      "contact": "+9779800000157",
+      "lat": 28.384559,
+      "lng": 83.574587
+    },
+    {
+      "name": "Shiva Auto Repair",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 4,
+      "contact": "+9779800000158",
+      "lat": 27.777721,
+      "lng": 87.69805
+    },
+    {
+      "name": "Raju Auto Care",
+      "province": "Sudurpashchim",
+      "district": "Dadeldhura",
+      "ward": 8,
+      "contact": "+9779800000159",
+      "lat": 27.528067,
+      "lng": 84.01874
+    },
+    {
+      "name": "Hari Auto Service",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 19,
+      "contact": "+9779800000160",
+      "lat": 30.220666,
+      "lng": 82.953571
+    },
+    {
+      "name": "Raju Auto Garage",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 6,
+      "contact": "+9779800000161",
+      "lat": 30.433812,
+      "lng": 85.083521
+    },
+    {
+      "name": "Sita Auto Service",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 9,
+      "contact": "+9779800000162",
+      "lat": 26.975615,
+      "lng": 83.613477
+    },
+    {
+      "name": "Muna Auto Care",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 19,
+      "contact": "+9779800000163",
+      "lat": 26.488827,
+      "lng": 86.460346
+    },
+    {
+      "name": "Muna Auto Service",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 17,
+      "contact": "+9779800000164",
+      "lat": 29.892192,
+      "lng": 82.046071
+    },
+    {
+      "name": "Rita Auto Care",
+      "province": "Bagmati",
+      "district": "Lalitpur",
+      "ward": 19,
+      "contact": "+9779800000165",
+      "lat": 26.218303,
+      "lng": 84.16193
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Madhesh",
+      "district": "Birgunj",
+      "ward": 14,
+      "contact": "+9779800000166",
+      "lat": 27.965724,
+      "lng": 81.784262
+    },
+    {
+      "name": "Kiran Auto Garage",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 13,
+      "contact": "+9779800000167",
+      "lat": 26.857729,
+      "lng": 84.723201
+    },
+    {
+      "name": "Rita Auto Service",
+      "province": "Province 1",
+      "district": "Dharan",
+      "ward": 19,
+      "contact": "+9779800000168",
+      "lat": 29.752369,
+      "lng": 81.74139
+    },
+    {
+      "name": "Ajay Auto Garage",
+      "province": "Bagmati",
+      "district": "Kathmandu",
+      "ward": 11,
+      "contact": "+9779800000169",
+      "lat": 30.19235,
+      "lng": 83.474029
+    },
+    {
+      "name": "Muna Auto Care",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 2,
+      "contact": "+9779800000170",
+      "lat": 26.561716,
+      "lng": 87.031907
+    },
+    {
+      "name": "Kiran Auto Repair",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 10,
+      "contact": "+9779800000171",
+      "lat": 28.902998,
+      "lng": 80.789297
+    },
+    {
+      "name": "Muna Auto Service",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 18,
+      "contact": "+9779800000172",
+      "lat": 26.954534,
+      "lng": 82.379576
+    },
+    {
+      "name": "Muna Auto Service",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 14,
+      "contact": "+9779800000173",
+      "lat": 26.18879,
+      "lng": 84.443296
+    },
+    {
+      "name": "Shiva Auto Garage",
+      "province": "Sudurpashchim",
+      "district": "Dadeldhura",
+      "ward": 3,
+      "contact": "+9779800000174",
+      "lat": 28.998346,
+      "lng": 84.791527
+    },
+    {
+      "name": "Ajay Auto Garage",
+      "province": "Karnali",
+      "district": "Jumla",
+      "ward": 17,
+      "contact": "+9779800000175",
+      "lat": 29.676457,
+      "lng": 80.276409
+    },
+    {
+      "name": "Bikash Auto Service",
+      "province": "Sudurpashchim",
+      "district": "Dhangadhi",
+      "ward": 10,
+      "contact": "+9779800000176",
+      "lat": 28.226972,
+      "lng": 80.150414
+    },
+    {
+      "name": "Hari Auto Repair",
+      "province": "Lumbini",
+      "district": "Dang",
+      "ward": 16,
+      "contact": "+9779800000177",
+      "lat": 26.902033,
+      "lng": 83.215534
+    },
+    {
+      "name": "Rita Auto Care",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 5,
+      "contact": "+9779800000178",
+      "lat": 29.296609,
+      "lng": 83.680489
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 17,
+      "contact": "+9779800000179",
+      "lat": 26.271692,
+      "lng": 84.714145
+    },
+    {
+      "name": "Rita Auto Service",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 13,
+      "contact": "+9779800000180",
+      "lat": 29.719081,
+      "lng": 86.730881
+    },
+    {
+      "name": "Manoj Auto Service",
+      "province": "Bagmati",
+      "district": "Kathmandu",
+      "ward": 16,
+      "contact": "+9779800000181",
+      "lat": 29.728443,
+      "lng": 82.412815
+    },
+    {
+      "name": "Muna Auto Garage",
+      "province": "Province 1",
+      "district": "Itahari",
+      "ward": 1,
+      "contact": "+9779800000182",
+      "lat": 30.334023,
+      "lng": 84.183426
+    },
+    {
+      "name": "Manoj Auto Service",
+      "province": "Sudurpashchim",
+      "district": "Dhangadhi",
+      "ward": 10,
+      "contact": "+9779800000183",
+      "lat": 30.106816,
+      "lng": 84.792689
+    },
+    {
+      "name": "Rita Auto Care",
+      "province": "Karnali",
+      "district": "Dailekh",
+      "ward": 5,
+      "contact": "+9779800000184",
+      "lat": 30.176198,
+      "lng": 83.825726
+    },
+    {
+      "name": "Shiva Auto Repair",
+      "province": "Sudurpashchim",
+      "district": "Dhangadhi",
+      "ward": 18,
+      "contact": "+9779800000185",
+      "lat": 28.272613,
+      "lng": 87.657747
+    },
+    {
+      "name": "Manoj Auto Garage",
+      "province": "Province 1",
+      "district": "Biratnagar",
+      "ward": 16,
+      "contact": "+9779800000186",
+      "lat": 30.015909,
+      "lng": 81.5203
+    },
+    {
+      "name": "Hari Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 11,
+      "contact": "+9779800000187",
+      "lat": 27.788118,
+      "lng": 83.703392
+    },
+    {
+      "name": "Raju Auto Repair",
+      "province": "Lumbini",
+      "district": "Kapilvastu",
+      "ward": 3,
+      "contact": "+9779800000188",
+      "lat": 26.824398,
+      "lng": 84.220975
+    },
+    {
+      "name": "Hari Auto Repair",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 2,
+      "contact": "+9779800000189",
+      "lat": 28.043182,
+      "lng": 82.412638
+    },
+    {
+      "name": "Manoj Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 3,
+      "contact": "+9779800000190",
+      "lat": 28.125115,
+      "lng": 87.690267
+    },
+    {
+      "name": "Shiva Auto Repair",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 6,
+      "contact": "+9779800000191",
+      "lat": 27.215276,
+      "lng": 81.54156
+    },
+    {
+      "name": "Sita Auto Repair",
+      "province": "Karnali",
+      "district": "Surkhet",
+      "ward": 18,
+      "contact": "+9779800000192",
+      "lat": 27.4188,
+      "lng": 85.14244
+    },
+    {
+      "name": "Sita Auto Service",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 8,
+      "contact": "+9779800000193",
+      "lat": 29.712463,
+      "lng": 85.360826
+    },
+    {
+      "name": "Sita Auto Garage",
+      "province": "Madhesh",
+      "district": "Lahan",
+      "ward": 3,
+      "contact": "+9779800000194",
+      "lat": 27.310597,
+      "lng": 86.703554
+    },
+    {
+      "name": "Manoj Auto Repair",
+      "province": "Madhesh",
+      "district": "Janakpur",
+      "ward": 19,
+      "contact": "+9779800000195",
+      "lat": 30.242405,
+      "lng": 85.115205
+    },
+    {
+      "name": "Bikash Auto Repair",
+      "province": "Sudurpashchim",
+      "district": "Mahendranagar",
+      "ward": 9,
+      "contact": "+9779800000196",
+      "lat": 29.524361,
+      "lng": 81.767943
+    },
+    {
+      "name": "Ajay Auto Garage",
+      "province": "Lumbini",
+      "district": "Butwal",
+      "ward": 12,
+      "contact": "+9779800000197",
+      "lat": 28.414875,
+      "lng": 80.631905
+    },
+    {
+      "name": "Bikash Auto Repair",
+      "province": "Gandaki",
+      "district": "Pokhara",
+      "ward": 20,
+      "contact": "+9779800000198",
+      "lat": 26.938889,
+      "lng": 80.059927
+    },
+    {
+      "name": "Manoj Auto Garage",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 8,
+      "contact": "+9779800000199",
+      "lat": 28.306259,
+      "lng": 86.105905
+    },
+    {
+      "name": "Sita Auto Garage",
+      "province": "Gandaki",
+      "district": "Baglung",
+      "ward": 8,
+      "contact": "+9779800000200",
+      "lat": 26.16045,
+      "lng": 83.035959
+    }
+  ]

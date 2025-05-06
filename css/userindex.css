@@ -1,0 +1,85 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+  }
+
+  header img.logo {
+    height: 30px;
+  }
+
+  .header-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .icon-menu {
+    width: 32px;
+    height: 32px;
+    background: #ccc;
+    border-radius: 50%;
+  }
+
+  .services {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 16px 8px;
+  }
+
+  .service {
+    text-align: center;
+    margin: 12px;
+  }
+
+  .service img {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .section {
+    padding: 16px;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: #f3f5f7;
+    border-radius: 12px;
+    padding: 8px 12px;
+    margin: 12px 0;
+  }
+
+  .search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    flex-grow: 1;
+    font-size: 14px;
+  }
+
+  .search-icon {
+    margin-left: 8px;
+    font-size: 18px;
+  }
+
+  .shortcut-bar {
+    display: flex;
+    justify-content: space-between;
+    background: #f3f5f7;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .invite-section {
+    padding: 16px;
+    font-weight: bold;
+  }
