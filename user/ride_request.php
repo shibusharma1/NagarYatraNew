@@ -62,8 +62,11 @@ if ($result && $result->num_rows > 0) {
 
 // Paginate and fetch bookings that are valid
 $limit = 10; // number of records per page
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // current page
+// $page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // current page
+// $offset = ($page - 1) * $limit;
+$page = isset($_GET['page']) && (int)$_GET['page'] > 0 ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
+
 
 if (!empty($validBookingIds)) {
     // Convert valid booking IDs to a comma-separated string
@@ -80,7 +83,7 @@ if (!empty($validBookingIds)) {
     $result = $conn->query($sql);
 
     echo '<table>';
-    echo '<h1>Your Booking Request</h1>';
+    echo '<h2>Booking Request</h2>';
     echo '<tr><th>S.N</th><th>Pickup Location</th><th>Destination Location</th><th>Estimated Km</th><th>Estimated duration</th><th>Estimated cost</th><th>Map</th><th>Action</th></tr>';
     if ($result && $result->num_rows > 0) {
 
@@ -156,7 +159,7 @@ $conn->close();
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
+        h2 {
             text-align: center;
             color: #092448;
         }

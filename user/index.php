@@ -12,86 +12,86 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-// Set $userId correctly based on role
-if ($_SESSION['role'] == 0) {
-    $userId = $_SESSION['id']; // Normal user
-    $sql = "SELECT * 
-            FROM booking 
-            WHERE user_id = ? AND status == 5 
-            ORDER BY id DESC";
-} else {
-    $userId = $_SESSION['vehicle_id']; // Driver or vehicle owner
-    $sql = "SELECT * 
-            FROM booking 
-            WHERE vehicle_id = ? 
-            ORDER BY id DESC";
-}
+// // Set $userId correctly based on role
+// if ($_SESSION['role'] == 0) {
+//     $userId = $_SESSION['id']; // Normal user
+//     $sql = "SELECT * 
+//             FROM booking 
+//             WHERE user_id = ? AND status == 5 
+//             ORDER BY id DESC";
+// } else {
+//     $userId = $_SESSION['vehicle_id']; // Driver or vehicle owner
+//     $sql = "SELECT * 
+//             FROM booking 
+//             WHERE vehicle_id = ? 
+//             ORDER BY id DESC";
+// }
 
-// Pagination setup
-$limit = 5; // items per page
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-$offset = ($page - 1) * $limit;
+// // Pagination setup
+// $limit = 5; // items per page
+// $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+// $offset = ($page - 1) * $limit;
 
-// Modify SQL for pagination
-if ($_SESSION['role'] == 0) {
-    $sql = "SELECT * 
-            FROM booking 
-            WHERE user_id = ? AND status != 2 
-            ORDER BY id DESC 
-            LIMIT $limit OFFSET $offset";
-} else {
-    $sql = "SELECT * 
-            FROM booking 
-            WHERE vehicle_id = ? 
-            ORDER BY id DESC 
-            LIMIT $limit OFFSET $offset";
-}
+// // Modify SQL for pagination
+// if ($_SESSION['role'] == 0) {
+//     $sql = "SELECT * 
+//             FROM booking 
+//             WHERE user_id = ? AND status != 2 
+//             ORDER BY id DESC 
+//             LIMIT $limit OFFSET $offset";
+// } else {
+//     $sql = "SELECT * 
+//             FROM booking 
+//             WHERE vehicle_id = ? 
+//             ORDER BY id DESC 
+//             LIMIT $limit OFFSET $offset";
+// }
 
-// Prepare and execute query
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("SQL prepare failed: " . $conn->error);
-}
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
-$bookings = $result->fetch_all(MYSQLI_ASSOC);
-$stmt->close();
+// // Prepare and execute query
+// $stmt = $conn->prepare($sql);
+// if (!$stmt) {
+//     die("SQL prepare failed: " . $conn->error);
+// }
+// $stmt->bind_param("i", $userId);
+// $stmt->execute();
+// $result = $stmt->get_result();
+// $bookings = $result->fetch_all(MYSQLI_ASSOC);
+// $stmt->close();
 
-// Count total records for pagination
-if ($_SESSION['role'] == 0) {
-    $count_sql = "SELECT COUNT(*) as total 
-                  FROM booking 
-                  WHERE user_id = $userId AND status != 2";
-} else {
-    $count_sql = "SELECT COUNT(*) as total 
-                  FROM booking 
-                  WHERE vehicle_id = $userId";
-}
-$count_result = $conn->query($count_sql);
-$total_records = $count_result->fetch_assoc()['total'];
-$total_pages = ceil($total_records / $limit);
+// // Count total records for pagination
+// if ($_SESSION['role'] == 0) {
+//     $count_sql = "SELECT COUNT(*) as total 
+//                   FROM booking 
+//                   WHERE user_id = $userId AND status != 2";
+// } else {
+//     $count_sql = "SELECT COUNT(*) as total 
+//                   FROM booking 
+//                   WHERE vehicle_id = $userId";
+// }
+// $count_result = $conn->query($count_sql);
+// $total_records = $count_result->fetch_assoc()['total'];
+// $total_pages = ceil($total_records / $limit);
 
 
 ?>
 <?php if (isset($_SESSION['login_success'])): ?>
     <script>
-         const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
 
-    Toast.fire({
-        icon: "success",
-        title: "Login successful"
-    });
+        Toast.fire({
+            icon: "success",
+            title: "Login successful"
+        });
     </script>
     <?php unset($_SESSION['login_success']); ?>
 <?php endif; ?>
@@ -136,13 +136,456 @@ $total_pages = ceil($total_records / $limit);
     </script>
 
 </div>
-<!-- <div class="icon-menu"></div> -->
 </header>
+
+
+
+
+<!-- Only to show the driver -->
+<?php
+if ($_SESSION['role'] == 1) {
+    ?>
+    <!-- Users details -->
+    <div class="row my-5">
+        <!-- Total Users Card -->
+        <div class="col-lg-3">
+            <div class="s7__widget-three card shadow-sm  card-info">
+                <div class="content">
+                    <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                        <?php
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT COUNT(id) AS total_bookings FROM booking WHERE user_id = $userId AND is_delete = 0";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $totalBookings = $row['total_bookings'];
+                            echo $totalBookings;
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                        ?>
+                    </h1>
+                    <p class="mb-2 text-muted">Total Booking</p>
+                </div>
+                <div class="icon s7__bg-primary rounded-circle">
+                    <i class="las la-calendar-check"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="s7__widget-three card shadow-sm  card-info">
+                <div class="content">
+                    <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                        <?php
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT COUNT(id) AS completed_bookings FROM booking 
+                                WHERE user_id = $userId 
+                                AND status = 3 
+                                AND is_delete = 0";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $completedBookings = $row['completed_bookings'];
+                            echo $completedBookings;
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                        ?>
+                    </h1>
+                    <p class="mb-2 text-muted">Booking Completed</p>
+                </div>
+                <div class="icon s7__bg-primary rounded-circle">
+                    <i class="las la-check-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="s7__widget-three card shadow-sm  card-info">
+                <div class="content">
+                    <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                        <?php
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT SUM(estimated_cost) AS total_earning FROM booking 
+                                WHERE user_id = $userId 
+                                AND status = 3 
+                                AND is_delete = 0";
+
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $totalEarning = $row['total_earning'] ?? 0;
+                            echo number_format($totalEarning, 2); // Format to 2 decimal places
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                        ?>
+                    </h1>
+                    <p class="mb-2 text-muted">Total Earnings</p>
+                </div>
+                <div class="icon s7__bg-primary rounded-circle">
+                    <i class="las la-dollar-sign"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="s7__widget-three card shadow-sm  card-info">
+                <div class="content">
+                    <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                        <?php
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT SUM(estimated_cost) AS todays_earning FROM booking 
+                                WHERE user_id = $userId 
+                                AND status = 3 
+                                AND DATE(created_at) = CURDATE()
+                                AND is_delete = 0";
+
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $todaysEarning = $row['todays_earning'] ?? 0;
+                            echo number_format($todaysEarning, 2); // Format with 2 decimals
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                        ?>
+                    </h1>
+                    <p class="mb-2 text-muted">Todays Earnings</p>
+                </div>
+                <div class="icon s7__bg-primary rounded-circle">
+                    <i class="las la-coins"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+
+$user_id = $_SESSION['id'];
+
+
+// Fetch booking count per day
+$sql1 = "
+    SELECT DATE(created_at) AS day, COUNT(*) AS bookings
+    FROM booking
+    WHERE user_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
+    GROUP BY day
+    ORDER BY day
+";
+$stmt1 = $conn->prepare($sql1);
+$stmt1->bind_param("i", $user_id);
+$stmt1->execute();
+$result1 = $stmt1->get_result();
+
+$booking_data = [];
+while ($row = $result1->fetch_assoc()) {
+    $booking_data[$row['day']] = $row['bookings'];
+}
+
+// Fetch earnings (SUM of estimated_cost) per day
+$sql2 = "
+    SELECT DATE(created_at) AS day, SUM(estimated_cost) AS earnings
+    FROM booking
+    WHERE user_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
+    GROUP BY day
+    ORDER BY day
+";
+$stmt2 = $conn->prepare($sql2);
+$stmt2->bind_param("i", $user_id);
+$stmt2->execute();
+$result2 = $stmt2->get_result();
+
+$earning_data = [];
+while ($row = $result2->fetch_assoc()) {
+    $earning_data[$row['day']] = round($row['earnings'], 2);
+}
+
+// Prepare last 7 days
+$labels = [];
+$bookings = [];
+$earnings = [];
+
+for ($i = 6; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days"));
+    $labels[] = $date;
+    $bookings[] = $booking_data[$date] ?? 0;
+    $earnings[] = $earning_data[$date] ?? 0;
+}
+?>
+
+<!-- <div class="container py-5"> -->
+    <h3 class="text-center mb-4" style="color:#092448;">Your 7-Day Activity Overview</h3>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <canvas id="bookingChart" height="300"></canvas>
+        </div>
+        <div class="col-md-6 mb-4">
+            <canvas id="earningChart" height="300"></canvas>
+        </div>
+    </div>
+<!-- </div> -->
+
+<script>
+const labels = <?= json_encode($labels); ?>;
+const bookings = <?= json_encode($bookings); ?>;
+const earnings = <?= json_encode($earnings); ?>;
+
+const themeColor = '#092448';
+
+function createGradient(ctx, height) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, 'rgba(9, 36, 72, 0.4)');
+    gradient.addColorStop(1, 'rgba(9, 36, 72, 0.05)');
+    return gradient;
+}
+
+function createChart(canvasId, label, data, yLabel) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const gradient = createGradient(ctx, 300);
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: data,
+                fill: true,
+                backgroundColor: gradient,
+                borderColor: themeColor,
+                borderWidth: 2,
+                tension: 0.4,
+                pointBackgroundColor: themeColor,
+                pointHoverRadius: 6,
+                pointRadius: 4,
+                pointBorderColor: "#fff",
+                pointHoverBorderColor: "#fff"
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: label + ' (Last 7 Days)',
+                    color: themeColor,
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: themeColor,
+                    titleColor: '#fff',
+                    bodyColor: '#fff'
+                },
+                legend: {
+                    display: false
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                intersect: false
+            },
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: yLabel,
+                        color: themeColor,
+                        font: {
+                            weight: 'bold'
+                        }
+                    },
+                    ticks: {
+                        color: themeColor
+                    },
+                    grid: {
+                        color: '#ddd'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: themeColor
+                    },
+                    grid: {
+                        color: '#eee'
+                    }
+                }
+            }
+        }
+    });
+}
+
+createChart('bookingChart', 'Number of Bookings', bookings, 'Bookings');
+createChart('earningChart', 'Earnings (NRs.)', earnings, 'Earnings in NRs.');
+</script>
+    <?php
+    }
+    ?>
+
+<!-- CSS for card -->
+<!-- Additional styling for hover and card effects -->
+<style>
+    .card-info {
+        flex-direction: row-reverse;
+        justify-content: space-around;
+    }
+
+    .s7__widget-three {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .s7__widget-three:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon {
+
+        font-size: 50px;
+        color: #092448;
+    }
+
+    .content {
+        text-align: end;
+    }
+
+
+    .content p {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .content h3 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    /* Make sure the cards have smooth shadows */
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    /* Graphs Styling */
+    canvas {
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+
+    /* Header Styling */
+    .card-header {
+        background-color: #092448;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+    canvas {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+    }
+
+    /* Responsive Layout for smaller screens */
+    @media (max-width: 768px) {
+        .col-md-6 {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+
+
+
+
+
 <div class="recent_ride"
     style="max-width: 100%; margin: 30px auto; background: #f9f9f9; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05); padding: 20px;">
     <h3 style="text-align: left; color: #092448; font-size: 24px; margin-bottom: 20px;">Your Recent Ride</h3>
 
-    <?php if ($result && $result->num_rows > 0): ?>
+    <?php
+    // Set $userId correctly based on role
+    if ($_SESSION['role'] == 0) {
+        $userId = $_SESSION['id']; // Normal user
+        $sql = "SELECT * 
+            FROM booking 
+            WHERE user_id = ? AND status == 5 
+            ORDER BY id DESC";
+    } else {
+        $userId = $_SESSION['vehicle_id']; // Driver or vehicle owner
+        $sql = "SELECT * 
+            FROM booking 
+            WHERE vehicle_id = ? 
+            ORDER BY id DESC";
+    }
+
+    // Pagination setup
+    $limit = 5; // items per page
+    $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+    $offset = ($page - 1) * $limit;
+
+    // Modify SQL for pagination
+    if ($_SESSION['role'] == 0) {
+        $sql = "SELECT * 
+            FROM booking 
+            WHERE user_id = ? AND status != 2 
+            ORDER BY id DESC 
+            LIMIT $limit OFFSET $offset";
+    } else {
+        $sql = "SELECT * 
+            FROM booking 
+            WHERE vehicle_id = ? 
+            ORDER BY id DESC 
+            LIMIT $limit OFFSET $offset";
+    }
+
+    // Prepare and execute query
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL prepare failed: " . $conn->error);
+    }
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $bookings = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+    // Count total records for pagination
+    if ($_SESSION['role'] == 0) {
+        $count_sql = "SELECT COUNT(*) as total 
+                  FROM booking 
+                  WHERE user_id = $userId AND status != 2";
+    } else {
+        $count_sql = "SELECT COUNT(*) as total 
+                  FROM booking 
+                  WHERE vehicle_id = $userId";
+    }
+    $count_result = $conn->query($count_sql);
+    $total_records = $count_result->fetch_assoc()['total'];
+    $total_pages = ceil($total_records / $limit);
+
+    if ($result && $result->num_rows > 0): ?>
         <?php foreach ($result as $row): ?>
             <?php
             $pickup = htmlspecialchars($row['pick_up_place']);
@@ -159,6 +602,7 @@ $total_pages = ceil($total_records / $limit);
         <div style="text-align: center; color: #888; font-size: 15px; margin-top: 10px;">No bookings found.</div>
     <?php endif; ?>
 </div>
+
 
 
 <!-- <div class="service">
@@ -246,7 +690,7 @@ if ($_SESSION['role'] != 1) {
 <div class="invite-section">
     <div class="invite-content">
         <h2>Invite Friends & Get Discount</h2>
-        <p>Invite your friends to join the vehicle booking system and get exciting discounts on your next ride!</p>
+        <p>Invite your friends to join the NagarYatra and get exciting discounts on your next ride!</p>
 
         <!-- Invite Code Input (to share with friends) -->
         <div class="invite-code">

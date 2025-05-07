@@ -237,98 +237,105 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <section class="car-list">
   <!-- <div class="container mt-4"> -->
-    <h4 class="mb-3 title">Pre-Book a Ride</h4>
-    <form action="" method="post" onsubmit="return prepareBooking();">
-      <!-- category -->
-      <?php
-      // Fetch categories for the dropdown
-      $categories = [];
-      $sql = "SELECT id, name FROM vehicle_category";
-      $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          $categories[] = $row;
-        }
+  <h4 class="mb-3 title">Pre-Book a Ride</h4>
+  <form action="" method="post" onsubmit="return prepareBooking();">
+    <!-- category -->
+    <?php
+    // Fetch categories for the dropdown
+    $categories = [];
+    $sql = "SELECT id, name, image FROM vehicle_category"; // Include image here
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $categories[] = $row;
       }
+    }
+    ?>
 
-      ?>
-      <div class="input-group mb-3">
-        <!-- <label for="category" class="form-label">Category</label> -->
-        <span class="input-group-text">
-          <i class="bi bi-list-ul"></i> <!-- Bootstrap Icons 'list' icon -->
-        </span>
-        <select class="form-control" id="category" name="category">
-          <option value="">Select Category</option>
-          <?php foreach ($categories as $category): ?>
-            <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
-          <?php endforeach; ?>
-        </select>
+    <div class="input-group mb-3">
+      <div class="row">
+        <?php foreach ($categories as $category): ?>
+          <div class="col-md-3 mb-3">
+            <div class="vehicle-option" data-id="<?= $category['id']; ?>" onclick="selectCategory(this)">
+              <?php
+              $image = "../admin/" . htmlspecialchars($category['image']);
+              ?>
+              <img src="<?php echo $image; ?>" alt="<?= htmlspecialchars($category['name']); ?>"
+                style="width: 100%; height: 150px; object-fit: cover;">
+              <div class="text-center mt-2"><?= htmlspecialchars($category['name']); ?></div>
+            </div>
+          </div>
+        <?php endforeach; ?>
       </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-        <input type="text" class="form-control" id="currentLocation" placeholder="Current Location">
-        <button type="button" class="btn btn-theme" onclick="getCurrentLocation()"
-          style="background-color: #092448;color:white;">Use My Location</button>
-      </div>
+      <!-- Hidden input to store selected category ID -->
+      <input type="hidden" name="category" id="selectedCategoryId">
+    </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-        <input type="text" class="form-control" id="destination" placeholder="Search Destination">
-        <button type="button" class="btn btn-theme" onclick="setDestination()"
-          style="background-color: #092448;color:white;">Search</button>
-      </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+      <input type="text" class="form-control" id="currentLocation" placeholder="Current Location">
+      <button type="button" class="btn btn-theme" onclick="getCurrentLocation()"
+        style="background-color: #092448;color:white;">Use My Location</button>
+    </div>
 
-      <input type="hidden" name="pickup_address" id="pickup_address">
-      <input type="hidden" name="pickup_lat" id="pickup_lat">
-      <input type="hidden" name="pickup_lng" id="pickup_lng">
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+      <input type="text" class="form-control" id="destination" placeholder="Search Destination">
+      <button type="button" class="btn btn-theme" onclick="setDestination()"
+        style="background-color: #092448;color:white;">Search</button>
+    </div>
 
-      <input type="hidden" name="destination_address" id="destination_address">
-      <input type="hidden" name="destination_lat" id="destination_lat">
-      <input type="hidden" name="destination_lng" id="destination_lng">
+    <input type="hidden" name="pickup_address" id="pickup_address">
+    <input type="hidden" name="pickup_lat" id="pickup_lat">
+    <input type="hidden" name="pickup_lng" id="pickup_lng">
 
-      <input type="hidden" name="distance_km" id="distance_km">
-      <input type="hidden" name="duration" id="duration">
+    <input type="hidden" name="destination_address" id="destination_address">
+    <input type="hidden" name="destination_lat" id="destination_lat">
+    <input type="hidden" name="destination_lng" id="destination_lng">
+
+    <input type="hidden" name="distance_km" id="distance_km">
+    <input type="hidden" name="duration" id="duration">
 
 
-      <div id="map" class="map-container mb-4" style="height: 400px;"></div>
-      <div id="info" class="text-center fw-bold mb-3 text-primary"></div>
+    <div id="map" class="map-container mb-4" style="height: 400px;"></div>
+    <div id="info" class="text-center fw-bold mb-3 text-primary"></div>
 
-      <!-- New fields -->
-      <div class="mb-3">
-        <label for="estimated_ride_duration" class="form-label">Estimated Ride Duration(in Days)</label>
-        <!-- <input type="Number" class="form-control" id="estimated_ride_duration" name="estimated_ride_duration"
+    <!-- New fields -->
+    <div class="mb-3">
+      <label for="estimated_ride_duration" class="form-label">Estimated Ride Duration(in Days)</label>
+      <!-- <input type="Number" class="form-control" id="estimated_ride_duration" name="estimated_ride_duration"
           placeholder="e.g., 2 Days" required> -->
-        <input type="number" class="form-control" id="estimated_ride_duration" name="estimated_ride_duration"
-          placeholder="e.g., 2" min="1" required>
+      <input type="number" class="form-control" id="estimated_ride_duration" name="estimated_ride_duration"
+        placeholder="e.g., 2" min="1" required>
 
-      </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="booking_date" class="form-label">Booking Date</label>
-        <!-- <input type="date" class="form-control" id="booking_date" name="booking_date" required> -->
-        <input type="date" class="form-control" id="booking_date" name="booking_date" required>
+    <div class="mb-3">
+      <label for="booking_date" class="form-label">Booking Date</label>
+      <!-- <input type="date" class="form-control" id="booking_date" name="booking_date" required> -->
+      <input type="date" class="form-control" id="booking_date" name="booking_date" required>
 
-        <script>
-          const today = new Date().toISOString().split('T')[0];
-          document.getElementById('booking_date').setAttribute('min', today);
-        </script>
+      <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('booking_date').setAttribute('min', today);
+      </script>
 
-      </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="booking_description" class="form-label">Booking Description</label>
-        <textarea class="form-control" id="booking_description" name="booking_description" rows="3"
-          placeholder="Write something about your booking..." required></textarea>
-      </div>
+    <div class="mb-3">
+      <label for="booking_description" class="form-label">Booking Description</label>
+      <textarea class="form-control" id="booking_description" name="booking_description" rows="3"
+        placeholder="Write something about your booking..." required></textarea>
+    </div>
 
-      <input type="hidden" name="pre_booking" id="pre_booking" value="1">
+    <input type="hidden" name="pre_booking" id="pre_booking" value="1">
 
 
-      <button type="submit" class="btn btn-theme w-100" style="background-color: #092448;color:white;">
-        <i class="bi bi-car-front-fill"></i> Book Ride
-      </button>
-    </form>
+    <button type="submit" class="btn btn-theme w-100" style="background-color: #092448;color:white;">
+      <i class="bi bi-car-front-fill"></i> Book Ride
+    </button>
+  </form>
   <!-- </div> -->
 
   <!-- Map + JS logic remains unchanged -->
@@ -500,6 +507,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       isSelectingPickup = false;
       // alert("Click on the map to select your Destination 📍 or use Search");
     });
+  </script>
+
+  <script>
+    function selectCategory(element) {
+      // Remove "selected" class from all options
+      document.querySelectorAll('.vehicle-option').forEach(el => el.classList.remove('selected'));
+
+      // Add "selected" class to clicked option
+      element.classList.add('selected');
+
+      // Set selected ID into hidden input
+      const categoryId = element.getAttribute('data-id');
+      document.getElementById('selectedCategoryId').value = categoryId;
+    }
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDumdDv9jxmpC0yaURPXnqkk4kssB8R3C4&callback=initMap"

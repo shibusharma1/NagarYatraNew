@@ -74,6 +74,16 @@ if ($result && mysqli_num_rows($result) > 0) {
 
     <!-- sweetalert CDN-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Include Bootstrap for grid layout -->
+    <link rel="stylesheet" href="https://cdn.lineawesome.com/1.3.0/line-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.lineawesome.com/1.3.0/line-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
+        integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     <style>
         a {
@@ -140,7 +150,9 @@ if ($result && mysqli_num_rows($result) > 0) {
 
         <a href="index">
             <div class="logo-img">
-                <img src="../assets/logo1.png" alt="NagarYatra">
+                <img src="../assets/logo1.png" alt="NagarYatra" style="
+    margin-top: -20px;
+">
             </div>
         </a>
 
@@ -223,7 +235,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 ?>
                 <a href="show_vehicle">
                     <div class="item <?php echo ($current_page == 'show_vehicle') ? 'active' : ''; ?>">
-                        <i class="fa fa-car" aria-hidden="true"></i> &nbsp; View Vehicle
+                        <i class="fa fa-car" aria-hidden="true"></i> &nbsp; Vehicle Details
                     </div>
                 </a>
             <?php } ?>
@@ -267,12 +279,21 @@ if ($result && mysqli_num_rows($result) > 0) {
                 </div>
             </a>
 
+            <?php
+            if ($row['role'] == 1) {
+                ?>
+                <a href="earnings">
+                    <div class="item <?php echo ($current_page == 'earnings') ? 'active' : ''; ?>">
+                        <i class="fa fa-dollar" aria-hidden="true"></i> &nbsp; Earnings
+                    </div>
+                </a>
+            <?php } ?>
+            
             <a href="feedback">
                 <div class="item <?php echo ($current_page == 'feedback') ? 'active' : ''; ?>">
                     <i class="fa fa-commenting-o" aria-hidden="true"></i> &nbsp; Send Feedback
                 </div>
             </a>
-
 
             <a href="emergencycontacts">
                 <div class="item <?php echo ($current_page == 'emergencycontacts') ? 'active' : ''; ?>">
@@ -293,7 +314,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         <!-- Header Section -->
         <div class="header-content">
             <a href="index">
-                <span style="color:#000000;">NagarYatra</span>
+                <!-- <span style="color:#000000;">NagarYatra</span> -->
             </a>
 
             <div class="notification-account-info">

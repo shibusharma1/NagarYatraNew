@@ -27,7 +27,7 @@ require_once '../config/connection.php';
   </script>
   <?php unset($_SESSION['login_success']); ?>
 <?php endif; ?>
-<!-- <h2>Dashboard</h2> -->
+<h2>Dashboard</h2>
 <!-- Users details -->
 <div class="row my-5">
   <!-- Total Users Card -->

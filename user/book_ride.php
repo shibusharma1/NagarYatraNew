@@ -83,9 +83,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-  $cost = 20;
+  $sql = "SELECT * FROM vehicle_category 
+          WHERE id = $category_id";
+
+  $result = mysqli_query($conn, $sql);
+  if ($result) {
+      $row = mysqli_fetch_assoc($result);
+      $per_km_cost = $row['per_km_cost'] ?? 0;
+      $cost = $row['min_cost'] ?? 0;
+      // echo number_format($totalEarning, 2); // Format to 2 decimal places
+  } else {
+      echo "Error: " . mysqli_error($conn);
+  }
+
   if ($distance_km > 2) {
-    $cost += ($distance_km - 2) * 18;
+    $cost += ($distance_km - 2) * $per_km_cost;
   }
   $cost = round($cost, 2);
 
@@ -438,6 +450,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // alert("Click on the map to select your Destination 📍 or use Search");
     });
   </script>
+  
   <script>
     function selectCategory(element) {
       // Remove "selected" class from all options
@@ -451,7 +464,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       document.getElementById('selectedCategoryId').value = categoryId;
     }
   </script>
-
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDumdDv9jxmpC0yaURPXnqkk4kssB8R3C4&callback=initMap"
     async defer></script>

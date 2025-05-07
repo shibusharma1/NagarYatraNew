@@ -160,11 +160,7 @@ if (!isset($_SESSION['admin_id'])) {
             </a>
 
 
-            <!-- <a href="fairs">
-                <div class="item <?php echo ($current_page == 'fairs') ? 'active' : ''; ?>">
-                    <i class="fa fa-money" aria-hidden="true"></i> &nbsp; Fairs
-                </div>
-            </a> -->
+          
             <a href="feedbacks">
                 <div class="item <?php echo ($current_page == 'feedback') ? 'active' : ''; ?>">
                     <i class="fa fa-commenting-o" aria-hidden="true"></i> &nbsp; Feedback
@@ -188,20 +184,22 @@ if (!isset($_SESSION['admin_id'])) {
         <!-- Header Section -->
         <div class="header-content px-4">
             <a href="index">
-                <span style="color:#000000;">NagarYatra</span>
+                <!-- <span style="color:#000000;">NagarYatra</span> -->
             </a>
 
             <div class="notification-account-info">
                 <!-- Bell Icon with Notification Badge -->
-                <div class="notification">
-                    <i class="fa fa-bell" aria-hidden="true"></i>
+                <!-- <div class="notification">-->
+                    <!-- <i class="fa fa-bell" aria-hidden="true"></i>  -->
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>  <!-- Good for profile/admin -->
+
                     <!-- <sup class="badge">3</sup> -->
-                    <div class="dropdown">
+                    <!-- <div class="dropdown">
                         <div class="notif-item">Notification 1</div>
                         <div class="notif-item">Notification 2</div>
                         <div class="notif-item">Notification 3</div>
                     </div>
-                </div>
+                </div> -->
                 <!-- User Profile Icon -->
                 <div class="account-info" id="profileTrigger">
                     <!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->

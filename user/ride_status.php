@@ -7,6 +7,7 @@ include('../config/connection.php');
 // Get user ID from session
 $userId = $_SESSION['id'];
 
+
 // Pagination setup
 $limit = 10; // records per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -20,6 +21,7 @@ $sql = "SELECT * FROM booking
         ORDER BY created_at DESC 
         LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
+
 
 // Count total records for pagination
 $count_sql = "SELECT COUNT(*) as total FROM booking 
@@ -166,8 +168,11 @@ if (isset($_POST['booking_id'])) {
             <tbody>
                 <?php $sn = ($page - 1) * $limit + 1; ?>
                 <?php if ($result && $result->num_rows > 0): ?>
-                    <?php while ($row = $result->fetch_assoc()): ?>
+                    <?php while ($row = $result->fetch_assoc()): 
+                        
+                        ?>
                         <tr>
+                            
                             <td><?= $sn++ ;
                             if ($row['pre_booking'] == 1) {
                                     ?>
