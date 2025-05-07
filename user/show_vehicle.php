@@ -27,7 +27,7 @@ include_once 'master_header.php';
     if ($row = $result->fetch_assoc()) {
 ?>
 
-<div class="container">
+<!-- <div class="container"> -->
     <div class="vehicle-container">
         <!-- Vehicle Image -->
         <div class="vehicle-image">
@@ -69,7 +69,7 @@ include_once 'master_header.php';
         </div>
     </div>
 <!-- </div> -->
-</div>
+<!-- </div> -->
 
 <?php
     } else {

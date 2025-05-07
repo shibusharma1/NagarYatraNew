@@ -141,66 +141,427 @@ if (!isset($_SESSION['id'])) {
 
 
 
+
+<!-- Users details -->
+<div class="row my-5">
+    <!-- Total Users Card -->
+    <div class="col-lg-3">
+        <div class="s7__widget-three card shadow-sm  card-info">
+            <div class="content">
+                <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                    <?php
+                    $userId = $_SESSION['id'];
+
+                    $sql = "SELECT COUNT(id) AS total_bookings FROM booking WHERE user_id = $userId AND is_delete = 0";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result) {
+                        $row = mysqli_fetch_assoc($result);
+                        $totalBookings = $row['total_bookings'];
+                        echo $totalBookings;
+                    } else {
+                        echo "Error: " . mysqli_error($conn);
+                    }
+                    ?>
+                </h1>
+                <p class="mb-2 text-muted">Total Booking</p>
+            </div>
+            <div class="icon s7__bg-primary rounded-circle">
+                <i class="las la-calendar-check"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="s7__widget-three card shadow-sm  card-info">
+            <div class="content">
+                <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                    <?php
+                    $userId = $_SESSION['id'];
+
+                    $sql = "SELECT COUNT(id) AS completed_bookings FROM booking 
+                                WHERE user_id = $userId 
+                                AND status = 5 
+                                AND is_delete = 0";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result) {
+                        $row = mysqli_fetch_assoc($result);
+                        $completedBookings = $row['completed_bookings'];
+                        echo $completedBookings;
+                    } else {
+                        echo "Error: " . mysqli_error($conn);
+                    }
+                    ?>
+                </h1>
+                <p class="mb-2 text-muted">Booking Completed</p>
+            </div>
+            <div class="icon s7__bg-primary rounded-circle">
+                <i class="las la-check-circle"></i>
+            </div>
+        </div>
+    </div>
 <!-- Only to show the driver -->
 <?php
-if ($_SESSION['role'] == 1) {
+if ($_SESSION['role'] != 1) {
     ?>
-    <!-- Users details -->
-    <div class="row my-5">
-        <!-- Total Users Card -->
-        <div class="col-lg-3">
-            <div class="s7__widget-three card shadow-sm  card-info">
-                <div class="content">
-                    <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
-                        <?php
-                        $userId = $_SESSION['id'];
 
-                        $sql = "SELECT COUNT(id) AS total_bookings FROM booking WHERE user_id = $userId AND is_delete = 0";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result) {
-                            $row = mysqli_fetch_assoc($result);
-                            $totalBookings = $row['total_bookings'];
-                            echo $totalBookings;
-                        } else {
-                            echo "Error: " . mysqli_error($conn);
-                        }
-                        ?>
-                    </h1>
-                    <p class="mb-2 text-muted">Total Booking</p>
-                </div>
-                <div class="icon s7__bg-primary rounded-circle">
-                    <i class="las la-calendar-check"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="s7__widget-three card shadow-sm  card-info">
-                <div class="content">
-                    <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
-                        <?php
-                        $userId = $_SESSION['id'];
+<div class="col-lg-3">
+        <div class="s7__widget-three card shadow-sm  card-info">
+            <div class="content">
+                <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                    <?php
+                    $userId = $_SESSION['id'];
 
-                        $sql = "SELECT COUNT(id) AS completed_bookings FROM booking 
+                    $sql = "SELECT COUNT(id) AS completed_bookings FROM booking 
                                 WHERE user_id = $userId 
-                                AND status = 3 
+                                AND status = 2 
                                 AND is_delete = 0";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result) {
+                        $row = mysqli_fetch_assoc($result);
+                        $completedBookings = $row['completed_bookings'];
+                        echo $completedBookings;
+                    } else {
+                        echo "Error: " . mysqli_error($conn);
+                    }
+                    ?>
+                </h1>
+                <p class="mb-2 text-muted">Pending Booking</p>
+            </div>
+            <div class="icon s7__bg-primary rounded-circle">
+                <i class="las la-check-circle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+            <div class="s7__widget-three card shadow-sm  card-info">
+                <div class="content">
+                    <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
+                        <?php
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT SUM(estimated_cost) AS total_earning FROM booking 
+                                WHERE user_id = $userId 
+                                AND status = 5 
+                                AND is_delete = 0";
+
                         $result = mysqli_query($conn, $sql);
                         if ($result) {
                             $row = mysqli_fetch_assoc($result);
-                            $completedBookings = $row['completed_bookings'];
-                            echo $completedBookings;
+                            $totalEarning = $row['total_earning'] ?? 0;
+                            echo number_format($totalEarning, 2); // Format to 2 decimal places
                         } else {
                             echo "Error: " . mysqli_error($conn);
                         }
                         ?>
                     </h1>
-                    <p class="mb-2 text-muted">Booking Completed</p>
+                    <p class="mb-2 text-muted">Total Bookings Cost</p>
                 </div>
                 <div class="icon s7__bg-primary rounded-circle">
-                    <i class="las la-check-circle"></i>
+                    <i class="las la-dollar-sign"></i>
                 </div>
             </div>
         </div>
+        </div>
+
+
+
+
+        <!-- Pie charts and bar graph for user -->
+        <?php
+    $user_id = $_SESSION['id'];
+
+    // Fetch booking count per day (for the last 7 days)
+    $sql1 = "
+    SELECT DATE(created_at) AS day, COUNT(*) AS bookings
+    FROM booking
+    WHERE user_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
+    GROUP BY day
+    ORDER BY day
+    ";
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->bind_param("i", $user_id);
+    $stmt1->execute();
+    $result1 = $stmt1->get_result();
+
+    $booking_data = [];
+    while ($row = $result1->fetch_assoc()) {
+        $booking_data[$row['day']] = $row['bookings'];
+    }
+
+    // Prepare last 7 days
+    $labels = [];
+    $bookings = [];
+
+    for ($i = 6; $i >= 0; $i--) {
+        $date = date('Y-m-d', strtotime("-$i days"));
+        $labels[] = $date;
+        $bookings[] = $booking_data[$date] ?? 0;
+    }
+
+    // Fetch booking status counts (all-time)
+    $sql3 = "
+    SELECT status, COUNT(*) AS status_count
+    FROM booking
+    WHERE user_id = ? AND is_delete = 0
+    GROUP BY status
+    ";
+    $stmt3 = $conn->prepare($sql3);
+    $stmt3->bind_param("i", $user_id);
+    $stmt3->execute();
+    $result3 = $stmt3->get_result();
+
+    $status_data = [
+        'cancelled_by_user' => 0,
+        'pending' => 0,
+        'approved' => 0,
+        'rejected_by_driver' => 0,
+        'completed' => 0,
+        'cancelled_by_driver' => 0
+    ];
+
+    while ($row = $result3->fetch_assoc()) {
+        switch ($row['status']) {
+            case 1: // cancelled by user
+                $status_data['cancelled_by_user'] = $row['status_count'];
+                break;
+            case 2: // pending
+                $status_data['pending'] = $row['status_count'];
+                break;
+            case 3: // approved
+                $status_data['approved'] = $row['status_count'];
+                break;
+            case 4: // rejected by driver
+                $status_data['rejected_by_driver'] = $row['status_count'];
+                break;
+            case 5: // completed
+                $status_data['completed'] = $row['status_count'];
+                break;
+            case 6: // cancelled by driver
+                $status_data['cancelled_by_driver'] = $row['status_count'];
+                break;
+        }
+    }
+?>
+
+<!-- Booking Chart -->
+<h3 class="text-center mb-4" style="color:#092448;">Your 7-Day Activity Overview</h3>
+<div class="row">
+    <!-- Booking Chart -->
+    <div class="col-md-6 mb-4">
+        <canvas id="bookingChart" height="300"></canvas>
+    </div>
+
+
+<!-- Booking Status Pie Chart -->
+<div class="col-md-6 mb-4">
+    <canvas id="statusPieChart" height="300"></canvas>
+</div>
+</div>
+<script>
+    const labels = <?= json_encode($labels); ?>;
+    const bookings = <?= json_encode($bookings); ?>;
+    const statusData = <?= json_encode($status_data); ?>;
+
+    const themeColor = '#092448';
+
+    // Create gradient for line charts
+    function createGradient(ctx, height) {
+        const gradient = ctx.createLinearGradient(0, 0, 0, height);
+        gradient.addColorStop(0, 'rgba(9, 36, 72, 0.4)');
+        gradient.addColorStop(1, 'rgba(9, 36, 72, 0.05)');
+        return gradient;
+    }
+
+    // Create Line Chart for Bookings
+    function createChart(canvasId, label, data, yLabel) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        const gradient = createGradient(ctx, 300);
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: label,
+                    data: data,
+                    fill: true,
+                    backgroundColor: gradient,
+                    borderColor: themeColor,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: themeColor,
+                    pointHoverRadius: 6,
+                    pointRadius: 4,
+                    pointBorderColor: "#fff",
+                    pointHoverBorderColor: "#fff"
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: label + ' (Last 7 Days)',
+                        color: themeColor,
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 20
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: themeColor,
+                        titleColor: '#fff',
+                        bodyColor: '#fff'
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    intersect: false
+                },
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: yLabel,
+                            color: themeColor,
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            color: themeColor
+                        },
+                        grid: {
+                            color: '#ddd'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: themeColor
+                        },
+                        grid: {
+                            color: '#eee'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Create Pie Chart for Status
+    const statusLabels = [
+        'Cancelled (by User)',
+        'Pending',
+        'Approved',
+        'Rejected (by Driver)',
+        'Completed',
+        'Cancelled (by Driver)'
+    ];
+
+    const statusCounts = [
+        statusData.cancelled_by_user,
+        statusData.pending,
+        statusData.approved,
+        statusData.rejected_by_driver,
+        statusData.completed,
+        statusData.cancelled_by_driver
+    ];
+
+    const statusColors = [
+        '#ff4d4d', // Red for Cancelled (by User)
+        '#ffcc00', // Yellow for Pending
+        '#4caf50', // Green for Approved
+        '#f44336', // Red for Rejected (by Driver)
+        '#2196f3', // Blue for Completed
+        '#9e9e9e'  // Grey for Cancelled (by Driver)
+    ];
+
+    // Calculate total count
+    const totalBookings = statusCounts.reduce((total, count) => total + count, 0);
+
+    // Append percentage to the chart
+    const statusPercentages = statusCounts.map(count => {
+        return {
+            count: count,
+            percentage: totalBookings ? ((count / totalBookings) * 100).toFixed(2) : 0
+        };
+    });
+
+    const ctxPie = document.getElementById('statusPieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: statusLabels,
+            datasets: [{
+                data: statusCounts,
+                backgroundColor: statusColors,
+                borderColor: '#fff',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Overall Booking Status',
+                    color: '#092448',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            const idx = tooltipItem.dataIndex;
+                            const count = tooltipItem.raw;
+                            const percentage = statusPercentages[idx].percentage;
+                            return `${statusLabels[idx]}: ${count} (${percentage}%)`;
+                        }
+                    },
+                    backgroundColor: '#092448',
+                    titleColor: '#fff',
+                    bodyColor: '#fff'
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Create the booking chart (line graph)
+    createChart('bookingChart', 'Number of Bookings', bookings, 'Bookings');
+</script>
+
+
+<?php
+ }
+?>
+
+
+
+    <!-- Only to show the driver -->
+    <?php
+    if ($_SESSION['role'] == 1) {
+        ?>
         <div class="col-lg-3">
             <div class="s7__widget-three card shadow-sm  card-info">
                 <div class="content">
@@ -262,61 +623,66 @@ if ($_SESSION['role'] == 1) {
         </div>
     </div>
 
+
+
+
+
+
     <?php
 
-$user_id = $_SESSION['id'];
+    $user_id = $_SESSION['id'];
 
 
-// Fetch booking count per day
-$sql1 = "
+    // Fetch booking count per day
+    $sql1 = "
     SELECT DATE(created_at) AS day, COUNT(*) AS bookings
     FROM booking
     WHERE user_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
     GROUP BY day
     ORDER BY day
 ";
-$stmt1 = $conn->prepare($sql1);
-$stmt1->bind_param("i", $user_id);
-$stmt1->execute();
-$result1 = $stmt1->get_result();
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->bind_param("i", $user_id);
+    $stmt1->execute();
+    $result1 = $stmt1->get_result();
 
-$booking_data = [];
-while ($row = $result1->fetch_assoc()) {
-    $booking_data[$row['day']] = $row['bookings'];
-}
+    $booking_data = [];
+    while ($row = $result1->fetch_assoc()) {
+        $booking_data[$row['day']] = $row['bookings'];
+    }
 
-// Fetch earnings (SUM of estimated_cost) per day
-$sql2 = "
+    // Fetch earnings (SUM of estimated_cost) per day
+    $sql2 = "
     SELECT DATE(created_at) AS day, SUM(estimated_cost) AS earnings
     FROM booking
     WHERE user_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
     GROUP BY day
     ORDER BY day
 ";
-$stmt2 = $conn->prepare($sql2);
-$stmt2->bind_param("i", $user_id);
-$stmt2->execute();
-$result2 = $stmt2->get_result();
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bind_param("i", $user_id);
+    $stmt2->execute();
+    $result2 = $stmt2->get_result();
 
-$earning_data = [];
-while ($row = $result2->fetch_assoc()) {
-    $earning_data[$row['day']] = round($row['earnings'], 2);
-}
+    $earning_data = [];
+    while ($row = $result2->fetch_assoc()) {
+        $earning_data[$row['day']] = round($row['earnings'], 2);
+    }
 
-// Prepare last 7 days
-$labels = [];
-$bookings = [];
-$earnings = [];
+    // Prepare last 7 days
+    $labels = [];
+    $bookings = [];
+    $earnings = [];
 
-for ($i = 6; $i >= 0; $i--) {
-    $date = date('Y-m-d', strtotime("-$i days"));
-    $labels[] = $date;
-    $bookings[] = $booking_data[$date] ?? 0;
-    $earnings[] = $earning_data[$date] ?? 0;
-}
-?>
+    for ($i = 6; $i >= 0; $i--) {
+        $date = date('Y-m-d', strtotime("-$i days"));
+        $labels[] = $date;
+        $bookings[] = $booking_data[$date] ?? 0;
+        $earnings[] = $earning_data[$date] ?? 0;
+    }
+    ?>
 
-<!-- <div class="container py-5"> -->
+    <!-- <div class="container py-5"> -->
     <h3 class="text-center mb-4" style="color:#092448;">Your 7-Day Activity Overview</h3>
     <div class="row">
         <div class="col-md-6 mb-4">
@@ -326,108 +692,108 @@ for ($i = 6; $i >= 0; $i--) {
             <canvas id="earningChart" height="300"></canvas>
         </div>
     </div>
-<!-- </div> -->
+    <!-- </div> -->
 
-<script>
-const labels = <?= json_encode($labels); ?>;
-const bookings = <?= json_encode($bookings); ?>;
-const earnings = <?= json_encode($earnings); ?>;
+    <script>
+        const labels = <?= json_encode($labels); ?>;
+        const bookings = <?= json_encode($bookings); ?>;
+        const earnings = <?= json_encode($earnings); ?>;
 
-const themeColor = '#092448';
+        const themeColor = '#092448';
 
-function createGradient(ctx, height) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, height);
-    gradient.addColorStop(0, 'rgba(9, 36, 72, 0.4)');
-    gradient.addColorStop(1, 'rgba(9, 36, 72, 0.05)');
-    return gradient;
-}
+        function createGradient(ctx, height) {
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, 'rgba(9, 36, 72, 0.4)');
+            gradient.addColorStop(1, 'rgba(9, 36, 72, 0.05)');
+            return gradient;
+        }
 
-function createChart(canvasId, label, data, yLabel) {
-    const ctx = document.getElementById(canvasId).getContext('2d');
-    const gradient = createGradient(ctx, 300);
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: label,
-                data: data,
-                fill: true,
-                backgroundColor: gradient,
-                borderColor: themeColor,
-                borderWidth: 2,
-                tension: 0.4,
-                pointBackgroundColor: themeColor,
-                pointHoverRadius: 6,
-                pointRadius: 4,
-                pointBorderColor: "#fff",
-                pointHoverBorderColor: "#fff"
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: label + ' (Last 7 Days)',
-                    color: themeColor,
-                    font: {
-                        size: 18,
-                        weight: 'bold'
-                    },
-                    padding: {
-                        top: 10,
-                        bottom: 20
-                    }
+        function createChart(canvasId, label, data, yLabel) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const gradient = createGradient(ctx, 300);
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        fill: true,
+                        backgroundColor: gradient,
+                        borderColor: themeColor,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointBackgroundColor: themeColor,
+                        pointHoverRadius: 6,
+                        pointRadius: 4,
+                        pointBorderColor: "#fff",
+                        pointHoverBorderColor: "#fff"
+                    }]
                 },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    backgroundColor: themeColor,
-                    titleColor: '#fff',
-                    bodyColor: '#fff'
-                },
-                legend: {
-                    display: false
-                }
-            },
-            interaction: {
-                mode: 'nearest',
-                intersect: false
-            },
-            scales: {
-                y: {
-                    title: {
-                        display: true,
-                        text: yLabel,
-                        color: themeColor,
-                        font: {
-                            weight: 'bold'
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: label + ' (Last 7 Days)',
+                            color: themeColor,
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            },
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: themeColor,
+                            titleColor: '#fff',
+                            bodyColor: '#fff'
+                        },
+                        legend: {
+                            display: false
                         }
                     },
-                    ticks: {
-                        color: themeColor
+                    interaction: {
+                        mode: 'nearest',
+                        intersect: false
                     },
-                    grid: {
-                        color: '#ddd'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: themeColor
-                    },
-                    grid: {
-                        color: '#eee'
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: yLabel,
+                                color: themeColor,
+                                font: {
+                                    weight: 'bold'
+                                }
+                            },
+                            ticks: {
+                                color: themeColor
+                            },
+                            grid: {
+                                color: '#ddd'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: themeColor
+                            },
+                            grid: {
+                                color: '#eee'
+                            }
+                        }
                     }
                 }
-            }
+            });
         }
-    });
-}
 
-createChart('bookingChart', 'Number of Bookings', bookings, 'Bookings');
-createChart('earningChart', 'Earnings (NRs.)', earnings, 'Earnings in NRs.');
-</script>
+        createChart('bookingChart', 'Number of Bookings', bookings, 'Bookings');
+        createChart('earningChart', 'Earnings (NRs.)', earnings, 'Earnings in NRs.');
+    </script>
     <?php
     }
     ?>
@@ -500,11 +866,12 @@ createChart('earningChart', 'Earnings (NRs.)', earnings, 'Earnings in NRs.');
         font-weight: bold;
         font-size: 1.2rem;
     }
+
     canvas {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
     }
 
     /* Responsive Layout for smaller screens */
@@ -605,23 +972,6 @@ createChart('earningChart', 'Earnings (NRs.)', earnings, 'Earnings in NRs.');
 
 
 
-<!-- <div class="service">
-        <img src="../admin/uploads/bike.png" alt="Bike" title="Comfortable for 1 riders, secure with locks and GPS, and highly convenient for quick city travel.">
-        <div>Bike</div>
-    </div>
-    <div class="service">
-        <img src="../admin/uploads/car.png" alt="car" title="Spacious for 4 passengers, safe with seatbelts and airbags, and convenient for comfortable long or short trips.">
-        <div>Car</div>
-    </div>
-    <div class="service">
-        <img src="../admin/uploads/auto.png" alt="Auto" title="Ideal for 2–3 passengers, offers moderate safety, and convenient for short city rides.">
-        <div>Auto</div>
-    </div>
-    <div class="service">
-        <img src="../admin/uploads/microbus.png" alt="Micro Bus" title="Comfortable for 8–15 passengers, ensures good security, and perfect for group travel.">
-        <div>Micro Bus</div>
-    </div> -->
-<!-- </div> -->
 <?php
 if ($_SESSION['role'] != 1) {
     ?>

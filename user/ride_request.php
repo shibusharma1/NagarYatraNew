@@ -113,7 +113,7 @@ if (!empty($validBookingIds)) {
             echo '<td> <form method="POST" action="approve_reject_ride.php">
                                     <input type="hidden" name="booking_id" value="'.$row['id'].'">
                                     <input type="hidden" name="status_value" value="3">
-                                    <button type="submit" class="btn btn-danger" style="padding: 5px 10px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #fff; background-color: green; margin-bottom:3px;">Approve</button>
+                                    <button type="submit" class="btn btn-danger" style="padding: 5px 10px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #fff; background-color: green; margin-bottom:3px;">Accept</button>
                                 </form>
                                 <form method="POST" action="approve_reject_ride.php">
                                     <input type="hidden" name="booking_id" value="'. $row['id'].'">

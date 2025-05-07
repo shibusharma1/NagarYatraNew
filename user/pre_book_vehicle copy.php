@@ -106,23 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $vehicle_id = $user['vehicle_id']; //shortest distance vehicle id fetched
 
-  // $cost = 20;
-  $sql = "SELECT * FROM vehicle_category 
-          WHERE id = $category_id";
-
-  $result = mysqli_query($conn, $sql);
-  if ($result) {
-      $row = mysqli_fetch_assoc($result);
-      $per_km_cost = $row['per_km_cost'] ?? 0;
-      $cost = $row['min_cost'] ?? 0;
-      // echo number_format($totalEarning, 2); // Format to 2 decimal places
-  } else {
-      echo "Error: " . mysqli_error($conn);
-  }
-
-
+  $cost = 20;
   if ($distance_km > 2) {
-    $cost += ($distance_km - 2) * $per_km_cost;
+    $cost += ($distance_km - 2) * 18;
   }
   $cost = round($cost, 2);
 
@@ -320,7 +306,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <label for="estimated_ride_duration" class="form-label">Estimated Ride Duration(in Days)</label>
       <!-- <input type="Number" class="form-control" id="estimated_ride_duration" name="estimated_ride_duration"
           placeholder="e.g., 2 Days" required> -->
-      <input type="text" class="form-control" id="estimated_ride_duration" name="estimated_ride_duration"
+      <input type="number" class="form-control" id="estimated_ride_duration" name="estimated_ride_duration"
         placeholder="e.g., 2" min="1" required>
 
     </div>

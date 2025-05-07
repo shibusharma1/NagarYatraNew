@@ -322,6 +322,5 @@ $total_pages = ceil($total_records / $limit);
             <?php endif; ?>
         </div>
     <!-- </div> -->
-</body>
 
-</html>
+<?php include_once 'master_footer.php'; ?>
