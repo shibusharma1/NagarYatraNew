@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $otp = rand(100000, 999999); // Generate OTP
 
   // category to find the nearest vehicle of specific category
-
+  $nearbyUsers=[];
   // Step 1: Fetch all vehicle IDs matching the category
   $vehicleIds = [];
   $sql = "SELECT id FROM vehicle WHERE vehicle_category_id = ? AND status = 1 AND is_approved = 1";
@@ -91,10 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   foreach ($users as $user) {
     $distance = haversineDistance($pickup_lat, $pickup_lng, $user['latitude'], $user['longitude']);
 
-    if ($distance < $shortestDistance) {
-      $shortestDistance = $distance;
-      $shortestVehicleId = $user['vehicle_id'];
-      $shortestUserId = $user['id'];
+    // if ($distance < $shortestDistance) {
+    //   $shortestDistance = $distance;
+    //   $shortestVehicleId = $user['vehicle_id'];
+    //   $shortestUserId = $user['id'];
+    // }
+    if ($distance <= 10) {
+      $nearest_users[] = $user['id']; // Collect user ID
+      $nearbyUsers[] = array_merge($user, ['distance_km' => round($distance, 2)]); // Optional: store details
     }
   }
 
@@ -104,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // echo "User ID of Driver with Shortest Distance: " . $shortestUserId . "<br>";
   // echo "Shortest Distance (km): " . round($shortestDistance, 2) . " km<br>";
 
-  $vehicle_id = $user['vehicle_id']; //shortest distance vehicle id fetched
+  // $vehicle_id = $user['vehicle_id']; //shortest distance vehicle id fetched
 
   // $cost = 20;
   $sql = "SELECT * FROM vehicle_category 
@@ -112,12 +116,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $result = mysqli_query($conn, $sql);
   if ($result) {
-      $row = mysqli_fetch_assoc($result);
-      $per_km_cost = $row['per_km_cost'] ?? 0;
-      $cost = $row['min_cost'] ?? 0;
-      // echo number_format($totalEarning, 2); // Format to 2 decimal places
+    $row = mysqli_fetch_assoc($result);
+    $per_km_cost = $row['per_km_cost'] ?? 0;
+    $cost = $row['min_cost'] ?? 0;
+    // echo number_format($totalEarning, 2); // Format to 2 decimal places
   } else {
-      echo "Error: " . mysqli_error($conn);
+    echo "Error: " . mysqli_error($conn);
   }
 
 
@@ -206,10 +210,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 
+  // $nearest_users_str = implode(',', $nearest_users);
+ // If no nearby users found, handle gracefully
+if (empty($nearest_users)) {
+  echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+  echo "<script>
+  Swal.fire({
+      icon: 'info',
+      title: 'No Nearby Users',
+      text: 'No nearby users found. Please try again later.',
+      confirmButtonText: 'OK'
+  }).then(() => {
+      window.location.href = 'pre_book_vehicle.php';
+  });
+  </script>";
+  exit;
+}
 
+// Continue with the booking insert
+$nearest_users_str = implode(',', array_column($nearest_users, 'id')); // Store only user IDs as a comma-separated string
 
   $sql = "INSERT INTO booking (
-    user_id, vehicle_id, otp, pick_up_place, pickup_lat, pickup_lng,
+    user_id, nearest_users, otp, pick_up_place, pickup_lat, pickup_lng,
     destination, destination_lat, destination_lng,
     estimated_cost, estimated_KM, estimated_ride_duration,
     booking_date, booking_description,pre_booking
@@ -222,9 +244,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   $stmt->bind_param(
-    "iissddsssdsdsss",
+    "isssddsssdsdsss",
     $user_id,
-    $vehicle_id,
+    $nearest_users_str,
     $otp,
     $pickup,
     $pickup_lat,

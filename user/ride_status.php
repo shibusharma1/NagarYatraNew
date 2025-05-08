@@ -61,7 +61,7 @@ if (isset($_POST['booking_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="64x64" href="../assets/logo1.png" />
-    <title>Booking Status</title>
+    <title>Ride Status</title>
     <style>
         .container {
             max-width: 1100px;
@@ -150,7 +150,7 @@ if (isset($_POST['booking_id'])) {
 
 <body>
     <!-- <div class="container"> -->
-        <h2 style="text-align: center;color:#092448;">Booking Status</h2>
+        <h2 style="text-align: center;color:#092448;">Ride Status</h2>
         <table>
             <thead>
                 <tr>

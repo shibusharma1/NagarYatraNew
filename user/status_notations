@@ -5,3 +5,4 @@ Status Notations
 3 => Approve/Accepted (by Driver)
 4 => Rejected (by Driver)
 5 => Completed/Success
+6 => cancelled (By rider after accpeting it)

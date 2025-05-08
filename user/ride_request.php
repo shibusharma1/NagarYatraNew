@@ -83,7 +83,7 @@ if (!empty($validBookingIds)) {
     $result = $conn->query($sql);
 
     echo '<table>';
-    echo '<h2>Booking Request</h2>';
+    echo '<h2>Ride Request</h2>';
     echo '<tr><th>S.N</th><th>Pickup Location</th><th>Destination Location</th><th>Estimated Km</th><th>Estimated duration</th><th>Estimated cost</th><th>Map</th><th>Action</th></tr>';
     if ($result && $result->num_rows > 0) {
 
@@ -94,7 +94,7 @@ if (!empty($validBookingIds)) {
             if ($row['pre_booking'] == 1) {
 
                 echo '<sup style="background-color: #092448;color:white;padding: 2px; border-radius:10px;">Pre</sup>
-        <br>
+                <br>
             </td>';
             }
             echo '<td>' . $row['pick_up_place'] . '</td>';

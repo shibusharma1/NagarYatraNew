@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-$userId = $_SESSION['id'];
+$userId = $_SESSION['vehicle_id'];
 $filter = $_GET['filter'] ?? '7days';
 
 switch ($filter) {
@@ -36,7 +36,7 @@ switch ($filter) {
 $sql = "
     SELECT DATE(created_at) AS earning_date, SUM(estimated_cost) AS earnings
     FROM booking
-    WHERE user_id = ? AND is_delete = 0 AND status = 5 AND DATE(created_at) BETWEEN ? AND ?
+    WHERE vehicle_id = ? AND is_delete = 0 AND status = 5 AND DATE(created_at) BETWEEN ? AND ?
     GROUP BY DATE(created_at)
     ORDER BY earning_date
 ";
