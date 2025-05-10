@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Assume password update is successful
     $_SESSION['success'] = "Password changed successfully!";
-    header("Location: profile.php");
+    header("Location: index.php");
     exit();
 }
 ?>

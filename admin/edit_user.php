@@ -113,6 +113,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             if ($stmt->execute()) {
                 $success = "User updated successfully!";
+                // Get current date and time
+                $time = date("F j, Y, g:i a");
+
+                // Compose the message
+                $message = "Dear {$name}, your details have been updated by an admin on {$time}. If you did not make these changes, please contact us at <a href='mailto:nagarctservices@gmail.com'>nagarctservices@gmail.com</a> for assistance.";
+
+                // Escape the message for safety
+                $escaped_message = mysqli_real_escape_string($conn, $message);
+
+                // Insert notification
+                if ($user_id !== NULL) {
+                    $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
+                } else {
+                    $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
+                }
+
+                if (!mysqli_query($conn, $sql)) {
+                    echo "Error: " . mysqli_error($conn);
+                }
+
                 ?>
                 <script>
                     window.location.href = "users";

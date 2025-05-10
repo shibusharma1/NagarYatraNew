@@ -191,7 +191,7 @@ if (!isset($_SESSION['admin_id'])) {
                 <!-- Bell Icon with Notification Badge -->
                 <!-- <div class="notification">-->
                     <!-- <i class="fa fa-bell" aria-hidden="true"></i>  -->
-                    <i class="fa fa-user-circle" aria-hidden="true"></i>  <!-- Good for profile/admin -->
+                    <i class="fa fa-user-circle" aria-hidden="true"  style="font-size: 24px;"></i>  <!-- Good for profile/admin -->
 
                     <!-- <sup class="badge">3</sup> -->
                     <!-- <div class="dropdown">
