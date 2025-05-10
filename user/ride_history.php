@@ -75,6 +75,7 @@ $total_pages = ceil($total_records / $limit);
             width: 100%;
             border-collapse: collapse;
             background-color: white;
+            border: 1px solid #F0F0F0;
         }
 
         th,
@@ -82,6 +83,8 @@ $total_pages = ceil($total_records / $limit);
             padding: 14px 18px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            border: 1px solid #F0F0F0;
+
         }
 
         th {
@@ -134,7 +137,8 @@ $total_pages = ceil($total_records / $limit);
             background-color: #092448;
             color: white;
         }
-        a{
+
+        a {
             text-decoration: none;
         }
 
@@ -192,135 +196,138 @@ $total_pages = ceil($total_records / $limit);
 
 <body>
     <!-- <div class="container"> -->
-        <h2>Ride History</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>S.N</th>
-                    <th>Pickup Location</th>
-                    <th>Drop Location</th>
-                    <th>Booking Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
+    <h2>Ride History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Pickup Location</th>
+                <th>Drop Location</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                <?php if (count($bookings) > 0): ?>
-                    <?php $sn = ($page - 1) * $limit + 1;
-                    foreach ($bookings as $booking): ?>
-                        <tr>
-                            <td><?= $sn++; ?></td>
-                            <td>
-                                <?= htmlspecialchars($booking['pick_up_place']); ?>
-                                <?php if ($booking['pre_booking'] == 1): ?>
-                                    <span class="badge-prebooking">Pre</span>
-                                <?php endif; ?>
-                            </td>
-                            <td><?= htmlspecialchars($booking['destination']); ?></td>
-                            <td><?= date("d M Y", strtotime($booking['booking_date'])); ?></td>
-                            <td>
-                                <span class="status-badge status-<?= $booking['status']; ?>">
-                                    <?php
-                                    switch ($booking['status']) {
-                                        case 1:
-                                            echo "Cancelled";
-                                            break;
-                                        case 3:
-                                            echo "Success";
-                                            break;
-                                        case 4:
-                                            echo "Rejected";
-                                            break;
-                                        case 5:
-                                            echo "Completed";
-                                            break;
-                                        default:
-                                            echo "Unknown";
-                                    }
-                                    ?>
-                                </span>
-                            </td>
-                            <td>
-                                <button class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#rideDetailsModal<?= $booking['id']; ?>" style="margin:5px;">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <a href="generate_ride_summary.php?id=<?= $booking['id']; ?>" class="btn btn-success btn-sm"
-                                    target="_blank" style="margin:5px;background-color:#092448;color:white'">
-                                    <i class="fas fa-download"></i>
-                                </a>
-                            </td>
-                        </tr>
+            <?php if (count($bookings) > 0): ?>
+                <?php $sn = ($page - 1) * $limit + 1;
+                foreach ($bookings as $booking): ?>
+                    <tr>
+                        <td><?= $sn++; ?></td>
+                        <td>
+                            <?= htmlspecialchars($booking['pick_up_place']); ?>
+                            <?php if ($booking['pre_booking'] == 1): ?>
+                                <span class="badge-prebooking">Pre</span>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= htmlspecialchars($booking['destination']); ?></td>
+                        <td><?= date("d M Y", strtotime($booking['booking_date'])); ?></td>
+                        <td>
+                            <span class="status-badge status-<?= $booking['status']; ?>">
+                                <?php
+                                switch ($booking['status']) {
+                                    case 1:
+                                        echo "Cancelled(U)";
+                                        break;
+                                    case 3:
+                                        echo "Accepted";
+                                        break;
+                                    case 4:
+                                        echo "Rejected";
+                                        break;
+                                    case 5:
+                                        echo "Completed";
+                                        break;
+                                    case 6:
+                                        echo "CFancelled";
+                                        break;
+                                    default:
+                                        echo "Unknown";
+                                }
+                                ?>
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#rideDetailsModal<?= $booking['id']; ?>" style="margin:5px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <a href="generate_ride_summary.php?id=<?= $booking['id']; ?>" class="btn btn-success btn-sm"
+                                target="_blank" style="margin:5px;background-color:#092448;color:white'">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </td>
+                    </tr>
 
-                        <!-- Ride Details Modal -->
-                        <div class="modal modal-fade fade" id="rideDetailsModal<?= $booking['id']; ?>"
-                            aria-labelledby="rideDetailsModalLabel<?= $booking['id']; ?>">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="rideDetailsModalLabel<?= $booking['id']; ?>">Ride Details
-                                        </h5>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p><strong>Pickup Location:</strong> <?= htmlspecialchars($booking['pick_up_place']); ?>
-                                        </p>
-                                        <p><strong>Drop Location:</strong> <?= htmlspecialchars($booking['destination']); ?></p>
-                                        <p><strong>Booking Date:</strong>
-                                            <?= date("d M Y", strtotime($booking['booking_date'])); ?></p>
-                                        <p><strong>Status:</strong>
-                                            <?php
-                                            switch ($booking['status']) {
-                                                case 1:
-                                                    echo "Cancelled";
-                                                    break;
-                                                case 3:
-                                                    echo "Success";
-                                                    break;
-                                                case 4:
-                                                    echo "Rejected";
-                                                    break;
-                                                case 5:
-                                                    echo "Completed";
-                                                    break;
-                                                default:
-                                                    echo "Unknown";
-                                            }
-                                            ?>
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
+                    <!-- Ride Details Modal -->
+                    <div class="modal modal-fade fade" id="rideDetailsModal<?= $booking['id']; ?>"
+                        aria-labelledby="rideDetailsModalLabel<?= $booking['id']; ?>">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="rideDetailsModalLabel<?= $booking['id']; ?>">Ride Details
+                                    </h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Pickup Location:</strong> <?= htmlspecialchars($booking['pick_up_place']); ?>
+                                    </p>
+                                    <p><strong>Drop Location:</strong> <?= htmlspecialchars($booking['destination']); ?></p>
+                                    <p><strong>Booking Date:</strong>
+                                        <?= date("d M Y", strtotime($booking['booking_date'])); ?></p>
+                                    <p><strong>Status:</strong>
+                                        <?php
+                                        switch ($booking['status']) {
+                                            case 1:
+                                                echo "Cancelled";
+                                                break;
+                                            case 3:
+                                                echo "Success";
+                                                break;
+                                            case 4:
+                                                echo "Rejected";
+                                                break;
+                                            case 5:
+                                                echo "Completed";
+                                                break;
+                                            default:
+                                                echo "Unknown";
+                                        }
+                                        ?>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="6" class="text-center">No ride history found.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-
-        <!-- Pagination -->
-        <div class="pagination">
-            <?php if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?>">&laquo; Prev</a>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="6" class="text-center">No ride history found.</td>
+                </tr>
             <?php endif; ?>
+        </tbody>
+    </table>
 
-            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <a href="?page=<?= $i ?>" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>
-            <?php endfor; ?>
+    <!-- Pagination -->
+    <div class="pagination">
+        <?php if ($page > 1): ?>
+            <a href="?page=<?= $page - 1 ?>">&laquo; Prev</a>
+        <?php endif; ?>
 
-            <?php if ($page < $total_pages): ?>
-                <a href="?page=<?= $page + 1 ?>">Next &raquo;</a>
-            <?php endif; ?>
-        </div>
+        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+            <a href="?page=<?= $i ?>" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>
+        <?php endfor; ?>
+
+        <?php if ($page < $total_pages): ?>
+            <a href="?page=<?= $page + 1 ?>">Next &raquo;</a>
+        <?php endif; ?>
+    </div>
     <!-- </div> -->
 
-<?php include_once 'master_footer.php'; ?>
+    <?php include_once 'master_footer.php'; ?>

@@ -44,7 +44,7 @@ $result = mysqli_query($conn, $sql);
           <td><?php echo htmlspecialchars($row['name']); ?></td>
           <td>
             <?php if (!empty($row['image'])): ?>
-              <img src="<?php echo htmlspecialchars($row['image']); ?>" alt="Image" style="height: 60px; border:1px solid #ccc;" />
+              <img src="<?php echo htmlspecialchars($row['image']); ?>" alt="Image" style="height: 60px;background:transparent;" />
             <?php else: ?>
               N/A
             <?php endif; ?>

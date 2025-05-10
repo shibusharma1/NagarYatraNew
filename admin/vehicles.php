@@ -11,10 +11,11 @@ $page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Get current page, def
 $offset = ($page - 1) * $records_per_page;
 
 // Fetch vehicle data with the necessary columns
-$sql = "SELECT v.id, v.chassis_number, v.color, v.vehicle_number, v.description, v.bill_book_expiry_date, 
-               v.thumb_image, v.bill_book_image, vc.name AS company_name,v.is_approved, v.created_at
+$sql = "SELECT v.id, v.chassis_number, v.color, v.vehicle_number, v.vehicle_category_id,v.description, v.bill_book_expiry_date, 
+               v.thumb_image, v.bill_book_image, vc.name AS company_name,vvc.name AS category_name ,v.is_approved, v.created_at
         FROM vehicle v
         LEFT JOIN vehicle_company vc ON v.vehicle_company_id = vc.id
+        LEFT JOIN vehicle_category vvc ON v.vehicle_category_id = vvc.id
         WHERE is_delete = 0
         ORDER BY v.created_at DESC
         LIMIT $records_per_page OFFSET $offset";
@@ -50,7 +51,7 @@ $total_pages = ceil($total_rows / $records_per_page);
       <th>Driver Name</th>
       <th>Company</th>
       <th>Chassis Number</th>
-      <th>Color</th>
+      <th>Category</th>
       <th>Vehicle Number</th>
       <th>Description</th>
       <th>Bill Expiry Date</th>
@@ -99,7 +100,7 @@ $total_pages = ceil($total_rows / $records_per_page);
           </td>
           <td><?php echo htmlspecialchars($row['company_name']); ?></td>
           <td><?php echo htmlspecialchars($row['chassis_number']); ?></td>
-          <td><?php echo htmlspecialchars($row['color']); ?></td>
+          <td><?php echo htmlspecialchars($row['category_name']); ?></td>
           <td><?php echo htmlspecialchars($row['vehicle_number']); ?></td>
 
           <td>
@@ -134,7 +135,7 @@ $total_pages = ceil($total_rows / $records_per_page);
                       showCancelButton: true,
                       confirmButtonColor: '#d33',
                       cancelButtonColor: '#3085d6',
-                      confirmButtonText: 'Yes, disapprove user!',
+                      confirmButtonText: 'Yes, disapprove Vehicle!',
                       cancelButtonText: 'Cancel'
                     }).then((result) => {
                       if (result.isConfirmed) {

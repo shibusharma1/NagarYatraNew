@@ -218,7 +218,7 @@ if (isset($_POST['booking_id'])) {
                                     <?php
                                     switch ($row['status']) {
                                         case 1:
-                                            echo "Canceled";
+                                            echo "Cancelled";
                                             break;
                                         case 2:
                                             echo "Pending";

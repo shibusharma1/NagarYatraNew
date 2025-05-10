@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($seats <= 0)
         $errors['seats'] = "Seats must be greater than 0.";
 
+        
+
     // Image Upload
     if (!empty($_FILES['image']['name'])) {
         $image_path = "uploads/vehicle_category/";

@@ -222,7 +222,7 @@ $conn->close();
   <div class="container" id="reportContent">
     <div class="header">
       <div>Report</div>
-      <div>of</div>
+      <!-- <div>of</div> -->
       <img src="../assets/logo_report.png" alt="Logo" style="width: 150px; margin-bottom: 10px;">
 
     </div>

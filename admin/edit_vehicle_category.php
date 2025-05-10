@@ -38,12 +38,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image = $category['image']; // Existing image
 
     // Handle image upload if new one is selected
-    if (isset($_FILES['image']) && $_FILES['image']['name']) {
-        $target_dir = "uploads/Vehicle_category";
-        // $image_path = "uploads/vehicle_category/";
-        $target_file = $target_dir . basename($_FILES["image"]["name"]);
-        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-        $image = $_FILES["image"]["name"];
+    // if (isset($_FILES['image']) && $_FILES['image']['name']) {
+    //     $target_dir = "uploads/Vehicle_category/";
+    //     // $image_path = "uploads/vehicle_category/";
+    //     $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    //     move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+    //     $image = $_FILES["image"]["name"];
+    // }
+       // Image Upload
+    if (!empty($_FILES['image']['name'])) {
+        $image_path = "uploads/vehicle_category/";
+        if (!is_dir($image_path))
+            mkdir($image_path, 0777, true);
+
+        $unique_name = uniqid() . "_" . basename($_FILES['image']['name']);
+        $image = $image_path . $unique_name;
+
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], $image)) {
+            $errors['image'] = "Failed to upload image.";
+        }
+    } else {
+        // $errors['image'] = "Image is required.";
     }
 
     if (empty($errors)) {

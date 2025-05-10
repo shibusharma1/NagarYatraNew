@@ -12,66 +12,6 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-// // Set $userId correctly based on role
-// if ($_SESSION['role'] == 0) {
-//     $userId = $_SESSION['id']; // Normal user
-//     $sql = "SELECT * 
-//             FROM booking 
-//             WHERE user_id = ? AND status == 5 
-//             ORDER BY id DESC";
-// } else {
-//     $userId = $_SESSION['vehicle_id']; // Driver or vehicle owner
-//     $sql = "SELECT * 
-//             FROM booking 
-//             WHERE vehicle_id = ? 
-//             ORDER BY id DESC";
-// }
-
-// // Pagination setup
-// $limit = 5; // items per page
-// $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-// $offset = ($page - 1) * $limit;
-
-// // Modify SQL for pagination
-// if ($_SESSION['role'] == 0) {
-//     $sql = "SELECT * 
-//             FROM booking 
-//             WHERE user_id = ? AND status != 2 
-//             ORDER BY id DESC 
-//             LIMIT $limit OFFSET $offset";
-// } else {
-//     $sql = "SELECT * 
-//             FROM booking 
-//             WHERE vehicle_id = ? 
-//             ORDER BY id DESC 
-//             LIMIT $limit OFFSET $offset";
-// }
-
-// // Prepare and execute query
-// $stmt = $conn->prepare($sql);
-// if (!$stmt) {
-//     die("SQL prepare failed: " . $conn->error);
-// }
-// $stmt->bind_param("i", $userId);
-// $stmt->execute();
-// $result = $stmt->get_result();
-// $bookings = $result->fetch_all(MYSQLI_ASSOC);
-// $stmt->close();
-
-// // Count total records for pagination
-// if ($_SESSION['role'] == 0) {
-//     $count_sql = "SELECT COUNT(*) as total 
-//                   FROM booking 
-//                   WHERE user_id = $userId AND status != 2";
-// } else {
-//     $count_sql = "SELECT COUNT(*) as total 
-//                   FROM booking 
-//                   WHERE vehicle_id = $userId";
-// }
-// $count_result = $conn->query($count_sql);
-// $total_records = $count_result->fetch_assoc()['total'];
-// $total_pages = ceil($total_records / $limit);
-
 
 ?>
 <?php if (isset($_SESSION['login_success'])): ?>
@@ -95,9 +35,33 @@ if (!isset($_SESSION['id'])) {
     </script>
     <?php unset($_SESSION['login_success']); ?>
 <?php endif; ?>
+<?php
+if ($row['status'] == 0) {
+    echo '
+    <div class="alert alert-danger text-center m-3" role="alert" style="font-weight: bold;">
+        You have been <b>blocked by admin</b>. Please contact us for more info or email us at 
+        <a href="mailto:nagarctservices@gmail.com" class="alert-link">nagarctservices@gmail.com</a>.
+    </div>';
+}
+
+
+// (Your PHP logic above…)
+if ($row['image'] == 0) {
+    echo '
+    <div class="alert alert-warning alert-dismissible fade show text-center m-3" role="alert" style="font-weight: bold;">
+      <strong>Warning!</strong> You haven\'t uploaded a profile picture yet. Please 
+      <a href="profile.php" class="alert-link">update your profile picture</a> to continue.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+}
+
+
+
+?>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
 
 <h2 style="color:#092448;">Dashboard</h2>
-<!-- <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Pathao_Logo.png" alt="Pathao" class="logo"> -->
 <div class="header-location">
     <span>📍</span>
     <span id="location-name">Biratnagar Metropolitan City</span>
@@ -934,6 +898,7 @@ if ($_SESSION['role'] == 1) {
 
 
 <?php
+if($row['status'] != 0){
 if ($_SESSION['role'] != 1) {
     ?>
     <div class="section">
@@ -996,7 +961,7 @@ if ($_SESSION['role'] != 1) {
     </div>
 
     <hr>
-<?php } ?>
+<?php } }?>
 <!-- Invite Friends Section -->
 <div class="invite-section">
     <div class="invite-content">

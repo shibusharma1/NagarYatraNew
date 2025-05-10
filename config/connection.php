@@ -194,7 +194,7 @@ if (mysqli_query($conn, $sql)) {
     echo "Error Creating table: " . mysqli_error($conn);
 }
 
-$hashedpassword = '$2y$10$jbr6tw489YHuquPeyLsXEuq5LaL47CzbKGsKTdu1LC/0gY2ElDJFS';
+$hashedpassword = password_hash('password', PASSWORD_DEFAULT);
 
 // Separate insert statements to isolate issues
 $sql1 = "INSERT IGNORE INTO user (id, name, role, email, password, phone, status, cancel_status, dob, gender, image, address, dl_number, dl_image, dl_expiry_date, vehicle_id, otp, otp_expiry, is_verified) 
@@ -221,11 +221,7 @@ if (mysqli_query($conn, $sql2)) {
 $sql = "CREATE TABLE IF NOT EXISTS notification (
     id INT PRIMARY KEY AUTO_INCREMENT,
     message VARCHAR(255) NOT NULL,
-    -- user_id INT NULL,
-    -- driver_id INT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    -- FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE SET NULL,
-    -- FOREIGN KEY (driver_id) REFERENCES driver(id) ON DELETE SET NULL
 )";
 
 if (mysqli_query($conn, $sql)) {
@@ -342,7 +338,4 @@ if (mysqli_query($conn, $insert_sql)) {
 } else {
     echo "Error inserting data: " . mysqli_error($conn);
 }
-
-
-
 ?>

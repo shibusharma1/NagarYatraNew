@@ -106,13 +106,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </div>
 
           <button type="submit" class="btn solid">Login <i class="fas fa-arrow-right"></i></button>
-          <p class="social-text">Or Sign in with social platforms</p>
+          <!-- <p class="social-text">Or Sign in with social platforms</p>
           <div class="social-media">
             <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-          </div>
+          </div> -->
           <!-- <p>Don't have an account? <a href="register">Register</a></p> -->
         </div>
       </form>

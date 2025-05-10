@@ -10,10 +10,9 @@ $records_per_page = 10;
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * $records_per_page;
 
-// Get role, order, and status values
+// Get role and order values, trimming spaces to prevent issues
 $filter_role = isset($_GET['role']) ? trim($_GET['role']) : 'all';
 $order_by = isset($_GET['order']) ? trim($_GET['order']) : 'name';
-$filter_status = isset($_GET['status']) ? trim($_GET['status']) : 'all';
 
 $where_clause = "WHERE is_delete = 0";
 
@@ -23,17 +22,11 @@ if ($filter_role === 'passenger') {
   $where_clause .= " AND role = 1";
 }
 
-if ($filter_status === 'active') {
-  $where_clause .= " AND status = 1";
-} elseif ($filter_status === 'blocked') {
-  $where_clause .= " AND status = 0";
-}
-
 // Fetch user data
 $sql = "SELECT id, name, role, email, phone, status, gender, address, vehicle_id, is_verified, created_at
         FROM user
         $where_clause
-        ORDER BY $order_by ASC
+        ORDER BY created_at DESC
         LIMIT $records_per_page OFFSET $offset";
 $result = mysqli_query($conn, $sql);
 
@@ -50,18 +43,13 @@ $total_pages = ceil($total_rows / $records_per_page);
   </div>
   <div class="filters">
     <select id="roleFilter" class="filter-dropdown">
-      <option value="all" <?php echo $filter_role === 'all' ? 'selected' : ''; ?>>All</option>
-      <option value="passenger" <?php echo $filter_role === 'passenger' ? 'selected' : ''; ?>>Passenger</option>
-      <option value="driver" <?php echo $filter_role === 'driver' ? 'selected' : ''; ?>>Driver</option>
-    </select>
-    <select id="statusFilter" class="filter-dropdown">
-      <option value="all" <?php echo $filter_status === 'all' ? 'selected' : ''; ?>>All Status</option>
-      <option value="active" <?php echo $filter_status === 'active' ? 'selected' : ''; ?>>Active</option>
-      <option value="blocked" <?php echo $filter_status === 'blocked' ? 'selected' : ''; ?>>Blocked</option>
+      <option value="all">All</option>
+      <option value="passenger">Passenger</option>
+      <option value="driver">Driver</option>
     </select>
     <select id="sortBy" class="filter-dropdown">
-      <option value="name" <?php echo $order_by === 'name' ? 'selected' : ''; ?>>Sort by Name</option>
-      <option value="email" <?php echo $order_by === 'email' ? 'selected' : ''; ?>>Sort by Email</option>
+      <option value="name">Sort by Name</option>
+      <option value="email">Sort by Email</option>
     </select>
     <input type="text" id="searchInput" class="search-input" placeholder="Search..." style="display: none;">
     <button id="searchBtn" class="search-btn">
@@ -180,10 +168,44 @@ $total_pages = ceil($total_rows / $records_per_page);
             <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="action-btn">
               <i class="fa fa-edit" aria-hidden="true"></i>
             </a>
+            <!-- <a href="delete_user.php?id=<?php
+            // echo $row['id']; 
+            ?>"
+              onclick="return confirm('Are you sure you want to delete this user?');" class="action-btn">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </a> -->
             <a href="delete_user.php?id=<?php echo $row['id']; ?>" class="action-btn delete-user"
               data-id="<?php echo $row['id']; ?>">
               <i class="fa fa-trash-o" aria-hidden="true"></i>
             </a>
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                const deleteLinks = document.querySelectorAll(".delete-user");
+
+                deleteLinks.forEach(link => {
+                  link.addEventListener("click", function (e) {
+                    e.preventDefault(); // prevent default link behavior
+                    const userId = this.getAttribute("data-id");
+                    const url = `delete_user.php?id=${userId}`;
+
+                    Swal.fire({
+                      title: "Are you sure?",
+                      text: "You won't be able to revert this!",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#d33",
+                      cancelButtonColor: "#3085d6",
+                      confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href = url;
+                      }
+                    });
+                  });
+                });
+              });
+            </script>
+
           </td>
         </tr>
         <?php
@@ -198,33 +220,33 @@ $total_pages = ceil($total_rows / $records_per_page);
 <!-- Pagination -->
 <div class="pagination">
   <?php if ($page > 1): ?>
-    <a href="?page=<?php echo $page - 1; ?>&role=<?php echo $filter_role; ?>&status=<?php echo $filter_status; ?>&order=<?php echo $order_by; ?>"
+    <a href="?page=<?php echo $page - 1; ?>&role=<?php echo $filter_role; ?>&order=<?php echo $order_by; ?>"
       class="prev">&laquo; Previous</a>
   <?php endif; ?>
 
   <?php
+  // Display page numbers
   for ($i = 1; $i <= $total_pages; $i++) {
-    echo "<a href='?page=$i&role=$filter_role&status=$filter_status&order=$order_by' class='page-num " . ($i == $page ? 'active' : '') . "'>$i</a>";
+    echo "<a href='?page=$i&role=$filter_role&order=$order_by' class='page-num " . ($i == $page ? 'active' : '') . "'>$i</a>";
   }
   ?>
 
   <?php if ($page < $total_pages): ?>
-    <a href="?page=<?php echo $page + 1; ?>&role=<?php echo $filter_role; ?>&status=<?php echo $filter_status; ?>&order=<?php echo $order_by; ?>"
+    <a href="?page=<?php echo $page + 1; ?>&role=<?php echo $filter_role; ?>&order=<?php echo $order_by; ?>"
       class="next">Next &raquo;</a>
   <?php endif; ?>
 </div>
 
 <script>
-  document.getElementById('roleFilter').addEventListener('change', updateFilters);
-  document.getElementById('statusFilter').addEventListener('change', updateFilters);
-  document.getElementById('sortBy').addEventListener('change', updateFilters);
+  document.getElementById('roleFilter').addEventListener('change', function () {
+    let role = this.value;
+    window.location.href = '?role=' + role + '&order=' + document.getElementById('sortBy').value;
+  });
 
-  function updateFilters() {
-    let role = document.getElementById('roleFilter').value;
-    let status = document.getElementById('statusFilter').value;
-    let order = document.getElementById('sortBy').value;
-    window.location.href = '?role=' + role + '&status=' + status + '&order=' + order;
-  }
+  document.getElementById('sortBy').addEventListener('change', function () {
+    let order = this.value;
+    window.location.href = '?role=' + document.getElementById('roleFilter').value + '&order=' + order;
+  });
 
   document.getElementById('searchBtn').addEventListener('click', function () {
     document.getElementById('searchInput').style.display = 'block';

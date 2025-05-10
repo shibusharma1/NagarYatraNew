@@ -2,8 +2,8 @@
 // session_start();
 // Example user data (Fetch from database in real implementation)
 $user = [
-    "name" => "John Doe",
-    "email" => "abc@gmail.com",
+    "name" => "Admin",
+    "email" => "admin@gmail.com",
     "profile_image" => "../assets/logo1.png" // Change to actual path
 ];
 // include_once 'master_header.php';
@@ -20,70 +20,8 @@ include_once 'master_header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <style>
-        .container {
-            width: 50%;
-            margin: 50px auto;
-        }
+    
 
-        .profile-card {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .profile-actions button {
-            background: green;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .profile-actions button:hover {
-            background: darkgreen;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            width: 300px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .close {
-            float: right;
-            cursor: pointer;
-            font-size: 20px;
-        }
-    </style> -->
-<style>
     <style>
     :root {
         --primary-color: #2c3e50;
@@ -152,8 +90,8 @@ include_once 'master_header.php';
     }
 
     .profile-actions button {
-        background: linear-gradient(135deg, var(--accent-color) 0%, #219a52 100%);
-        color: white;
+        /* background: linear-gradient(135deg, var(--accent-color) 0%, #219a52 100%); */
+        /* color: white; */
         border: none;
         padding: 12px 25px;
         border-radius: 8px;
@@ -277,7 +215,6 @@ include_once 'master_header.php';
             flex-direction: column;
         }
     }
-</style>
 </style>
 </head>
 

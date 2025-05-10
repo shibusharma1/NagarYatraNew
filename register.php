@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors['phone'] = "Phone Number is required.";
   } elseif (!preg_match('/^(97|98|96)[0-9]{8}$/', $phone)) {
     $errors['phone'] = "Phone Number must start with 97, 98, or 96 and be exactly 10 digits.";
-  }else {
+  } else {
     // Check if phone number already exists
     $checkPhone = "SELECT id FROM user WHERE phone = ?";
     $stmt = $conn->prepare($checkPhone);
@@ -272,9 +272,27 @@ include_once "register_login_header.php";
     }
     ?>
     <div class="input-field">
-      <i class="fas fa-date"></i>
-      <input type="date" placeholder="Birthdate" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>"
-        required />
+      <!-- <i class="fas fa-calender"></i> -->
+      <i class="fas fa-calendar-alt"></i>
+
+      <!-- <input type="date" placeholder="Birthdate" name="date" value="<?= htmlspecialchars($_POST['date'] ?? '') ?>"
+        required /> -->
+      <input type="date" placeholder="Birthdate" name="date" max="<?= date('Y-m-d') ?>"
+        value="<?= htmlspecialchars($_POST['date'] ?? '') ?>">
+
+      <!-- JS for past date -->
+      <!-- <script>
+        document.querySelector('input[name="date"]').addEventListener('change', function () {
+          const selectedDate = new Date(this.value);
+          const today = new Date();
+          if (selectedDate > today) {
+            alert('Please select a date in the past.');
+            this.value = '';
+          }
+        });
+      </script> -->
+
+
     </div>
     <?php
     if (isset($errors['date'])) {
@@ -332,8 +350,9 @@ include_once "register_login_header.php";
     <input type="hidden" name="latitude" id="latitude">
     <input type="hidden" name="longitude" id="longitude">
     <div style="display: flex;justify-content:center;gap:10px;">
-    <input type="checkbox" name="termsandConditions" class="termsandConditions" id="termsandConditions" required>
-    <p class="terms">I have read and agreed to the <a href="user/terms_and_conditions.php">terms and conditions</a>.</p>
+      <input type="checkbox" name="termsandConditions" class="termsandConditions" id="termsandConditions" required>
+      <p class="terms">I have read and agreed to the <a href="user/terms_and_conditions.php">terms and conditions</a>.
+      </p>
     </div>
     <button type="submit" class="btn solid">
       Register <i class="fas fa-arrow-right"></i>

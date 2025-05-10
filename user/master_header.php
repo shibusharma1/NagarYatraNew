@@ -184,7 +184,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                 }
                 ?>
 
-                <?php if ($is_within_5_min): ?>
+                <?php 
+                if ($is_within_5_min): ?>
                     <a href="add_vehicle" id="become-driver-button">
                         <div class="item <?php echo ($current_page == 'add_vehicle') ? 'active' : ''; ?>">
                             <i class="fa fa-car" aria-hidden="true"></i> &nbsp; Become a Driver
@@ -209,7 +210,9 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <i class="fa fa-home" aria-hidden="true"></i> &nbsp; Dashboard
                 </div>
             </a>
+
             <?php
+            if($row['status'] != 0){
             if ($row['role'] != 1) {
                 ?>
                 <a href="book_ride.php">
@@ -242,6 +245,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
             <?php
             if ($row['role'] == 1) {
+                
                 ?>
                 <a href="ride_request">
                     <div class="item <?php echo ($current_page == 'ride_request') ? 'active' : ''; ?>">
@@ -294,6 +298,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <i class="fa fa-commenting-o" aria-hidden="true"></i> &nbsp; Send Feedback
                 </div>
             </a>
+            <?php } ?>
 
             <a href="emergencycontacts">
                 <div class="item <?php echo ($current_page == 'emergencycontacts') ? 'active' : ''; ?>">
@@ -374,9 +379,9 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <a href="profile">
                             <div class="menu-item">Edit Profile</div>
                         </a>
-                        <a href="change_password">
+                        <!-- <a href="change_password">
                             <div class="menu-item">Change Password</div>
-                        </a>
+                        </a> -->
                         <a href="logout">
                             <div class="menu-item">Logout</div>
                         </a>

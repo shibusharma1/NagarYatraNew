@@ -218,9 +218,9 @@ if (!isset($_SESSION['admin_id'])) {
                         <a href="profile" style="text-decoration:none;color:#000000;">
                             <div class="menu-item">Edit Profile</div>
                         </a>
-                        <a href="change_password" style="text-decoration:none;color:#000000;">
+                        <!-- <a href="change_password" style="text-decoration:none;color:#000000;">
                             <div class="menu-item">Change Password</div>
-                        </a>
+                        </a> -->
                         <a href="logout">
                             <div class="menu-item">Logout</div>
                         </a>
