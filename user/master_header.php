@@ -20,8 +20,14 @@ $result = mysqli_query($conn, $sql);
 if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $role = $row['role'];
+    $status = $row['status'];
+    $name = $row['name'];
+    $image = $row['image'];
 } else {
     $role = null; // or handle error
+    $status = 1;
+    $name = "Nagar Yatra";
+    $image = "../assets/logo1.png";
 }
 ?>
 <!DOCTYPE html>
@@ -138,6 +144,91 @@ if ($result && mysqli_num_rows($result) > 0) {
         .heading-2 h2 {
             color: #092448;
         }
+
+        /* CSS for the notifications */
+        .dropdown {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .notif-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .notif-item:last-child {
+            border-bottom: none;
+        }
+
+        .notif-item.unread {
+            font-weight: 300;
+            background-color: #fff8c6 !important;
+            /* light yellow */
+            border-left: 3px solid orange;
+            padding: 8px;
+            margin-bottom: 5px;
+        }
+
+        .view-all {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .view-all a {
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .view-all a:hover {
+            text-decoration: underline;
+        }
+
+        .red-bell {
+            color: red;
+        }
+
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(10deg);
+            }
+
+            50% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(10deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .dropdown {
+            position: absolute;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .notif-item.unread {
+            font-weight: 600;
+            background-color: #f9f9f9;
+        }
     </style>
 
 </head>
@@ -184,7 +275,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 }
                 ?>
 
-                <?php 
+                <?php
                 if ($is_within_5_min): ?>
                     <a href="add_vehicle" id="become-driver-button">
                         <div class="item <?php echo ($current_page == 'add_vehicle') ? 'active' : ''; ?>">
@@ -212,60 +303,60 @@ if ($result && mysqli_num_rows($result) > 0) {
             </a>
 
             <?php
-            if($row['status'] != 0){
-            if ($row['role'] != 1) {
-                ?>
-                <a href="book_ride.php">
-                    <div class="item <?php echo ($current_page == 'vehicle_list') ? 'active' : ''; ?>">
-                        <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Book a Ride
-                    </div>
-                </a>
+            if ($row['status'] != 0) {
+                if ($row['role'] != 1) {
+                    ?>
+                    <a href="book_ride.php">
+                        <div class="item <?php echo ($current_page == 'vehicle_list') ? 'active' : ''; ?>">
+                            <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Book a Ride
+                        </div>
+                    </a>
 
-                <a href="pre_book_vehicle.php">
-                    <div class="item <?php echo ($current_page == 'prebooking') ? 'active' : ''; ?>">
-                        <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Pre-Booking
-                    </div>
-                </a>
+                    <a href="pre_book_vehicle.php">
+                        <div class="item <?php echo ($current_page == 'prebooking') ? 'active' : ''; ?>">
+                            <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Pre-Booking
+                        </div>
+                    </a>
 
-                <a href="ride_status.php">
-                    <div class="item <?php echo ($current_page == 'ride_status') ? 'active' : ''; ?>">
-                        <i class="fa fa-location-arrow" aria-hidden="true"></i> &nbsp; Ride Status
-                    </div>
-                </a>
-            <?php } ?>
-            <?php
-            if ($row['role'] == 1) {
-                ?>
-                <a href="show_vehicle">
-                    <div class="item <?php echo ($current_page == 'show_vehicle') ? 'active' : ''; ?>">
-                        <i class="fa fa-car" aria-hidden="true"></i> &nbsp; Vehicle Details
-                    </div>
-                </a>
-            <?php } ?>
+                    <a href="ride_status.php">
+                        <div class="item <?php echo ($current_page == 'ride_status') ? 'active' : ''; ?>">
+                            <i class="fa fa-location-arrow" aria-hidden="true"></i> &nbsp; Ride Status
+                        </div>
+                    </a>
+                <?php } ?>
+                <?php
+                if ($row['role'] == 1) {
+                    ?>
+                    <a href="show_vehicle">
+                        <div class="item <?php echo ($current_page == 'show_vehicle') ? 'active' : ''; ?>">
+                            <i class="fa fa-car" aria-hidden="true"></i> &nbsp; Vehicle Details
+                        </div>
+                    </a>
+                <?php } ?>
 
-            <?php
-            if ($row['role'] == 1) {
-                
-                ?>
-                <a href="ride_request">
-                    <div class="item <?php echo ($current_page == 'ride_request') ? 'active' : ''; ?>">
-                        <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Ride Request
-                    </div>
-                </a>
-            <?php } ?>
+                <?php
+                if ($row['role'] == 1) {
 
-            <?php
-            if ($row['role'] == 1) {
-                ?>
-                <a href="approved_ride">
-                    <div class="item <?php echo ($current_page == 'approved_ride') ? 'active' : ''; ?>">
-                        <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Approved Ride
-                    </div>
-                </a>
-            <?php } ?>
+                    ?>
+                    <a href="ride_request">
+                        <div class="item <?php echo ($current_page == 'ride_request') ? 'active' : ''; ?>">
+                            <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Ride Request
+                        </div>
+                    </a>
+                <?php } ?>
 
-            <?php if ($row['role'] == 1): ?>
-                <!-- <a href="mechanicscontacts">
+                <?php
+                if ($row['role'] == 1) {
+                    ?>
+                    <a href="approved_ride">
+                        <div class="item <?php echo ($current_page == 'approved_ride') ? 'active' : ''; ?>">
+                            <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Approved Ride
+                        </div>
+                    </a>
+                <?php } ?>
+
+                <?php if ($row['role'] == 1): ?>
+                    <!-- <a href="mechanicscontacts">
                     <div class="item 
                     <?php
                     // echo ($current_page == 'mechanicscontacts') ? 'active' : '';
@@ -273,31 +364,31 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <i class="fa fa-phone" aria-hidden="true"></i> &nbsp; Call a Mechanics
                     </div>
                 </a> -->
-            <?php endif ?>
+                <?php endif ?>
 
 
 
-            <a href="ride_history.php">
-                <div class="item <?php echo ($current_page == 'ride_history') ? 'active' : ''; ?>">
-                    <i class="fa fa-history" aria-hidden="true"></i> &nbsp; Ride History
-                </div>
-            </a>
-
-            <?php
-            if ($row['role'] == 1) {
-                ?>
-                <a href="earnings">
-                    <div class="item <?php echo ($current_page == 'earnings') ? 'active' : ''; ?>">
-                        <i class="fa fa-dollar" aria-hidden="true"></i> &nbsp; Earnings
+                <a href="ride_history.php">
+                    <div class="item <?php echo ($current_page == 'ride_history') ? 'active' : ''; ?>">
+                        <i class="fa fa-history" aria-hidden="true"></i> &nbsp; Ride History
                     </div>
                 </a>
-            <?php } ?>
-            
-            <a href="feedback">
-                <div class="item <?php echo ($current_page == 'feedback') ? 'active' : ''; ?>">
-                    <i class="fa fa-commenting-o" aria-hidden="true"></i> &nbsp; Send Feedback
-                </div>
-            </a>
+
+                <?php
+                if ($row['role'] == 1) {
+                    ?>
+                    <a href="earnings">
+                        <div class="item <?php echo ($current_page == 'earnings') ? 'active' : ''; ?>">
+                            <i class="fa fa-dollar" aria-hidden="true"></i> &nbsp; Earnings
+                        </div>
+                    </a>
+                <?php } ?>
+
+                <a href="feedback">
+                    <div class="item <?php echo ($current_page == 'feedback') ? 'active' : ''; ?>">
+                        <i class="fa fa-commenting-o" aria-hidden="true"></i> &nbsp; Send Feedback
+                    </div>
+                </a>
             <?php } ?>
 
             <a href="emergencycontacts">
@@ -324,21 +415,76 @@ if ($result && mysqli_num_rows($result) > 0) {
 
             <div class="notification-account-info">
                 <!-- Bell Icon with Notification Badge -->
-                <div class="notification">
-                    <?php if ($row['role'] == 1): ?>
-                        <i class="fa fa-car" aria-hidden="true"></i>
-                    <?php endif ?>
+                <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+                <?php if ($row['role'] == 1): ?>
+                    <i class="fa fa-car" aria-hidden="true" style="font-size: 24px;"></i>
+                <?php endif ?>
 
-                    <?php if ($row['role'] == 0): ?>
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    <?php endif ?>
-                    <!-- <sup class="badge">3</sup> -->
-                    <!-- <div class="dropdown">
-                        <div class="notif-item">Notification 1</div>
-                        <div class="notif-item">Notification 2</div>
-                        <div class="notif-item">Notification 3</div>
-                    </div> -->
+                <?php if ($row['role'] == 0): ?>
+                    <i class="fa fa-user" aria-hidden="true" style="font-size: 24px;"></i>
+                <?php endif ?>
+
+                <?php
+                $user_id = $_SESSION['id'];
+                $sql = "SELECT * FROM notifications 
+        WHERE user_id = ? 
+        ORDER BY id DESC 
+        LIMIT 3";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $user_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                $hasUnread = false;
+                $notifications = [];
+
+                while ($row = $result->fetch_assoc()) {
+                    $notifications[] = $row;
+                    if ($row['mark_as_read'] == 0) {
+                        $hasUnread = true;
+                    }
+                }
+                ?>
+
+                <div class="notification">
+                    <i id="bellIcon" class="fa fa-bell <?= $hasUnread ? 'red-bell shake' : '' ?>"
+                        aria-hidden="true"></i>
+
+                    <!-- Notification Dropdown -->
+                    <div id="notifDropdown" class="dropdown" style="width: 400px; display: none;text-align:left;">
+                        <?php if (count($notifications) > 0): ?>
+                            <?php foreach ($notifications as $row): ?>
+                                <div class="notif-item <?= $row['mark_as_read'] == 0 ? 'unread' : '' ?>">
+                                    <?= htmlspecialchars($row['message']) ?>
+                                    <?php echo "<br>"; ?>
+                                    <?= htmlspecialchars($row['created_at']) ?>
+                                    
+                                </div>
+                            <?php endforeach; ?>
+                            <div class="view-all">
+                                <a href="view-all-notifications.php">View All Notifications</a>
+                            </div>
+                        <?php else: ?>
+                            <div class="notif-item">No notifications.</div>
+                        <?php endif; ?>
+                    </div>
                 </div>
+
+
+
+                <script>
+                    const bellIcon = document.getElementById('bellIcon');
+                    const notifDropdown = document.getElementById('notifDropdown');
+
+                    bellIcon.addEventListener('click', () => {
+                        if (notifDropdown.style.display === 'none') {
+                            notifDropdown.style.display = 'block';
+                        } else {
+                            notifDropdown.style.display = 'none';
+                        }
+                    });
+                </script>
+
                 <!-- User Profile Icon -->
                 <!-- <div class="account-info">
                     <img src="../assets/logo1.png" class="profile-img" alt="NagarYatra">
@@ -348,7 +494,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                             <img src="../assets/logo1.png" alt="NagarYatra">
                             <span>
                                 <?php
-                                echo $row['name'];
+                                echo $name;
                                 ?>
                             </span>
                         </div>
@@ -365,15 +511,13 @@ if ($result && mysqli_num_rows($result) > 0) {
                     </div>
                 </div> -->
                 <div class="account-info">
-                    <img src="<?php echo $row['image'] ? $row['image'] : '../assets/logo1.png'; ?>" class="profile-img"
-                        id="profileTrigger" alt="NagarYatra">
+                    <img src="<?php echo $image; ?>" class="profile-img" id="profileTrigger" alt="NagarYatra">
 
                     <div class="user-menu" id="userMenu">
                         <div class="user-header">
-                            <img src="<?php echo $row['image'] ? $row['image'] : '../assets/logo1.png'; ?>"
-                                alt="NagarYatra">
+                            <img src="<?php echo $image ?>" alt="NagarYatra">
                             <span>
-                                <?php echo $row['name']; ?>
+                                <?php echo $name; ?>
                             </span>
                         </div>
                         <a href="profile">

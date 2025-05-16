@@ -51,6 +51,31 @@ if ($success) {
     $_SESSION['password_failed'] = "Password update failed.";
 }
 
+// Get device and time
+$device = $_SERVER['HTTP_USER_AGENT'];  // or your preferred method to detect device
+$time = date('Y-m-d H:i:s');
+
+// Build the notification message
+$message = "Security alert: Your password has been successfully changed from the device '{$device}' on {$time}. If you did not initiate this change, please contact our support team immediately.";
+
+// Escape the message to avoid SQL issues
+$escaped_message = mysqli_real_escape_string($conn, $message);
+
+// Build the query (handle NULL for user_id)
+if ($user_id !== NULL) {
+    $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
+} else {
+    $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
+}
+
+// Execute the query
+if (mysqli_query($conn, $sql)) {
+    // echo "Notification sent successfully!";
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
+
 // Close the database connection
 $conn->close();
 

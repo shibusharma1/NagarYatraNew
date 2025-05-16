@@ -153,7 +153,7 @@
       <div class="col1" style="padding:1rem;">
         <img src="assets/logo1.png" alt="Loading" widht="auto" height="100px"
           style="background-color: white; border-radius:50%">
-        <p>NagarYatra, founded in 2070 B.S., offers innovative opportunities in a highly academic
+        <p>NagarYatra, founded in 2082 B.S., offers innovative opportunities in a highly academic
           setting. The college aims to deliver value-based quality education at the graduate level, promoting
           personal and professional growth through its experienced faculty and national experts. </p>
       </div>

@@ -33,8 +33,7 @@ switch ($filter) {
         break;
 }
 
-$sql = "
-    SELECT DATE(created_at) AS earning_date, SUM(estimated_cost) AS earnings
+$sql = "SELECT DATE(created_at) AS earning_date, SUM(estimated_cost) AS earnings
     FROM booking
     WHERE vehicle_id = ? AND is_delete = 0 AND status = 5 AND DATE(created_at) BETWEEN ? AND ?
     GROUP BY DATE(created_at)

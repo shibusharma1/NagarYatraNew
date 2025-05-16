@@ -43,6 +43,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         $_SESSION['profile_success'] = "Profile updated successfully.";
+        // Compose the notification message
+        $message = "Dear {$name}, your profile has been updated successfully. Thank you for keeping your information up to date.";
+
+        // Escape the message to avoid SQL errors
+        $escaped_message = mysqli_real_escape_string($conn, $message);
+
+        // Build the query (handle NULL for user_id)
+        if ($user_id !== NULL) {
+            $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
+        } else {
+            $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
+        }
+
+        // Execute the query
+        if (mysqli_query($conn, $sql)) {
+            // echo "Notification sent successfully!";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+
     } else {
         $_SESSION['error'] = "Error updating profile.";
     }

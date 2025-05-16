@@ -135,7 +135,7 @@ if (!empty($validBookingIds)) {
         echo "<td colspan=8 style='color:#092448;font-size:2rem;'>No bookings available within your area.</td>";
     }
 } else {
-    // echo "No bookings available within 10KM.";
+    echo "No bookings available within 10KM.";
 }
 
 $conn->close();

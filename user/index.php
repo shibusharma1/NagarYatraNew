@@ -35,8 +35,9 @@ if (!isset($_SESSION['id'])) {
     </script>
     <?php unset($_SESSION['login_success']); ?>
 <?php endif; ?>
+
 <?php
-if ($row['status'] == 0) {
+if ($status == 0) {
     echo '
     <div class="alert alert-danger text-center m-3" role="alert" style="font-weight: bold;">
         You have been <b>blocked by admin</b>. Please contact us for more info or email us at 
@@ -45,8 +46,9 @@ if ($row['status'] == 0) {
 }
 
 
+
 // (Your PHP logic above…)
-if ($row['image'] == 0) {
+if (!$image) {
     echo '
     <div class="alert alert-warning alert-dismissible fade show text-center m-3" role="alert" style="font-weight: bold;">
       <strong>Warning!</strong> You haven\'t uploaded a profile picture yet. Please 
@@ -54,12 +56,12 @@ if ($row['image'] == 0) {
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>';
 }
-
-
-
 ?>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+
+<?php include 'rating-popup.php'; ?>
+
 
 <h2 style="color:#092448;">Dashboard</h2>
 <div class="header-location">
@@ -114,16 +116,31 @@ if ($row['image'] == 0) {
             <div class="content">
                 <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
                     <?php
-                    $userId = $_SESSION['id'];
 
-                    $sql = "SELECT COUNT(id) AS total_bookings FROM booking WHERE user_id = $userId AND is_delete = 0";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result) {
-                        $row = mysqli_fetch_assoc($result);
-                        $totalBookings = $row['total_bookings'];
-                        echo $totalBookings;
+                    if ($_SESSION['role'] == 0) {
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT COUNT(id) AS total_bookings FROM booking WHERE user_id = $userId AND is_delete = 0";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $totalBookings = $row['total_bookings'];
+                            echo $totalBookings;
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
                     } else {
-                        echo "Error: " . mysqli_error($conn);
+                        $userId = $_SESSION['vehicle_id'];
+
+                        $sql = "SELECT COUNT(id) AS total_bookings FROM booking WHERE vehicle_id = $userId AND is_delete = 0";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $totalBookings = $row['total_bookings'];
+                            echo $totalBookings;
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
                     }
                     ?>
                 </h1>
@@ -139,19 +156,37 @@ if ($row['image'] == 0) {
             <div class="content">
                 <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
                     <?php
-                    $userId = $_SESSION['id'];
 
-                    $sql = "SELECT COUNT(id) AS completed_bookings FROM booking 
+                    if ($_SESSION['role'] == 0) {
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT COUNT(id) AS completed_bookings FROM booking 
                                 WHERE user_id = $userId 
                                 AND status = 5 
                                 AND is_delete = 0";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result) {
-                        $row = mysqli_fetch_assoc($result);
-                        $completedBookings = $row['completed_bookings'];
-                        echo $completedBookings;
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $completedBookings = $row['completed_bookings'];
+                            echo $completedBookings;
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
                     } else {
-                        echo "Error: " . mysqli_error($conn);
+                        $userId = $_SESSION['vehicle_id'];
+
+                        $sql = "SELECT COUNT(id) AS completed_bookings FROM booking 
+                                WHERE vehicle_id = $userId 
+                                AND status = 5 
+                                AND is_delete = 0";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $completedBookings = $row['completed_bookings'];
+                            echo $completedBookings;
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
                     }
                     ?>
                 </h1>
@@ -220,7 +255,9 @@ if ($row['image'] == 0) {
                     <p class="mb-2 text-muted">Total Bookings Cost</p>
                 </div>
                 <div class="icon s7__bg-primary rounded-circle">
-                    <i class="las la-dollar-sign"></i>
+                    <!-- <i class="las la-dollar-sign"></i> -->
+                <span>रु</span>
+
                 </div>
             </div>
         </div>
@@ -262,16 +299,32 @@ if ($row['image'] == 0) {
     }
 
     // Fetch booking status counts (all-time)
-    $sql3 = "
+    if ($_SESSION['role'] == 0) {
+        $user_id = $_SESSION['id'];
+        $sql3 = "
     SELECT status, COUNT(*) AS status_count
     FROM booking
     WHERE user_id = ? AND is_delete = 0
     GROUP BY status
     ";
-    $stmt3 = $conn->prepare($sql3);
-    $stmt3->bind_param("i", $user_id);
-    $stmt3->execute();
-    $result3 = $stmt3->get_result();
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->bind_param("i", $user_id);
+        $stmt3->execute();
+        $result3 = $stmt3->get_result();
+    } else {
+        $user_id = $_SESSION['vehicle_id'];
+        $sql3 = "
+                SELECT status, COUNT(*) AS status_count
+                FROM booking
+                WHERE vehicle_id = ? AND is_delete = 0
+                GROUP BY status
+                ";
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->bind_param("i", $user_id);
+        $stmt3->execute();
+        $result3 = $stmt3->get_result();
+    }
+
 
     $status_data = [
         'cancelled_by_user' => 0,
@@ -531,27 +584,51 @@ if ($_SESSION['role'] == 1) {
             <div class="content">
                 <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
                     <?php
-                    $userId = $_SESSION['id'];
 
-                    $sql = "SELECT SUM(estimated_cost) AS total_earning FROM booking 
+                    // For user
+                    if ($_SESSION['role'] == 0) {
+                        $userId = $_SESSION['id'];
+
+                        $sql = "SELECT SUM(estimated_cost) AS total_earning FROM booking 
                                 WHERE user_id = $userId 
                                 AND status = 5 
                                 AND is_delete = 0";
 
-                    $result = mysqli_query($conn, $sql);
-                    if ($result) {
-                        $row = mysqli_fetch_assoc($result);
-                        $totalEarning = $row['total_earning'] ?? 0;
-                        echo number_format($totalEarning, 2); // Format to 2 decimal places
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $totalEarning = $row['total_earning'] ?? 0;
+                            echo number_format($totalEarning, 2); // Format to 2 decimal places
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
                     } else {
-                        echo "Error: " . mysqli_error($conn);
+                        $userId = $_SESSION['vehicle_id'];
+
+                        $sql = "SELECT SUM(estimated_cost) AS total_earning FROM booking 
+                                WHERE vehicle_id = $userId 
+                                AND status = 5 
+                                AND is_delete = 0";
+
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $totalEarning = $row['total_earning'] ?? 0;
+                            echo number_format($totalEarning, 2); // Format to 2 decimal places
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+
                     }
+
                     ?>
                 </h1>
                 <p class="mb-2 text-muted">Total Earnings</p>
             </div>
             <div class="icon s7__bg-primary rounded-circle">
-                <i class="las la-dollar-sign"></i>
+               
+                <span>रु</span>
+
             </div>
         </div>
     </div>
@@ -560,10 +637,10 @@ if ($_SESSION['role'] == 1) {
             <div class="content">
                 <h1 class="mb-0 text-primary font-weight-bold" style="color:#092448 !important;">
                     <?php
-                    $userId = $_SESSION['id'];
+                    $userId = $_SESSION['vehicle_id'];
 
                     $sql = "SELECT SUM(estimated_cost) AS todays_earning FROM booking 
-                                WHERE user_id = $userId 
+                                WHERE vehicle_id = $userId 
                                 AND status = 5 
                                 AND DATE(created_at) = CURDATE()
                                 AND is_delete = 0";
@@ -589,14 +666,14 @@ if ($_SESSION['role'] == 1) {
 
     <?php
 
-    $user_id = $_SESSION['id'];
+    $user_id = $_SESSION['vehicle_id'];
 
 
     // Fetch booking count per day
     $sql1 = "
     SELECT DATE(created_at) AS day, COUNT(*) AS bookings
     FROM booking
-    WHERE user_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
+    WHERE vehicle_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
     GROUP BY day
     ORDER BY day
 ";
@@ -614,7 +691,7 @@ if ($_SESSION['role'] == 1) {
     $sql2 = "
     SELECT DATE(created_at) AS day, SUM(estimated_cost) AS earnings
     FROM booking
-    WHERE user_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
+    WHERE vehicle_id = ? AND is_delete = 0 AND created_at >= CURDATE() - INTERVAL 6 DAY
     GROUP BY day
     ORDER BY day
 ";
@@ -898,70 +975,71 @@ if ($_SESSION['role'] == 1) {
 
 
 <?php
-if($row['status'] != 0){
-if ($_SESSION['role'] != 1) {
-    ?>
-    <div class="section">
-        <h3>Take a ride to</h3>
-        <div class="search-bar">
-            <span>📍</span>
-            <input type="text" placeholder="Search Destination" onclick="redirectToVehicleList()">
-            <span class="search-icon">🔍</span>
+if ($status != 0) {
+    if ($_SESSION['role'] != 1) {
+        ?>
+        <div class="section">
+            <h3>Take a ride to</h3>
+            <div class="search-bar">
+                <span>📍</span>
+                <input type="text" placeholder="Search Destination" onclick="redirectToVehicleList()">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <script>
+                function redirectToVehicleList() {
+                    window.location.href = "book_ride.php"; // Redirect to book_ride.php
+                }
+            </script>
+
+
+            <div class="shortcut-bar">
+                <div>
+                    <div>🏠 Home</div>
+                    <onsmall id="home-location">Fetching location...</onsmall>
+                </div>
+                <div>
+                    <div>💼 Work</div>
+                    <small>Set Address</small>
+                </div>
+            </div>
+
+            <script>
+                function getLocationName(lat, lon) {
+                    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            const displayName = data.address.city || data.address.town || data.address.village || data.display_name;
+                            document.getElementById("home-location").textContent = displayName || "Location not found";
+                        })
+                        .catch(() => {
+                            document.getElementById("home-location").textContent = "Unable to fetch location";
+                        });
+                }
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            getLocationName(lat, lon);
+                        },
+                        () => {
+                            document.getElementById("home-location").textContent = "Unable to fetch location";
+                        }
+                    );
+                } else {
+                    document.getElementById("home-location").textContent = "Geolocation not supported";
+                }
+            </script>
+
         </div>
 
-        <script>
-            function redirectToVehicleList() {
-                window.location.href = "book_ride.php"; // Redirect to book_ride.php
-            }
-        </script>
-
-
-        <div class="shortcut-bar">
-            <div>
-                <div>🏠 Home</div>
-                <onsmall id="home-location">Fetching location...</onsmall>
-            </div>
-            <div>
-                <div>💼 Work</div>
-                <small>Set Address</small>
-            </div>
-        </div>
-
-        <script>
-            function getLocationName(lat, lon) {
-                const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
-
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        const displayName = data.address.city || data.address.town || data.address.village || data.display_name;
-                        document.getElementById("home-location").textContent = displayName || "Location not found";
-                    })
-                    .catch(() => {
-                        document.getElementById("home-location").textContent = "Unable to fetch location";
-                    });
-            }
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    position => {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
-                        getLocationName(lat, lon);
-                    },
-                    () => {
-                        document.getElementById("home-location").textContent = "Unable to fetch location";
-                    }
-                );
-            } else {
-                document.getElementById("home-location").textContent = "Geolocation not supported";
-            }
-        </script>
-
-    </div>
-
-    <hr>
-<?php } }?>
+        <hr>
+    <?php }
+} ?>
 <!-- Invite Friends Section -->
 <div class="invite-section">
     <div class="invite-content">

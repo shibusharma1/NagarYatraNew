@@ -69,13 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     return $earthRadius * $c;
   }
 
-  $nearest_users= []; // Array to store users within 10 km
+  $nearest_users = []; // Array to store users within 10 km
   $nearbyUsers = []; // Optional: store full data if needed
 
   foreach ($users as $user) {
     $distance = haversineDistance($pickup_lat, $pickup_lng, $user['latitude'], $user['longitude']);
 
-    if ($distance <= 10) {
+    if ($distance <= 20) {
       $nearest_users[] = $user['id']; // Collect user ID
       $nearbyUsers[] = array_merge($user, ['distance_km' => round($distance, 2)]); // Optional: store details
     }
@@ -88,12 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $result = mysqli_query($conn, $sql);
   if ($result) {
-      $row = mysqli_fetch_assoc($result);
-      $per_km_cost = $row['per_km_cost'] ?? 0;
-      $cost = $row['min_cost'] ?? 0;
-      // echo number_format($totalEarning, 2); // Format to 2 decimal places
+    $row = mysqli_fetch_assoc($result);
+    $per_km_cost = $row['per_km_cost'] ?? 0;
+    $cost = $row['min_cost'] ?? 0;
+    // echo number_format($totalEarning, 2); // Format to 2 decimal places
   } else {
-      echo "Error: " . mysqli_error($conn);
+    echo "Error: " . mysqli_error($conn);
   }
 
   if ($distance_km > 2) {
@@ -169,8 +169,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   // php mailer ends
+  // print_r($nearest_users);
+  // exit;
 
   $nearest_users_str = implode(',', $nearest_users);
+  echo "<pre>";
+  // var_dump($nearest_users_str);
+  echo "</pre>";
   $sql = "INSERT INTO booking (
     user_id, nearest_users, otp, pick_up_place, pickup_lat, pickup_lng,
     destination, destination_lat, destination_lng,
@@ -203,6 +208,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   );
 
   if ($stmt->execute()) {
+
+    // code for notifications
+    // Compose the notification message
+    $message = "Dear {$name}, your vehicle booking request has been successfully sent to nearby drivers. Please wait while we find the best match for you.";
+
+    // Escape the message to avoid SQL errors
+    $escaped_message = mysqli_real_escape_string($conn, $message);
+
+    // Build the query (handle NULL for user_id)
+    if ($user_id !== NULL) {
+      $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
+    } else {
+      $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
+    }
+
+    // Execute the query
+    if (mysqli_query($conn, $sql)) {
+      // echo "Notification sent successfully!";
+    } else {
+      echo "Error: " . mysqli_error($conn);
+    }
+
+
+
     echo "<script>window.location.href='ride_status.php';</script>";
     exit;
   } else {
@@ -213,74 +242,74 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <section class="car-list">
   <!-- <div class="container mt-4"> -->
-    <h4 class="mb-3 title">Book a Ride</h4>
-    <form action="" method="post" onsubmit="return prepareBooking();">
+  <h4 class="mb-3 title">Book a Ride</h4>
+  <form action="" method="post" onsubmit="return prepareBooking();">
 
-      <!-- category -->
-      <?php
-      // Fetch categories for the dropdown
-      $categories = [];
-      $sql = "SELECT id, name, image FROM vehicle_category"; // Include image here
-      $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          $categories[] = $row;
-        }
+    <!-- category -->
+    <?php
+    // Fetch categories for the dropdown
+    $categories = [];
+    $sql = "SELECT id, name, image FROM vehicle_category"; // Include image here
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $categories[] = $row;
       }
-      ?>
+    }
+    ?>
 
-      <div class="input-group mb-3">
-        <div class="row">
-          <?php foreach ($categories as $category): ?>
-            <div class="col-md-3 mb-3">
-              <div class="vehicle-option" data-id="<?= $category['id']; ?>" onclick="selectCategory(this)">
-                <?php
-                $image = "../admin/" . htmlspecialchars($category['image']);
-                ?>
-                <img src="<?php echo $image; ?>" alt="<?= htmlspecialchars($category['name']); ?>"
-                  style="width: 100%; height: 150px; object-fit: cover;">
-                <div class="text-center mt-2"><?= htmlspecialchars($category['name']); ?></div>
-              </div>
+    <div class="input-group mb-3">
+      <div class="row">
+        <?php foreach ($categories as $category): ?>
+          <div class="col-md-3 mb-3">
+            <div class="vehicle-option" data-id="<?= $category['id']; ?>" onclick="selectCategory(this)">
+              <?php
+              $image = "../admin/" . htmlspecialchars($category['image']);
+              ?>
+              <img src="<?php echo $image; ?>" alt="<?= htmlspecialchars($category['name']); ?>"
+                style="width: 100%; height: 150px; object-fit: cover;">
+              <div class="text-center mt-2"><?= htmlspecialchars($category['name']); ?></div>
             </div>
-          <?php endforeach; ?>
-        </div>
-
-        <!-- Hidden input to store selected category ID -->
-        <input type="hidden" name="category" id="selectedCategoryId">
+          </div>
+        <?php endforeach; ?>
       </div>
 
+      <!-- Hidden input to store selected category ID -->
+      <input type="hidden" name="category" id="selectedCategoryId">
+    </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-        <input type="text" class="form-control" id="currentLocation" placeholder="Current Location">
-        <button type="button" class="btn btn-theme" onclick="getCurrentLocation()"
-          style="background-color: #092448;color:white;"> Use My Location</button>
-      </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-        <input type="text" class="form-control" id="destination" placeholder="Search Destination">
-        <button type="button" class="btn btn-theme" onclick="setDestination()"
-          style="background-color: #092448;color:white;">Search</button>
-      </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+      <input type="text" class="form-control" id="currentLocation" placeholder="Current Location">
+      <button type="button" class="btn btn-theme" onclick="getCurrentLocation()"
+        style="background-color: #092448;color:white;"> Use My Location</button>
+    </div>
 
-      <input type="hidden" name="pickup_address" id="pickup_address">
-      <input type="hidden" name="pickup_lat" id="pickup_lat">
-      <input type="hidden" name="pickup_lng" id="pickup_lng">
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+      <input type="text" class="form-control" id="destination" placeholder="Search Destination">
+      <button type="button" class="btn btn-theme" onclick="setDestination()"
+        style="background-color: #092448;color:white;">Search</button>
+    </div>
 
-      <input type="hidden" name="destination_address" id="destination_address">
-      <input type="hidden" name="destination_lat" id="destination_lat">
-      <input type="hidden" name="destination_lng" id="destination_lng">
+    <input type="hidden" name="pickup_address" id="pickup_address">
+    <input type="hidden" name="pickup_lat" id="pickup_lat">
+    <input type="hidden" name="pickup_lng" id="pickup_lng">
 
-      <input type="hidden" name="distance_km" id="distance_km">
-      <input type="hidden" name="duration" id="duration">
+    <input type="hidden" name="destination_address" id="destination_address">
+    <input type="hidden" name="destination_lat" id="destination_lat">
+    <input type="hidden" name="destination_lng" id="destination_lng">
 
-      <div id="map" class="map-container mb-4" style="height: 400px;"></div>
-      <div id="info" class="text-center fw-bold mb-3 text-primary"></div>
+    <input type="hidden" name="distance_km" id="distance_km">
+    <input type="hidden" name="duration" id="duration">
 
-      <button type="submit" class="btn btn-theme w-100" style="background-color: #092448;color:white;"> <i
-          class="bi bi-car-front-fill"></i> Book Ride</button>
-    </form>
+    <div id="map" class="map-container mb-4" style="height: 400px;"></div>
+    <div id="info" class="text-center fw-bold mb-3 text-primary"></div>
+
+    <button type="submit" class="btn btn-theme w-100" style="background-color: #092448;color:white;"> <i
+        class="bi bi-car-front-fill"></i> Book Ride</button>
+  </form>
   <!-- </div> -->
 
   <script>
@@ -450,7 +479,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // alert("Click on the map to select your Destination 📍 or use Search");
     });
   </script>
-  
+
   <script>
     function selectCategory(element) {
       // Remove "selected" class from all options

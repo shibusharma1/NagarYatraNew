@@ -263,6 +263,26 @@ $nearest_users_str = implode(',', array_column($nearest_users, 'id')); // Store 
   );
 
   if ($stmt->execute()) {
+     // code for notifications
+    // Compose the notification message
+    $message = "Dear {$name}, your vehicle Pre-booking request has been successfully sent to nearby drivers. Please wait while we find the best match for you.";
+
+    // Escape the message to avoid SQL errors
+    $escaped_message = mysqli_real_escape_string($conn, $message);
+
+    // Build the query (handle NULL for user_id)
+    if ($user_id !== NULL) {
+      $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
+    } else {
+      $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
+    }
+
+    // Execute the query
+    if (mysqli_query($conn, $sql)) {
+      // echo "Notification sent successfully!";
+    } else {
+      echo "Error: " . mysqli_error($conn);
+    }
     echo "<script> window.location.href='ride_status.php';</script>";
     exit;
   } else {

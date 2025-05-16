@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
 
     // Check if email exists in the database
-    $stmt = $conn->prepare("SELECT name FROM user WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, name FROM user WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -23,7 +23,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     if ($user) {
+        $user_id = $user['id'];
         $name = $user['name']; // Get user's name from DB
+
+        // Get current date and time
+        $time = date("F j, Y, g:i a");
+
+        // Get user agent
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+        // Parse device/platform
+        $platform = "Unknown OS";
+        if (preg_match('/linux/i', $user_agent)) {
+            $platform = "Linux";
+        } elseif (preg_match('/macintosh|mac os x/i', $user_agent)) {
+            $platform = "Mac";
+        } elseif (preg_match('/windows|win32/i', $user_agent)) {
+            $platform = "Windows";
+        }
+
+        // Parse browser
+        $browser = "Unknown Browser";
+        if (preg_match('/MSIE/i', $user_agent) || preg_match('/Trident/i', $user_agent)) {
+            $browser = "Internet Explorer";
+        } elseif (preg_match('/Firefox/i', $user_agent)) {
+            $browser = "Firefox";
+        } elseif (preg_match('/Chrome/i', $user_agent)) {
+            $browser = "Chrome";
+        } elseif (preg_match('/Safari/i', $user_agent)) {
+            $browser = "Safari";
+        } elseif (preg_match('/Opera/i', $user_agent)) {
+            $browser = "Opera";
+        }
+
+        // Combine device info
+        $device = "$platform $browser Browser";
+
+        // Compose the message
+        $message = "Dear {$name}, your password has been reset successfully on {$time} from the device: {$device}. If this wasn't you, please contact support immediately.";
+
+        // Escape the message
+        $escaped_message = mysqli_real_escape_string($conn, $message);
+
+        // Insert notification
+        if ($user_id !== NULL) {
+            $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
+        } else {
+            $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
+        }
+
+        if (!mysqli_query($conn, $sql)) {
+            echo "Error: " . mysqli_error($conn);
+        }
+
+
 
         // Generate a 8 digit Alphanumeric password for user.
         $password = substr(str_shuffle(str_repeat('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 8)), 0, 8);
@@ -78,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                         ";
 
-            $mail->AltBody = "Hello $name, you have requested to reset your NagarYatra password. Your temporary password is: $password. It will expire in 2 minutes. If you did not request this, please ignore this email or contact support.";
+            $mail->AltBody = "Dear $name, you have requested to reset your NagarYatra password. Your temporary password is: $password. It will expire in 2 minutes. If you did not request this, please ignore this email or contact support.";
 
             $mail->send();
             $_SESSION['forget_password'];

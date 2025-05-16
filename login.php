@@ -1,8 +1,8 @@
 <?php
 // when user back to this page
-// session_start();
-// session_unset();
-// session_destroy();
+session_start();
+session_unset();
+session_destroy();
 
 ?>
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['name'] = $row['name'];
     $_SESSION['vehicle_id'] = $row['vehicle_id'];
     $_SESSION['login_success'] = "Login Successful";
-    // header("Location: user/hello");
+    
 
     // Updating location when user logins
     $stmt = $conn->prepare("UPDATE user SET latitude = ?, longitude = ? WHERE email = ?");

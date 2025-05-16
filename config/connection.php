@@ -218,10 +218,13 @@ if (mysqli_query($conn, $sql2)) {
 
 
 // Creating table for Notifications
-$sql = "CREATE TABLE IF NOT EXISTS notification (
+$sql = "CREATE TABLE IF NOT EXISTS notifications (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NULL,
     message VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    mark_as_read TINYINT(1) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 )";
 
 if (mysqli_query($conn, $sql)) {
@@ -231,21 +234,21 @@ if (mysqli_query($conn, $sql)) {
 }
 
 // Creating table for gets_Notifications
-$sql = "CREATE TABLE IF NOT EXISTS gets_notification (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    -- message VARCHAR(255) NOT NULL,
-    user_id INT NULL,
-    notification_id INT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
-    FOREIGN KEY (notification_id) REFERENCES notification(id) ON DELETE CASCADE
-)";
+// $sql = "CREATE TABLE IF NOT EXISTS gets_notification (
+//     id INT PRIMARY KEY AUTO_INCREMENT,
+//     -- message VARCHAR(255) NOT NULL,
+//     user_id INT NULL,
+//     -- notification_id INT NULL,
+//     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+//     -- FOREIGN KEY (notification_id) REFERENCES notification(id) ON DELETE CASCADE
+// )";
 
-if (mysqli_query($conn, $sql)) {
-    // Table created successfully
-} else {
-    echo "Error Creating table: " . mysqli_error($conn);
-}
+// if (mysqli_query($conn, $sql)) {
+//     // Table created successfully
+// } else {
+//     echo "Error Creating table: " . mysqli_error($conn);
+// }
 
 // New booking table
 $sql = "CREATE TABLE IF NOT EXISTS booking (
@@ -267,7 +270,7 @@ $sql = "CREATE TABLE IF NOT EXISTS booking (
     estimated_ride_duration VARCHAR(50) NOT NULL, -- Duration of the ride (days/hours)
     booking_date DATE NOT NULL,
 
-    rating DECIMAL(3,1) DEFAULT 5, -- Allows decimal ratings like 4.5, 3.0
+    rating DECIMAL(3,1) DEFAULT NULL, -- Allows decimal ratings like 4.5, 3.0
     nearest_users VARCHAR(255) NULL, -- The user can write his view regarding the specific ride
     booking_description TEXT NOT NULL,
 

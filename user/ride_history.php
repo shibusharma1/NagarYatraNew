@@ -14,7 +14,7 @@ if ($_SESSION['role'] == 0) {
     $sql = "SELECT * FROM booking WHERE user_id = ? AND status != 2 ORDER BY id DESC";
 } else {
     $userId = $_SESSION['vehicle_id'];
-    $sql = "SELECT * FROM booking WHERE vehicle_id = ? ORDER BY id DESC";
+    $sql = "SELECT * FROM booking WHERE vehicle_id = ? AND status != 2 ORDER BY id DESC";
 }
 
 $limit = 10;
@@ -36,7 +36,7 @@ $stmt->close();
 if ($_SESSION['role'] == 0) {
     $count_sql = "SELECT COUNT(*) as total FROM booking WHERE user_id = $userId AND status != 2";
 } else {
-    $count_sql = "SELECT COUNT(*) as total FROM booking WHERE vehicle_id = $userId";
+    $count_sql = "SELECT COUNT(*) as total FROM booking WHERE vehicle_id = $userId AND status != 2";
 }
 $count_result = $conn->query($count_sql);
 $total_records = $count_result->fetch_assoc()['total'];
@@ -106,6 +106,10 @@ $total_pages = ceil($total_records / $limit);
         .status-1 {
             background-color: #dc3545;
         }
+        
+        .status-2 {
+            background-color: #E4A11B;
+        }
 
         .status-3 {
             background-color: green;
@@ -117,6 +121,10 @@ $total_pages = ceil($total_records / $limit);
 
         .status-5 {
             background-color: #28a745;
+        }
+
+        .status-6 {
+            background-color:rgb(230, 80, 95);
         }
 
         .pagination {
@@ -230,6 +238,7 @@ $total_pages = ceil($total_records / $limit);
                                     case 1:
                                         echo "Cancelled(U)";
                                         break;
+                                        
                                     case 3:
                                         echo "Accepted";
                                         break;
@@ -240,7 +249,7 @@ $total_pages = ceil($total_records / $limit);
                                         echo "Completed";
                                         break;
                                     case 6:
-                                        echo "CFancelled";
+                                        echo "Cancelled(D)";
                                         break;
                                     default:
                                         echo "Unknown";
@@ -281,7 +290,7 @@ $total_pages = ceil($total_records / $limit);
                                         <?php
                                         switch ($booking['status']) {
                                             case 1:
-                                                echo "Cancelled";
+                                                echo "Cancelled(U)";
                                                 break;
                                             case 3:
                                                 echo "Success";
@@ -291,6 +300,9 @@ $total_pages = ceil($total_records / $limit);
                                                 break;
                                             case 5:
                                                 echo "Completed";
+                                                break;
+                                            case 6:
+                                                echo "Cancelled(D)";
                                                 break;
                                             default:
                                                 echo "Unknown";

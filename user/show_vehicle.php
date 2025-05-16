@@ -32,7 +32,19 @@ include_once 'master_header.php';
         <!-- Vehicle Image -->
         <div class="vehicle-image">
             <img src="<?php echo htmlspecialchars($row['thumb_image']); ?>" alt="Vehicle Image">
-            
+              <div class="info-item">
+                <?php 
+                if($row['status']==1){
+                    echo "<i class='fas fa-check-circle text-success'></i><strong>Status:</strong>";
+                    echo "Active"; 
+                }else{
+                    echo "<i class='fas fa-times-circle text-danger'></i><strong>Status:</strong>";
+                    echo "Active"; 
+                }
+                ?>
+            </div>
+
+
             <div class="info-item">
                 <i class="fas fa-building"></i> <strong>Company:</strong> <?php echo htmlspecialchars($row['company_name']); ?>
             </div>
