@@ -9,6 +9,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $sql = "UPDATE user SET is_delete = 1 WHERE id = $user_id";
 
     if (mysqli_query($conn, $sql)) {
+
+        
         header("Location: users"); // Redirect to vehicle list after soft delete
         exit;
     } else {

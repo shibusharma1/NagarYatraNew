@@ -102,6 +102,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 
+  
+  // addede code if no vehicle found near by
+if (empty($nearbyUsers)) {
+    echo "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'No Vehicle Found Nearby You',
+            text: 'Please try again later.',
+            confirmButtonColor: '#092448'
+        }).then(() => {
+            location.reload();
+        });
+    </script>";
+    // exit; // Stops further code execution
+}
+
   // Output(must important dont delete it)
   // echo "All Vehicle IDs: " . implode(separator: ', ', $vehicleIds) . "<br>";
   // echo "Vehicle ID with Shortest Distance: " . $shortestVehicleId . "<br>";

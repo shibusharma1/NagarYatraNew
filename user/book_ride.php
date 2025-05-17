@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 text: 'We couldn’t find any vehicles in the selected category. Please try a different category.',
                 confirmButtonColor: '#092448'
             }).then(() => {
-                window.history.back(); // or redirect to another page
+                // window.history.back(); // or redirect to another page
             });
         </script>";
     exit;
@@ -89,11 +89,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   foreach ($users as $user) {
     $distance = haversineDistance($pickup_lat, $pickup_lng, $user['latitude'], $user['longitude']);
 
-    if ($distance <= 20) {
+    if ($distance <= 10) {
       $nearest_users[] = $user['id']; // Collect user ID
       $nearbyUsers[] = array_merge($user, ['distance_km' => round($distance, 2)]); // Optional: store details
     }
   }
+
+
+  // addede code if no vehicle found near by
+if (empty($nearbyUsers)) {
+    echo "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'No Vehicle Found Nearby You',
+            text: 'Please try again later.',
+            confirmButtonColor: '#092448'
+        }).then(() => {
+            location.reload();
+        });
+    </script>";
+    // exit; // Stops further code execution
+}
 
 
 
