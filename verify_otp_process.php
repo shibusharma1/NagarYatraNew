@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->Host = 'smtp.gmail.com';                       // Set the SMTP server to send through
                 $mail->SMTPAuth = true;                                   // Enable SMTP authentication
                 $mail->Username = 'nagarctservices@gmail.com';                 // SMTP username
-                $mail->Password = 'gnpl gqhu pukx gmal';                    // SMTP password (Use App Password if 2FA is enabled)
+                $mail->Password = 'xjoa yrzu odbc nezg';                    // SMTP password (Use App Password if 2FA is enabled)
                 $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
                 $mail->Port = 587;                                    // TCP port to connect to
 

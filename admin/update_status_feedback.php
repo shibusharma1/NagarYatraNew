@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_id']) && isset($_
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
                 $mail->Username = 'nagarctservices@gmail.com'; // Your Gmail
-                $mail->Password = 'gnpl gqhu pukx gmal';        // App Password
+                $mail->Password = 'xjoa yrzu odbc nezg';        // App Password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 

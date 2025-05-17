@@ -17,6 +17,9 @@ $totalPages = ceil($totalRecords / $limit);
 // Fetch the paginated approved bookings
 $sql = "SELECT * FROM booking WHERE is_delete = 0 AND status = 3 ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
+
+
+
 ?>
 
 <!-- <div class="container"> -->
@@ -66,10 +69,10 @@ $result = $conn->query($sql);
                         <button type="submit" class="btn btn-danger" style="padding: 5px 10px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #fff; background-color: #dc3545;">Cancel</button>
                     </form>
                 </td>';
-                echo '</tr>';
+                echo '</tr></table>';
             }
         } else {
-            echo '<tr><td colspan="9" style="color:#092448;font-size:1.5rem;">No approved rides available.</td></tr>';
+            echo '<tr><td colspan="9" style="color:#092448;font-size:1.5rem;"><img src="../assets/search_no_data.svg" alt="No data" height="600px"></td></tr>';
         }
         ?>
     </table>

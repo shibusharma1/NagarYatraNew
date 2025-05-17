@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $pickup_lng = $_POST['pickup_lng'] ?? '';
 
   $dest = $_POST['destination_address'] ?? '';
-  $dest_lat = $_POST['destination_lat'] ?? '';
+  $dest_lat = $_POST['destination_lat'] ?? '';  
   $dest_lng = $_POST['destination_lng'] ?? '';
 
   $distance_km = $_POST['distance_km'] ?? 0;
@@ -36,7 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // If no vehicles found
   if (empty($vehicleIds)) {
-    die('No vehicles found for this category.');
+    // die('No vehicles found for this category.');
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'No Vehicles Found',
+                text: 'We couldn’t find any vehicles in the selected category. Please try a different category.',
+                confirmButtonColor: '#092448'
+            }).then(() => {
+                window.history.back(); // or redirect to another page
+            });
+        </script>";
+    exit;
+
   }
 
   // Step 2: Fetch user (driver) details linked with these vehicles
@@ -129,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $mail->Host = 'smtp.gmail.com';
       $mail->SMTPAuth = true;
       $mail->Username = 'nagarctservices@gmail.com'; // Your Gmail
-      $mail->Password = 'gnpl gqhu pukx gmal';        // App password
+      $mail->Password = 'xjoa yrzu odbc nezg';        // App password
       $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
       $mail->Port = 587;
 

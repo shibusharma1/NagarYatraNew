@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $mail->Host = 'smtp.gmail.com';
       $mail->SMTPAuth = true;
       $mail->Username = 'nagarctservices@gmail.com'; // Your Gmail
-      $mail->Password = 'gnpl gqhu pukx gmal';        // App password
+      $mail->Password = 'xjoa yrzu odbc nezg';        // App password
       $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
       $mail->Port = 587;
 
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         ";
 
-       $mail->AltBody = "Dear $name, \n\nThank you for your valuable feedback. Our team will review your comments and take necessary actions to improve our services. We truly appreciate your input and are always here to listen. \n\nBest Regards, \nNagarYatra Team\nVisit: www.NagarYatra.com";
+      $mail->AltBody = "Dear $name, \n\nThank you for your valuable feedback. Our team will review your comments and take necessary actions to improve our services. We truly appreciate your input and are always here to listen. \n\nBest Regards, \nNagarYatra Team\nVisit: www.NagarYatra.com";
 
       $mail->send();
       // echo 'Booking confirmation email sent successfully!';
@@ -87,7 +87,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if ($stmt->execute()) {
     // $success = "Thank you for your feedback! Our team will get back to you shortly.";
-    $_SESSION['feedback_success']="Thank you for your feedback! Our team will get back to you shortly.";
+    // Compose the notification message
+    $message = "Dear { $name }, your feedback has been submitted successfully. Our team will review it and get back to you shortly. Thank you for helping us improve our service.";
+
+    // Escape the message to avoid SQL errors
+    $escaped_message = mysqli_real_escape_string($conn, $message);
+
+    // Build the query (handle NULL for user_id)
+    if ($user_id !== NULL) {
+      $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
+    } else {
+      $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
+    }
+
+    // Execute the query
+    if (mysqli_query($conn, $sql)) {
+      // echo "Notification sent successfully!";
+    } else {
+      echo "Error: " . mysqli_error($conn);
+    }
+
+    $_SESSION['feedback_success'] = "Thank you for your feedback! Our team will get back to you shortly.";
   } else {
     $error = "Oops! Something went wrong. Please try again later.";
   }
@@ -98,25 +118,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!-- For feedback submission success -->
 <?php if (isset($_SESSION['feedback_success'])): ?>
-    <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
 
-        Toast.fire({
-            icon: "success",
-            title: "Feedback Sent Successfully"
-        });
-    </script>
-    <?php unset($_SESSION['feedback_success']); ?>
+    Toast.fire({
+      icon: "success",
+      title: "Feedback Sent Successfully"
+    });
+  </script>
+  <?php unset($_SESSION['feedback_success']); ?>
 <?php endif; ?>
 
 <div class="feedback-wrapper">

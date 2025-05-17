@@ -1040,43 +1040,6 @@ if ($status != 0) {
         <hr>
     <?php }
 } ?>
-<!-- Invite Friends Section -->
-<div class="invite-section">
-    <div class="invite-content">
-        <h2>Invite Friends & Get Discount</h2>
-        <p>Invite your friends to join the NagarYatra and get exciting discounts on your next ride!</p>
-
-        <!-- Invite Code Input (to share with friends) -->
-        <div class="invite-code">
-            <label for="inviteCode">Your Referral Code:</label>
-            <input type="text" id="inviteCode" value="ABCD1234" readonly class="input-field">
-            <button onclick="copyInviteCode()" class="copy-btn">Copy Code</button>
-        </div>
-
-        <!-- Invite Friend Button -->
-        <div class="invite-btn-container">
-            <button onclick="sendInvite()" class="invite-btn">Invite Friends</button>
-        </div>
-
-        <!-- <p class="terms">By inviting, you agree to our <a href="terms_and_conditions.php">terms and conditions</a>.</p> -->
-    </div>
-</div>
-<script>
-    // Function to copy the referral code to clipboard
-    function copyInviteCode() {
-        var inviteCode = document.getElementById("inviteCode");
-        inviteCode.select();
-        inviteCode.setSelectionRange(0, 99999); // For mobile devices
-        document.execCommand("copy");
-        // alert("Referral code copied to clipboard!");
-    }
-
-    // Function to handle sending invites (just a placeholder for now)
-    function sendInvite() {
-        // In a real-world scenario, you'd send the invite via email or a messaging API
-        alert("Invite sent to your friends! They will receive a referral link and you will earn discounts.");
-    }
-</script>
 
 
 <?php
