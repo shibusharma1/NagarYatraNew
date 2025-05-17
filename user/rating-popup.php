@@ -1,78 +1,152 @@
 <?php
-require '../config/connection.php'; // update to your DB connection file
+include '../config/connection.php';
+$userId = $_SESSION['id'];
 
-$bookingQuery = $conn->query("SELECT * FROM booking WHERE rating IS NULL AND status = 5 LIMIT 1");
-if ($bookingQuery && $bookingQuery->num_rows > 0):
-    $booking = $bookingQuery->fetch_assoc();
+$sql = "SELECT * FROM booking WHERE user_id = $userId AND rating IS NULL AND status = 5 LIMIT 1";
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    $booking = $result->fetch_assoc();
 ?>
-<style>
-    .modal-header, .btn-primary {
-        background-color: #092448;
-        color: white;
-    }
-    .star-rating {
-        direction: rtl;
-        font-size: 2em;
-        unicode-bidi: bidi-override;
-        display: inline-flex;
-        gap: 5px;
-    }
-    .star-rating input {
-        display: none;
-    }
-    .star-rating label {
-        color: #ccc;
-        cursor: pointer;
-    }
-    .star-rating input:checked ~ label,
-    .star-rating label:hover,
-    .star-rating label:hover ~ label {
-        color: gold;
-    }
-</style>
-
-<!-- Rating Modal -->
-<div class="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ratingModalLabel">Rate Your Ride Experience</h5>
-      </div>
-      <form method="POST" action="submit-rating.php">
-        <div class="modal-body">
-          <div class="mb-3">
-            <strong>Pickup:</strong> <?php echo htmlspecialchars($booking['pick_up_place']); ?><br>
-            <strong>Destination:</strong> <?php echo htmlspecialchars($booking['destination']); ?><br>
-            <strong>Date:</strong> <?php echo htmlspecialchars($booking['booking_date']); ?><br>
-            <strong>Distance:</strong> <?php echo $booking['estimated_KM']; ?> KM<br>
-            <strong>Cost:</strong> Rs. <?php echo $booking['estimated_cost']; ?><br>
-            <strong>Description:</strong><br>
-            <p class="text-muted"><?php echo nl2br(htmlspecialchars($booking['booking_description'])); ?></p>
-          </div>
-
-          <div class="mb-3 text-center">
-            <label class="form-label"><strong>Your Rating</strong></label><br>
-            <div class="star-rating">
-              <?php for ($i = 5; $i >= 1; $i--): ?>
-                <input type="radio" id="star<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>">
-                <label for="star<?php echo $i; ?>">★</label>
-              <?php endfor; ?>
-            </div>
-          </div>
-          <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Submit Rating</button>
-        </div>
-      </form>
+<!-- Modal HTML -->
+<div id="ratingModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h2>Rate Your Ride Experience</h2>
+    <div class="booking-info">
+      <p><strong>Pickup:</strong> <?= htmlspecialchars($booking['pick_up_place']) ?></p>
+      <p><strong>Destination:</strong> <?= htmlspecialchars($booking['destination']) ?></p>
+      <p><strong>Date:</strong> <?= htmlspecialchars($booking['booking_date']) ?></p>
+      <p><strong>Distance:</strong> <?= $booking['estimated_KM'] ?> KM</p>
+      <p><strong>Cost:</strong> Rs. <?= $booking['estimated_cost'] ?></p>
+      <p><strong>Description:</strong> <?= htmlspecialchars($booking['booking_description']) ?></p>
     </div>
+
+    <form id="ratingForm" method="POST" action="submit_rating.php">
+      <input type="hidden" name="booking_id" value="<?= $booking['id'] ?>">
+      <div class="stars">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+        <input type="hidden" name="rating" id="ratingInput" required>
+      </div>
+
+      <textarea name="experience_description" placeholder="Write your feedback..."></textarea>
+      <button type="submit">Submit Rating</button>
+    </form>
   </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#ratingModal').modal('show');
-    });
-</script>
+<!-- Modal Style -->
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  .modal-content {
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+    color: #092448;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  }
+  .modal-content h2 {
+    background: #092448;
+    color: #fff;
+    padding: 10px 15px;
+    margin: -30px -30px 20px -30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .booking-info p {
+    margin: 5px 0;
+  }
+  .stars {
+    text-align: center;
+    margin: 15px 0;
+    user-select: none;
+  }
+  .star {
+    font-size: 32px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .star.selected,
+  .star.hovered {
+    color: gold;
+  }
+  textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-family: Arial;
+    border-radius: 5px;
+  }
+  button {
+    background-color: #092448;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+  }
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #092448;
+    cursor: pointer;
+    font-weight: bold;
+  }
+</style>
 
-<?php endif; ?>
+<!-- SweetAlert and Rating Script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function closeModal() {
+    document.getElementById('ratingModal').remove();
+  }
+
+  const stars = document.querySelectorAll('.star');
+  const ratingInput = document.getElementById('ratingInput');
+
+  if (stars && ratingInput) {
+    stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+        const rating = parseInt(star.getAttribute('data-value'));
+        ratingInput.value = rating;
+        stars.forEach((s, i) => s.classList.toggle('selected', i < rating));
+      });
+
+      star.addEventListener('mouseover', () => {
+        const hoverValue = parseInt(star.getAttribute('data-value'));
+        stars.forEach((s, i) => s.classList.toggle('hovered', i < hoverValue));
+      });
+
+      star.addEventListener('mouseout', () => {
+        stars.forEach(s => s.classList.remove('hovered'));
+      });
+    });
+  }
+
+</script>
+<?php } ?>
