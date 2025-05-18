@@ -6,6 +6,8 @@ include_once 'master_header.php';
 require_once '../config/connection.php';
 
 
+
+
 // Check if user is logged in
 if (!isset($_SESSION['id'])) {
     echo "You are not logged in.";

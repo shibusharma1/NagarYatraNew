@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
 <!-- code to extract role -->
 <?php
 require_once('../config/connection.php');
-
+include('../chatbot.php');
 // SQL query
 $id = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE id = $id";
