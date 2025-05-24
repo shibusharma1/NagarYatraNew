@@ -202,7 +202,7 @@ include_once "register_login_header.php";
 ?>
 
 <form action="" method="POST" class="sign-in-form" onsubmit="return validateForm()">
-  <div class="first">
+  <div class="first" style="margin-top: -20px;">
     <h2 class="title">Sign Up</h2>
     <div class="input-field">
       <i class="fas fa-user"></i>

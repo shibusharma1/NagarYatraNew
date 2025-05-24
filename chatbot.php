@@ -251,7 +251,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Vehicle Booking Chatbot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* body {
@@ -418,6 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
                 },
                 body: "message=" + encodeURIComponent(message)
             })
+            
                 .then(response => response.json())
                 .then(data => {
                     appendMessage(data.reply, "bot");
@@ -426,6 +426,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
                     appendMessage("Error connecting to the chatbot.", "bot");
                 });
         }
+
+        // script to submit the message to the bot when enter key is pressed from the keyboard.
+        document.getElementById("userInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+       
     </script>
 
 </body>

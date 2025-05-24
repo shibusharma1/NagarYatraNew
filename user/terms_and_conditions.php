@@ -145,7 +145,7 @@
         ?>
         <a href="index.php" class="btn">Back to Home</a>
         <?php }else{ ?>
-            <a href="../register.php" class="btn">Back to Home</a>
+            <a href="../register.php" class="btn">Back to Register</a>
             <?php }?>    
     </div>
 </body>

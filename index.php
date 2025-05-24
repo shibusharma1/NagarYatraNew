@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('chatbot.php');
 ?>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ include('chatbot.php');
   <header class="header">
     <nav class="nav container">
       <a href="#" class="nav__logo">
-        <img src="assets/logo1.png" alt="NagarYatra Logo" width="150px" height="140px">  
+        <img src="assets/logo1.png" alt="NagarYatra Logo" width="150px" height="140px">
         <!-- NagarYatra -->
       </a>
 
@@ -92,10 +92,11 @@ include('chatbot.php');
           </div>
 
           <div class="service__card">
-            <i class="fa-solid fa-screwdriver-wrench service__icon"></i>
-            <h3>Mechanic Services</h3>
-            <p>Comprehensive vehicle maintenance and repair solutions</p>
+            <i class="fa-solid fa-credit-card service__icon"></i>
+            <h3>Fair & Transparent Fare</h3>
+            <p>Instant fare calculation with secure online payment options</p>
           </div>
+
         </div>
       </div>
     </section>
@@ -156,9 +157,10 @@ include('chatbot.php');
       <div class="col1" style="padding:1rem;">
         <img src="assets/logo1.png" alt="Loading" widht="auto" height="100px"
           style="background-color: white; border-radius:50%">
-        <p>NagarYatra, founded in 2082 B.S., offers innovative opportunities in a highly academic
-          setting. The college aims to deliver value-based quality education at the graduate level, promoting
-          personal and professional growth through its experienced faculty and national experts. </p>
+        <p>NagarYatra, launched in 2082 B.S., provides innovative ride-booking services in a digital landscape. The
+          platform aims to offer value-driven, reliable transportation across Nepal, supporting both users and drivers.
+          With experienced developers and transport experts, NagarYatra promotes personal mobility and professional
+          growth through efficient, quality-based online solutions </p>
       </div>
       <ul>
         <p class="footer-title" id="contact" style="margin-left:6px;">Get In Touch</p>
