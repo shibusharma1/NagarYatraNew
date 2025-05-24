@@ -1,34 +1,23 @@
 <?php
 session_start();
 $title = "NagarYatra | Verify OTP";
+include_once "register_login_header.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/logo1.png" type="image/png">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="assets/logo1.png" type="image/png" />
     <title>Verify OTP</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            background-color: #092448;
-
-        }
-
         .container {
             text-align: center;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
             background-color: white;
         }
 
@@ -56,9 +45,7 @@ $title = "NagarYatra | Verify OTP";
             border-radius: 25px;
             outline: none;
             border: none;
-            /* background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f); */
             background-color: #282474;
-            /* background-size: 200%; */
             font-size: 1.2rem;
             color: #fff;
             font-family: 'Poppins', sans-serif;
@@ -74,7 +61,6 @@ $title = "NagarYatra | Verify OTP";
         }
 
         .input-field {
-            /* max-width: 380px; */
             width: 100%;
             background-color: #f0f0f0;
             margin: 10px 0;
@@ -88,15 +74,9 @@ $title = "NagarYatra | Verify OTP";
             overflow: hidden;
         }
 
-        /* .input-field select:focus,
-  .input-field input:focus {
-    border: 2px solid blue !important;
-    outline: none !important;
-  } */
         .input-field:focus-within {
             border: 2px solid #282474 !important;
             overflow: hidden;
-
         }
 
         .input-field i {
@@ -122,27 +102,54 @@ $title = "NagarYatra | Verify OTP";
             font-weight: 500;
         }
     </style>
+
     <script>
-        let countdown = 119; // 1:59 in seconds
+        const countdownDuration = 120; // 2 minutes in seconds
+        let countdown;
+
         function startCountdown() {
-            let timerDisplay = document.getElementById("timer");
-            let verifyButton = document.getElementById("verify-btn");
-            let resendOtp = document.getElementById("resend-otp");
+            const timerDisplay = document.getElementById("timer");
+            const verifyButton = document.getElementById("verify-btn");
+            const resendOtp = document.getElementById("resend-otp");
 
-            let timer = setInterval(() => {
-                let minutes = Math.floor(countdown / 60);
-                let seconds = countdown % 60;
-                seconds = seconds < 10 ? '0' + seconds : seconds;
+             resendOtp.style.display = "none";
+            // Load saved countdown or start fresh
+            let savedTime = localStorage.getItem("otpCountdown");
+            if (savedTime !== null && !isNaN(savedTime)) {
+                countdown = parseInt(savedTime);
+            } else {
+                countdown = countdownDuration;
+            }
 
-                timerDisplay.innerText = `${minutes}:${seconds}`;
-                countdown--;
+            // Immediately reflect UI if countdown already expired on page load
+            if (countdown <= 0) {
+                timerDisplay.innerText = "00:00";
+                verifyButton.style.display = "none";
+                resendOtp.style.display = "block";
+                
+                localStorage.removeItem("otpCountdown");
+                return;
+            }
 
-                if (countdown < 0) {
+            const timer = setInterval(() => {
+                if (countdown >= 0) {
+                    let minutes = Math.floor(countdown / 60);
+                    let seconds = countdown % 60;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                    timerDisplay.innerText = `${minutes}:${seconds}`;
+
+                    localStorage.setItem("otpCountdown", countdown);
+
+                    countdown--;
+                } else {
                     clearInterval(timer);
                     timerDisplay.innerText = "00:00";
-                    verifyButton.disabled = true;
-                    verifyButton.classList.add("disabled");
+
+                    verifyButton.style.display = "none";
                     resendOtp.style.display = "block";
+
+                    localStorage.removeItem("otpCountdown");
                 }
             }, 1000);
         }
@@ -150,20 +157,26 @@ $title = "NagarYatra | Verify OTP";
 </head>
 
 <body onload="startCountdown()">
-    <div class="container">
-        <h2>Enter OTP</h2>
-        <p>Time left: <span class="countdown" id="timer">2:00</span></p>
-        <form action="verify_otp_process.php" method="POST">
-            <input type="text" name="otp" required placeholder="Enter OTP">
-            <br><br>
-            <button type="submit" id="verify-btn btn">Verify</button>
-        </form>
+    <form action="verify_otp_process.php" method="POST">
+        <div class="first" style="margin-top: -20px;">
+            <h2 class="title">Enter OTP</h2>
+            <p>Time left: <span class="countdown" id="timer">2:00</span></p>
 
+            <div class="input-field">
+                <i class="fas fa-address-card"></i>
+                <input type="text" placeholder="Enter OTP" name="otp"
+                    value="<?= htmlspecialchars($_POST['otp'] ?? '') ?>" required />
+            </div>
 
-        <div id="resend-otp" class="resend-otp">
-            <p>OTP expired! <a href="resend_otp.php">Resend OTP</a></p>
+            <button type="submit" class="btn solid" id="verify-btn">Verify</button>
+        
+
+        <div id="resend-otp" class="resend-otp btn solid">
+            <!-- <p>OTP expired!</p> -->
+             <a href="resend_otp.php" style="text-decoration: none;color:white;">Resend OTP</a>
         </div>
-    </div>
+        </div>
+    </form>
 </body>
 
 </html>

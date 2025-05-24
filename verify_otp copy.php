@@ -1,6 +1,7 @@
 <?php
 session_start();
 $title = "NagarYatra | Verify OTP";
+include_once "register_login_header.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +11,9 @@ $title = "NagarYatra | Verify OTP";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/logo1.png" type="image/png">
 
-    <title>Verify OTP</title>
+    <!-- <title>Verify OTP</title> -->
     <style>
-        body {
+        /* body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -21,14 +22,14 @@ $title = "NagarYatra | Verify OTP";
             flex-direction: column;
             background-color: #092448;
 
-        }
+        } */
 
         .container {
             text-align: center;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            /* width: 300px; */
             background-color: white;
         }
 
@@ -150,20 +151,27 @@ $title = "NagarYatra | Verify OTP";
 </head>
 
 <body onload="startCountdown()">
-    <div class="container">
-        <h2>Enter OTP</h2>
-        <p>Time left: <span class="countdown" id="timer">2:00</span></p>
-        <form action="verify_otp_process.php" method="POST">
-            <input type="text" name="otp" required placeholder="Enter OTP">
-            <br><br>
-            <button type="submit" id="verify-btn btn">Verify</button>
-        </form>
 
-
+    <!-- <div class="container"> -->
+    <!-- <h2>Enter OTP</h2> -->
+    <form action="verify_otp_process.php" method="POST">
+        <div class="first" style="margin-top: -20px;">
+            <h2 class="title">Enter OTP</h2>
+            <p>Time left: <span class="countdown" id="timer">2:00</span></p>
+            <div class="input-field">
+                <i class="fas fa-address-card"></i>
+                <input type="text" placeholder="Enter OTP" name="otp"
+                    value="<?= htmlspecialchars($_POST['otp'] ?? '') ?>" required />
+            </div>
+            <button type="submit" class="btn solid" id="verify-btn btn">Verify</button>
+        </div>
         <div id="resend-otp" class="resend-otp">
             <p>OTP expired! <a href="resend_otp.php">Resend OTP</a></p>
         </div>
-    </div>
+    </form>
+
+
+    <!-- </div> -->
 </body>
 
 </html>

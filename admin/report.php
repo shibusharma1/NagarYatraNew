@@ -232,10 +232,9 @@ $conn->close();
     </div>
     <div class="content">
 
-      <p>Dear Sir,</p>
-      <p style="padding: 0px 10px;">This report was generated on <span id="date">a</span> by the Admin to provide a comprehensive analysis of the
-        system's performance, efficiency, and key metrics. It offers valuable insights to support data-driven
-        decision-making and future improvements.</p>
+      <!-- <p>Dear Sir,</p> -->
+      <p style="padding: 0px 10px;">This report was generated on <span id="date">a</span> to provide a comprehensive analysis of the
+        system's performance, efficiency, and key metrics</p>
 
 
     </div>
@@ -319,7 +318,7 @@ $conn->close();
       return `${day}${getOrdinalSuffix(day)} ${month}, ${year}`;
     }
     document.getElementById("date").innerText = getFormattedDate();
-    document.getElementById("generatedAt").innerText = "Generated at: " + getFormattedDate();
+    document.getElementById("generatedAt").innerText = "Generated on: " + getFormattedDate();
 
     const labels = ["Users", "Vehicles", "Bookings", "Feedback"];
     const currentData = [<?= $users_total ?>, <?= $vehicles_total ?>, <?= $bookings_total ?>, <?= $feedbacks_total ?>];
@@ -367,7 +366,7 @@ $conn->close();
 
       html2pdf().set({
         margin: [10, 4, 5, 4], // top, left, bottom, right
-        filename: 'nagar_yatra_ride_summary.pdf',
+        filename: 'NagarYatra_Report_Summary.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
           scale: 2,

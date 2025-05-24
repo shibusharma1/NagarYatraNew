@@ -137,7 +137,7 @@
             <h2>6. Contact Us</h2>
             <p>If you have any questions or concerns about our Terms and Conditions, please feel free to contact us at:</p>
             <p>Email: <a href="mailto: nagarctservices@gmail.com">nagarctservices@gmail.com</a></p>
-            <p>Phone: +977-9819099126</p>
+            <p>Phone: <a href="tel: +977-9819099126">+977-9819099126</a></p>
             <p>Address: Biratnagar</p>
         </section>
         <?php
