@@ -204,7 +204,7 @@ $total_pages = ceil($total_records / $limit);
 
 <body>
     <!-- <div class="container"> -->
-    <h2>Ride History</h2>
+    <h2>My Bookings</h2>
     <table>
         <thead>
             <tr>

@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($stmt->execute()) {
             // header("Location: vehicles_category.php");
+            $_SESSION['vehicle_category']='succesful';
             echo "<script>window.location.href = 'vehicles_category.php';</script>";
             exit();
 

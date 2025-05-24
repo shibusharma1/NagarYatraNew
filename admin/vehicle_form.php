@@ -80,6 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 echo "<div class='success-msg'>Vehicle added successfully!</div>";
+                $_SESSION['vehicle_added'] = true;
                 header("Location: vehicles");
 
             } else {

@@ -14,7 +14,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $company = mysqli_fetch_assoc($result);
 
     if (!$company) {
-        $_SESSION['vehicle_company']='succesful';
+        $_SESSION['vehicle_company']='succesful';R
         header("Location: vehicle_company.php");
         exit;
     }
@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssii", $name, $headquarter, $global_presence, $company_id);
 
         if ($stmt->execute()) {
+            $_SESSION['vehicle_company']='succesful';
             header("Location: vehicles_company.php");
             exit;
         } else {

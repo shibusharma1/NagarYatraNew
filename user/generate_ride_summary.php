@@ -94,7 +94,7 @@ ob_start();
 <body>
 
     <div class="header">
-        <img src="../assets/logo1.png" alt="NagarYatra" class="logo"> <!-- Adjust logo path -->
+        <img src="../assets/logo1.png" alt="NagarYatra" class="logo"> Adjust logo path
         <h1 class="title">Ride Summary</h1>
     </div>
 

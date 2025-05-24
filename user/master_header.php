@@ -10,7 +10,9 @@ if (!isset($_SESSION['id'])) {
 <!-- code to extract role -->
 <?php
 require_once('../config/connection.php');
+if(!$title == 'feedback'){
 include('../chatbot.php');
+}
 // SQL query
 $id = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE id = $id";
@@ -313,7 +315,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                     ?>
                     <a href="book_ride.php">
                         <div class="item <?php echo ($current_page == 'vehicle_list') ? 'active' : ''; ?>">
-                            <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Book a Ride
+                            <i class="fa fa-route" aria-hidden="true"></i> &nbsp; Book Now
                         </div>
                     </a>
 
@@ -375,7 +377,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
                 <a href="ride_history.php">
                     <div class="item <?php echo ($current_page == 'ride_history') ? 'active' : ''; ?>">
-                        <i class="fa fa-history" aria-hidden="true"></i> &nbsp; Ride History
+                        <i class="fa fa-history" aria-hidden="true"></i> &nbsp; My Bookings
                     </div>
                 </a>
 

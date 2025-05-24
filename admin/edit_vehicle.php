@@ -16,6 +16,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     // If the vehicle doesn't exist, redirect to the vehicle list
     if (!$vehicle) {
+
         header("Location: vehicles");
         exit;
     }
@@ -77,6 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             echo "<div class='success-msg'>Vehicle updated successfully!</div>";
            // header("Location: vehicle");
+           $_SESSION['vehicle_edited'] = true;
+
            header("Location: vehicles");
            exit;
            ob_end_flush(); // End buffering and send output

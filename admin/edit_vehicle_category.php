@@ -14,6 +14,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $category = mysqli_fetch_assoc($result);
 
     if (!$category) {
+        
         header("Location: vehicles_category.php");
         exit;
     }
@@ -66,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssiiisi", $name, $image, $seats, $min_cost, $per_km_cost, $fuel_type, $category_id);
 
         if ($stmt->execute()) {
+            $_SESSION['edit_vehicle_category']='succesful';
             header("Location: vehicles_category.php");
             exit;
         } else {

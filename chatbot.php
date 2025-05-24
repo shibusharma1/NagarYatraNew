@@ -2,16 +2,7 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
     $userMessage = strtolower(trim($_POST['message']));
 
-    // $responses = [
-    //     "hi" => "Hello! How can I assist you with your vehicle booking?",
-    //     "hello" => "Hi there! Need help booking a ride?",
-    //     "book" => "Sure, you can book a vehicle from the 'Book Now' page.",
-    //     "available" => "Yes, vehicles are available. Please select your pickup and destination.",
-    //     "status" => "Please login to your account and check 'My Bookings' for the status.",
-    //     "thank you" => "You're welcome! Let me know if you need anything else.",
-    //     "bye" => "Goodbye! Have a safe journey.",
-    // ];
-    // require_once('responses.php');
+
     $responses = [
         // Greetings
         "hi" => "Hello! How can I help you today?",
@@ -147,105 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
 }
 ?>
 
-<!-- HTML Below
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Vehicle Booking Chatbot</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #f1f1f1;
-            padding: 20px;
-        }
-
-        #chatbox {
-            width: 100%;
-            max-width: 500px;
-            margin: auto;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .message {
-            margin: 10px 0;
-        }
-
-        .user {
-            text-align: right;
-            color: #092448;
-        }
-
-        .bot {
-            text-align: left;
-            color: #333;
-        }
-
-        input[type="text"] {
-            width: 80%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 9px 15px;
-            background-color: #092448;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="chatbox">
-        <div id="chatlog"></div>
-        <div>
-            <input type="text" id="userInput" placeholder="Type your message..." />
-            <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
-
-    <script>
-        function appendMessage(content, sender) {
-            const chatlog = document.getElementById("chatlog");
-            const div = document.createElement("div");
-            div.className = "message " + sender;
-            div.textContent = content;
-            chatlog.appendChild(div);
-        }
-
-        function sendMessage() {
-            const input = document.getElementById("userInput");
-            const message = input.value.trim();
-            if (!message) return;
-
-            appendMessage(message, "user");
-            input.value = "";
-
-            fetch(window.location.href, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: "message=" + encodeURIComponent(message)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    appendMessage(data.reply, "bot");
-                })
-                .catch(err => {
-                    appendMessage("Error connecting to the chatbot.", "bot");
-                });
-        }
-    </script>
-</body>
-
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -253,11 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #e9f0f5;
-            margin: 0;
-        } */
+       
 
         /* Chatbox Container */
         #chat-container {

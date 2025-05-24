@@ -7,8 +7,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     // Update the 'is_delete' column to 1 (soft delete the vehicle)
     $sql = "UPDATE vehicle SET is_delete = 1 WHERE id = $vehicle_id";
+    $_SESSION['vehicle_deleted'] = true;
 
     if (mysqli_query($conn, $sql)) {
+        $_SESSION['vehicle_deleted'] = true;
+        $_SESSION['vehicle_deleted'] = true;
         header("Location: vehicles"); // Redirect to vehicle list after soft delete
         exit;
     } else {

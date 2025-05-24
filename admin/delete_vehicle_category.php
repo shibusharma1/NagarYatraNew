@@ -9,6 +9,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $sql = "DELETE FROM vehicle_category WHERE id = $vehicle_id";
 
     if (mysqli_query($conn, $sql)) {
+        $_SESSION['delete_vehicle_category'] = true;
         header("Location: vehicles_category.php"); // Redirect to the category list page
         exit;
     } else {
