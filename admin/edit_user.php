@@ -113,6 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             if ($stmt->execute()) {
                 $success = "User updated successfully!";
+                $_SESSION['user_updated'] = "User updated successfully!";
                 // Get current date and time
                 $time = date("F j, Y, g:i a");
 
@@ -179,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             value="<?= htmlspecialchars($user['address']) ?>" required>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         <label for="password" class="form-label">Password (Leave blank to keep current password)</label>
         <input type="password" class="form-control" id="password" name="password">
     </div>
@@ -242,7 +243,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="form-group">
             <label for="experience" class="form-label">Experience</label>
             <textarea class="form-control" id="experience"
-                name="experience"><?= htmlspecialchars($user['experience']) ?></textarea>
+                name="experience"><?= !empty($user['experience']) ? htmlspecialchars($user['experience']) : ''; ?></textarea>
         </div>
 
         <div class="form-group">
@@ -265,7 +266,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="custom-btn">Save</button>
 </form>
 
 <script>

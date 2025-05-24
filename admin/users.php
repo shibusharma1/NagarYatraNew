@@ -43,6 +43,28 @@ $result_count = mysqli_query($conn, $sql_count);
 $total_rows = mysqli_fetch_assoc($result_count)['total'];
 $total_pages = ceil($total_rows / $records_per_page);
 ?>
+<?php if (isset($_SESSION['user_updated'])): ?>
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+
+    Toast.fire({
+      icon: "success",
+      title: "User updated successfully"
+    });
+  </script>
+  <?php unset($_SESSION['user_updated']); ?>
+<?php endif; ?>
+
 
 <div class="table-heading">
   <div class="heading-2">
@@ -184,6 +206,30 @@ $total_pages = ceil($total_rows / $records_per_page);
               data-id="<?php echo $row['id']; ?>">
               <i class="fa fa-trash-o" aria-hidden="true"></i>
             </a>
+            <script>
+              document.querySelectorAll('.delete-user').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                  e.preventDefault(); // Stop the default link behavior
+                  const url = this.getAttribute('href');
+
+                  Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you really want to delete this user?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = url; // Redirect to delete URL
+                    }
+                  });
+                });
+              });
+            </script>
+
           </td>
         </tr>
         <?php
