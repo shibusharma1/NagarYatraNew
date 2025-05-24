@@ -10,10 +10,33 @@ $sql = "SELECT * FROM vehicle_company";
 $result = mysqli_query($conn, $sql);
 ?>
 
+
 <div class="table-heading">
   <div class="heading-2">
     <h2>Vehicle Companies</h2>
   </div>
+  <?php if (isset($_SESSION['vehicle_company'])): ?>
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+
+    Toast.fire({
+      icon: "success",
+      title: "vehicle Company Updated Successfully"
+    });
+  </script>
+  <?php unset($_SESSION['vehicle_company']); ?>
+<?php endif; ?>
+
   <div class="add-button">
     <a href="add_vehicle_company.php">
       <button><i class="fa fa-plus" aria-hidden="true"></i> Add Company</button>

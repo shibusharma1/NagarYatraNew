@@ -106,6 +106,9 @@ if (!isset($_SESSION['admin_id'])) {
         .heading-2 h2{
             color: #092448;
         } 
+        .no_image{
+            height: 450px;
+        }
     </style>
 
 </head>

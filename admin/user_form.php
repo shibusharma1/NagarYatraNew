@@ -11,7 +11,7 @@ $success = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+    // $password = trim($_POST['password']);
     $phone = trim($_POST['phone']);
     $dob = trim($_POST['dob']);
     $gender = $_POST['gender'];
@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = trim($_POST['address']); // Get address input
 
     $experience = $dl_number = $dl_expiry_date = $dl_image = null;
+    $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8);
 
     // Validate required fields
     if (empty($name)) $errors['name'] = "Full name is required.";
@@ -181,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" class="form-control" id="address" name="address" value="<?= htmlspecialchars($_POST['address'] ?? '') ?>" required>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>
     </div>

@@ -235,7 +235,7 @@ $total_pages = ceil($total_rows / $records_per_page);
         <?php
       }
     } else {
-      echo "<tr><td colspan='9'>No users available.</td></tr>";
+      echo "<tr><td colspan='9'><img src='../assets/no_data.svg' alt='No data Found'class='no_image'/></td></tr>";
     }
     ?>
   </tbody>

@@ -14,6 +14,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $company = mysqli_fetch_assoc($result);
 
     if (!$company) {
+        $_SESSION['vehicle_company']='succesful';
         header("Location: vehicle_company.php");
         exit;
     }
