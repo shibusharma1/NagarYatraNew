@@ -1,6 +1,7 @@
 <?php
 session_start();
 $title = "NagarYatra | Verify OTP";
+$current_page = 'otp';
 include_once "register_login_header.php";
 ?>
 <!DOCTYPE html>

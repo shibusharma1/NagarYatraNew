@@ -10,6 +10,7 @@ session_destroy();
 session_start();
 require_once('config/connection.php');
 $title = "NagarYatra | Login";
+$current_page ='login';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = stripcslashes($_POST['email']);

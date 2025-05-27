@@ -5,8 +5,8 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <!-- <link rel="icon" href="assets/logo1.png" type="image/png"> -->
-  <link rel="icon" href="assets/logo1.png" type="image/png">
-  <link rel="icon" href="assets/logo1.png" type="image/png">
+   <link rel="icon" href="assets/logo1.png" type="image/png">
+   <link rel="icon" href="assets/logo1.png" type="image/png">
 
 
    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
@@ -22,6 +22,30 @@
 <body>
    <div class="container">
       <div class="img">
-         <img src="assets/bbg.svg">
+         <?php
+         if ($current_page == 'otp') {
+            ?>
+            <img src="assets/enter-otp-animate.svg">
+
+             <?php
+         } elseif($current_page == 'reset') {
+            ?>
+            <img src="assets/reset-password-animate.svg">
+            <?php
+         }
+         elseif($current_page == 'forget') {
+            ?>
+            <img src="assets/reset-password-animate.svg">
+            <?php
+         }
+        
+            else {
+            ?>
+            <img src="assets/bbg.svg">
+            <?php
+         }
+         ?>
+
+
       </div>
       <div class="login-content">

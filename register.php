@@ -1,5 +1,6 @@
 <?php
 $title = "NagarYatra | Register";
+$current_page = 'register';
 session_start();
 include_once 'config/connection.php'; // Include database connection
 require 'mailer.php'; // Include PHPMailer file (if needed)

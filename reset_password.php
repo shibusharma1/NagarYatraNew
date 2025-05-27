@@ -1,4 +1,5 @@
 <?php
+$current_page = 'reset';
 session_start();
 require 'config/connection.php';
 

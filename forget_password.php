@@ -1,4 +1,5 @@
 <?php
+$current_page = 'forget';
 session_start();
 require 'config/connection.php'; // Ensure this uses MySQLi connection
 $title = "NagarYatra | Forget Password ";
