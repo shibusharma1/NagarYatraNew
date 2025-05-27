@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     "customer_info": {
         "name": "Test Bahadur",
         "email": "test@khalti.com",
-        "phone": "9800000001"
+        "phone": "9800000002"
     }
     }
 
     ',
     CURLOPT_HTTPHEADER => array(
-        'Authorization: key ec7eb85c4f98467193859cfeeef2314d',
+        'Authorization: key ef74d2c2c9654215ab0602198e6cf16e',
         'Content-Type: application/json',
     ),
     ));
