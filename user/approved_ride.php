@@ -72,7 +72,7 @@ $result = $conn->query($sql);
                 echo '</tr></table>';
             }
         } else {
-            echo '<tr><td colspan="9" style="color:#092448;font-size:1.5rem;"><img src="../assets/search_no_data.svg" alt="No data" height="600px"></td></tr>';
+            echo '<tr><td colspan="9" style="color:#092448;font-size:1.5rem;"><img src="../assets/search_no_data.svg" alt="No data" height="450px"></td></tr>';
         }
         ?>
     </table>

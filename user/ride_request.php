@@ -132,10 +132,10 @@ if (!empty($validBookingIds)) {
         }
         echo '</div>';
     } else {
-        echo "<td colspan=8 style='color:#092448;font-size:2rem;'>No bookings available within your area.</td>";
+        echo "<td colspan=8 style='color:#092448;font-size:2rem;'><img src='../assets/no_data.svg' alt='No bookings available within your area.' height=550 style='padding-left:14rem;'></td>";
     }
 } else {
-    echo "No bookings available within 10KM.";
+    echo "<img src='../assets/no-data-animate.svg' alt='No Booking Found in near 10KM.' height=550 style='padding-left:20rem;'>";
 }
 
 $conn->close();
