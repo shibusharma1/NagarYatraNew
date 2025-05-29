@@ -148,6 +148,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+<style>
+    .menu-bar{
+            margin-top: -1.5rem !important;
+    }
+     .note-editor.note-frame {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+</style>
 
 <?php include_once 'master_header.php'; ?>
 
@@ -276,5 +285,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         driverFields.style.display = (roleSelect.value === '1') ? 'block' : 'none';
     }
 </script>
+<script>
+  $(document).ready(function () {
+    $('#experience').summernote({
+      placeholder: 'Describe your experience...',
+      tabsize: 2,
+      height: 200,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+  });
+</script>
+
 
 <?php include_once 'master_footer.php'; ?>

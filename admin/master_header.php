@@ -100,14 +100,22 @@ if (!isset($_SESSION['admin_id'])) {
         .menu-bar .logo-img {
             padding-top: 18px;
         }
-        a{
+
+        a {
             text-decoration: none !important;
         }
-        .heading-2 h2{
+
+        .heading-2 h2 {
             color: #092448;
-        } 
-        .no_image{
+        }
+
+        .no_image {
             height: 450px;
+        }
+
+        .note-editor.note-frame {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
         }
     </style>
 
@@ -162,8 +170,14 @@ if (!isset($_SESSION['admin_id'])) {
                 </div>
             </a>
 
+            <a href="earning">
+                <div class="item <?php echo ($current_page == 'earning') ? 'active' : ''; ?>">
+                    <i class="fa fa-dollar" aria-hidden="true"></i> &nbsp; Earnings
+                </div>
+            </a>
 
-          
+
+
             <a href="feedbacks">
                 <div class="item <?php echo ($current_page == 'feedback') ? 'active' : ''; ?>">
                     <i class="fa fa-commenting-o" aria-hidden="true"></i> &nbsp; Feedback
@@ -193,11 +207,12 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="notification-account-info">
                 <!-- Bell Icon with Notification Badge -->
                 <!-- <div class="notification">-->
-                    <!-- <i class="fa fa-bell" aria-hidden="true"></i>  -->
-                    <i class="fa fa-user-circle" aria-hidden="true"  style="font-size: 24px;"></i>  <!-- Good for profile/admin -->
+                <!-- <i class="fa fa-bell" aria-hidden="true"></i>  -->
+                <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 24px;"></i>
+                <!-- Good for profile/admin -->
 
-                    <!-- <sup class="badge">3</sup> -->
-                    <!-- <div class="dropdown">
+                <!-- <sup class="badge">3</sup> -->
+                <!-- <div class="dropdown">
                         <div class="notif-item">Notification 1</div>
                         <div class="notif-item">Notification 2</div>
                         <div class="notif-item">Notification 3</div>

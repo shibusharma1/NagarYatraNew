@@ -10,9 +10,10 @@ if (!isset($_SESSION['id'])) {
 <!-- code to extract role -->
 <?php
 require_once('../config/connection.php');
-if(!$title == 'feedback'){
-include('../chatbot.php');
+if($current_page != 'feedback'){
+    include('../chatbot.php');
 }
+
 // SQL query
 $id = $_SESSION['id'];
 $sql = "SELECT * FROM user WHERE id = $id";
@@ -334,9 +335,9 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <?php
                 if ($row['role'] == 1) {
                     ?>
-                    <a href="show_vehicle">
+                    <a href="show_vehicle.php?id=<?php echo $_SESSION['vehicle_id']; ?>">
                         <div class="item <?php echo ($current_page == 'show_vehicle') ? 'active' : ''; ?>">
-                            <i class="fa fa-car" aria-hidden="true"></i> &nbsp; Vehicle Details
+                            <i class="fa fa-car" aria-hidden="true"></i> &nbsp; Vehicle Profile
                         </div>
                     </a>
                 <?php } ?>

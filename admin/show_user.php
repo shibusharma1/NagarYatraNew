@@ -8,7 +8,11 @@ include_once 'master_header.php';
 
 <!-- Link External CSS -->
 <link rel="stylesheet" href="styles.css">
-
+<style>
+    .menu-bar{
+            margin-top: -1.5rem !important;
+    }
+</style>
 <?php
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
