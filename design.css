@@ -28,7 +28,7 @@ body {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 2rem 0;
 }
 
 .section__title {
@@ -170,7 +170,7 @@ body {
 }
 
 .service__card {
-  background: var(--text-light);
+  background: #FFFFFF;
   padding: 2rem;
   border-radius: 10px;
   text-align: center;

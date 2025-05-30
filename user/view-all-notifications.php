@@ -1,5 +1,6 @@
 <?php
 $title = "NagarYatra | Notifications";
+$current_page = 'notifications';
 // $current_page = "index";
 
 include_once 'master_header.php';

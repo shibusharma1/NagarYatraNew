@@ -41,7 +41,7 @@ include('chatbot.php');
       </div>
 
       <div class="nav__buttons">
-        <a href="user/book_ride.php" class="btn btn--primary">Book Ride</a>
+        <a href="user/book_ride.php" class="btn btn--primary">Sign In</a>
         <a href="register.php" class="btn btn--outline">Sign Up</a>
       </div>
     </nav>
@@ -75,7 +75,7 @@ include('chatbot.php');
     </section>
 
     <!-- Services Section -->
-    <section class="services section" id="services">
+    <section class="services section" id="services" style="background-color: #F1F3F5;">
       <div class="services__content container">
         <h2 class="section__title">Our Services</h2>
 

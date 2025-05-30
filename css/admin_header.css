@@ -65,7 +65,7 @@
 .item:hover {
   background: #496cb1;
   color: #333;
-  font-size: 0.9rem;
+  /* font-size: 0.9rem; */
 }
 
 .item.active {

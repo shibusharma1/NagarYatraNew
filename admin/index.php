@@ -27,9 +27,12 @@ require_once '../config/connection.php';
   </script>
   <?php unset($_SESSION['login_success']); ?>
 <?php endif; ?>
+<div class="heading" style="color: #092448;
+">
 <h2>Dashboard</h2>
+</div>
 <!-- Users details -->
-<div class="row my-5">
+<div class="row my-3">
   <!-- Total Users Card -->
   <div class="col-lg-3">
     <div class="s7__widget-three card shadow-sm  card-info">
@@ -135,7 +138,7 @@ require_once '../config/connection.php';
 
 <!-- Total Driver -->
 
-<div class="row my-5">
+<div class="row my-3">
   <!-- Total Users Card -->
   <div class="col-lg-3">
     <div class="s7__widget-three card shadow-sm  card-info">
@@ -245,7 +248,7 @@ require_once '../config/connection.php';
 </div>
 
 <!-- Vehicle and booking -->
-<div class="row my-5">
+<div class="row my-3">
   <!-- Total Users Card -->
   <div class="col-lg-3">
     <div class="s7__widget-three card shadow-sm  card-info">

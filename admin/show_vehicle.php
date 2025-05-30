@@ -180,7 +180,7 @@ if (isset($_GET['id'])) {
 
             <div class="row g-4 mb-5">
                 <!-- Vehicle Card -->
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <div class="detail-card h-100">
                         <?php
                         $imagePath = (!empty($row['thumb_image']) && file_exists($row['thumb_image']))

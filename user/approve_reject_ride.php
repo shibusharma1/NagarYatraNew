@@ -33,56 +33,47 @@ if (isset($_POST['booking_id'])) {
                     $vehicle_stmt->execute();
                     $vehicle_stmt->store_result();
 
-                    $vehicle_stmt->bind_result($vehicle_id, $name, $phone);
-                    if ($vehicle_stmt->fetch() && $vehicle_id !== null) {
-                        $vehicle_stmt->close(); // Close before next query
-                        // echo "Name: " . $name . "<br>";
-                        // echo "Phone: " . $phone . "<br>";
+                    $vehicle_stmt->bind_result($name, $phone, $vehicle_id); // ✅ Corrected order
 
-                        // 3. Update vehicle_id in booking
+                    if ($vehicle_stmt->fetch() && $vehicle_id !== null) {
+                        $vehicle_stmt->close();
+
+                        // ✅ Check if vehicle exists in vehicle table
+                        $check_vehicle = $conn->prepare("SELECT id FROM vehicle WHERE id = ?");
+                        $check_vehicle->bind_param("i", $vehicle_id);
+                        $check_vehicle->execute();
+                        $check_vehicle->store_result();
+                        if ($check_vehicle->num_rows === 0) {
+                            echo "<script>alert('Invalid vehicle assigned.'); window.history.back();</script>";
+                            exit;
+                        }
+                        $check_vehicle->close();
+
+                        // ✅ Now update booking with valid vehicle_id
                         $assign_stmt = $conn->prepare("UPDATE booking SET vehicle_id = ? WHERE id = ?");
                         if ($assign_stmt) {
                             $assign_stmt->bind_param("ii", $vehicle_id, $booking_id);
                             $assign_stmt->execute();
                             $assign_stmt->close();
 
-                            // Fetching user if from booking and storing it in the notification table.
-                            $sql = "SELECT user_id FROM booking WHERE booking_id = $booking_id";
+                            // ✅ Get user_id from booking
+                            $sql = "SELECT user_id FROM booking WHERE id = $booking_id";
                             $result = mysqli_query($conn, $sql);
 
                             if ($result && mysqli_num_rows($result) > 0) {
                                 $row = mysqli_fetch_assoc($result);
-                                $user_id = $row['user_id'];
+                                $ride_user_id = $row['user_id'];
 
-                                // now storing the ride accepted message in notifications table
-                                // Code for notifications
-
-                                // Compose the notification message
+                                // ✅ Compose and store notification
                                 $message = "Your ride has been successfully accepted by {$name}. You can contact your driver at {$phone}. They are expected to reach your location within approximately 20 minutes.";
-                                // Escape the message to avoid SQL errors
                                 $escaped_message = mysqli_real_escape_string($conn, $message);
 
-                                // Build the query (handle NULL for user_id)
-                                if ($user_id !== NULL) {
-                                    $sql = "INSERT INTO notifications (user_id, message) VALUES ($user_id, '$escaped_message')";
-                                } else {
-                                    $sql = "INSERT INTO notifications (user_id, message) VALUES (NULL, '$escaped_message')";
-                                }
-
-                                // Execute the query
-                                if (mysqli_query($conn, $sql)) {
-                                    // echo "Notification sent successfully!";
-                                } else {
-                                    echo "Error: " . mysqli_error($conn);
-                                }
-
-
-
+                                $notif_sql = "INSERT INTO notifications (user_id, message) VALUES (?, ?)";
+                                $notif_stmt = $conn->prepare($notif_sql);
+                                $notif_stmt->bind_param("is", $ride_user_id, $escaped_message);
+                                $notif_stmt->execute();
+                                $notif_stmt->close();
                             }
-
-
-
-
                         }
                     } else {
                         $vehicle_stmt->close(); // Always close
@@ -95,7 +86,7 @@ if (isset($_POST['booking_id'])) {
             echo "<script>window.location.href='ride_request.php?page={$page}';</script>";
             exit;
         } else {
-            $stmt->close(); // Ensure closure
+            $stmt->close();
             echo "<script>alert('Failed to update booking.'); window.history.back();</script>";
             exit;
         }

@@ -111,7 +111,7 @@ if (!$image) {
 
 
 <!-- Users details -->
-<div class="row my-5">
+<div class="row my-4">
     <!-- Total Users Card -->
     <div class="col-lg-3">
         <div class="s7__widget-three card shadow-sm  card-info">

@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
         "awesome" => "Thanks! Glad I could assist.",
         "cool" => "Cool! Let me know if you need anything else.",
         "sure" => "Yes, go ahead!",
-        "yes" => "Perfect. Proceed to booking.",
+        // "yes" => "Perfect. Proceed to booking.",
         "no" => "Alright, let me know if you change your mind.",
     ];
 
@@ -166,7 +166,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
         #chatbox {
             display: flex;
             flex-direction: column;
-            height: 500px;
+            min-height: 300px;
+            max-height: 500px;
         }
 
         #chatlog {
