@@ -127,6 +127,14 @@ $total_pages = ceil($total_records / $limit);
             background-color: rgb(230, 80, 95);
         }
 
+        .status-7 {
+            background-color: #28a745;
+        }
+
+        .status-8 {
+            background-color: #28a745;
+        }
+
         .pagination {
             margin-top: 20px;
             text-align: center;
@@ -229,30 +237,30 @@ $total_pages = ceil($total_records / $limit);
     }
     ?>
     <!-- SweetAlert for cash Received -->
-     
-<?php if (isset($_SESSION['cash_paid_success'])): ?>
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Cash Payment Received',
-            text: 'Booking has been marked as paid.',
-            confirmButtonColor: '#092448'
-        });
-    </script>
-    <?php unset($_SESSION['cash_paid_success']); ?>
-<?php endif; ?>
 
-<?php if (isset($_SESSION['cash_paid_failed'])): ?>
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Failed to update booking status.',
-            confirmButtonColor: '#092448'
-        });
-    </script>
-    <?php unset($_SESSION['cash_paid_failed']); ?>
-<?php endif; ?>
+    <?php if (isset($_SESSION['cash_paid_success'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Cash Payment Received',
+                text: 'Booking has been marked as paid.',
+                confirmButtonColor: '#092448'
+            });
+        </script>
+        <?php unset($_SESSION['cash_paid_success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['cash_paid_failed'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to update booking status.',
+                confirmButtonColor: '#092448'
+            });
+        </script>
+        <?php unset($_SESSION['cash_paid_failed']); ?>
+    <?php endif; ?>
 
 
 
