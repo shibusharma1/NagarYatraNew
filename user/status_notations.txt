@@ -6,3 +6,5 @@ Status Notations
 4 => Rejected (by Driver)
 5 => Completed/Success
 6 => cancelled (By rider after accpeting it)
+7 => Paid cash
+8 => Paid eSewa

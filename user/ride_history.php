@@ -106,7 +106,7 @@ $total_pages = ceil($total_records / $limit);
         .status-1 {
             background-color: #dc3545;
         }
-        
+
         .status-2 {
             background-color: #E4A11B;
         }
@@ -124,7 +124,7 @@ $total_pages = ceil($total_records / $limit);
         }
 
         .status-6 {
-            background-color:rgb(230, 80, 95);
+            background-color: rgb(230, 80, 95);
         }
 
         .pagination {
@@ -199,10 +199,63 @@ $total_pages = ceil($total_records / $limit);
         .modal-backdrop.fade.show {
             display: none;
         }
+
+        .btn-primary {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION['paid_via_esewa']) && $_SESSION['paid_via_esewa'] == 1) {
+        echo '
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Payment Successful",
+            text: "You have successfully paid via eSewa!",
+            confirmButtonColor: "#3085d6"
+        });
+    </script>';
+
+        // Optionally unset it after showing message
+        unset($_SESSION['paid_via_esewa']);
+    }
+    ?>
+    <!-- SweetAlert for cash Received -->
+     
+<?php if (isset($_SESSION['cash_paid_success'])): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Cash Payment Received',
+            text: 'Booking has been marked as paid.',
+            confirmButtonColor: '#092448'
+        });
+    </script>
+    <?php unset($_SESSION['cash_paid_success']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['cash_paid_failed'])): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to update booking status.',
+            confirmButtonColor: '#092448'
+        });
+    </script>
+    <?php unset($_SESSION['cash_paid_failed']); ?>
+<?php endif; ?>
+
+
+
     <!-- <div class="container"> -->
     <h2>My Bookings</h2>
     <table>
@@ -232,31 +285,46 @@ $total_pages = ceil($total_records / $limit);
                         <td><?= htmlspecialchars($booking['destination']); ?></td>
                         <td><?= date("d M Y", strtotime($booking['booking_date'])); ?></td>
                         <td>
-                            <span class="status-badge status-<?= $booking['status']; ?>">
+                            <div style="display: flex; flex-direction: column; gap: 6px; align-items: center;">
+                                <span class="status-badge status-<?= $booking['status']; ?>">
+                                    <?php
+                                    switch ($booking['status']) {
+                                        case 1:
+                                            echo "Cancelled(U)";
+                                            break;
+                                        case 3:
+                                            echo "Accepted";
+                                            break;
+                                        case 4:
+                                            echo "Rejected";
+                                            break;
+                                        case 5:
+                                            echo "Completed";
+                                            break;
+                                        case 6:
+                                            echo "Cancelled(D)";
+                                            break;
+                                        default:
+                                            echo "Completed";
+                                    }
+                                    ?>
+                                </span>
+
                                 <?php
-                                switch ($booking['status']) {
-                                    case 1:
-                                        echo "Cancelled(U)";
-                                        break;
-                                        
-                                    case 3:
-                                        echo "Accepted";
-                                        break;
-                                    case 4:
-                                        echo "Rejected";
-                                        break;
-                                    case 5:
-                                        echo "Completed";
-                                        break;
-                                    case 6:
-                                        echo "Cancelled(D)";
-                                        break;
-                                    default:
-                                        echo "Unknown";
-                                }
-                                ?>
-                            </span>
+                                if ($_SESSION['role'] == 0 && $booking['status'] == 5): ?>
+                                    <a href="../esewa.php?booking_id=<?= $booking['id']; ?>" class="btn btn-primary"
+                                        style="padding: 5px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; background-color: green; color: #fff;">
+                                        Pay
+                                    </a>
+                                <?php elseif ($_SESSION['role'] != 0 && $booking['status'] == 5): ?>
+                                    <a href="cash_received.php?booking_id=<?= $booking['id']; ?>" class="btn btn-primary"
+                                        style="padding: 5px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; background-color: green; color: #fff;">
+                                        Cash Received
+                                    </a>
+                                <?php endif; ?>
+                            </div>
                         </td>
+
                         <td>
                             <button class="btn btn-info btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#rideDetailsModal<?= $booking['id']; ?>" style="margin:5px;">

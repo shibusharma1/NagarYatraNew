@@ -1,30 +1,46 @@
 <?php
-// Sample dynamic values
-$total = 100; // Replace this with the actual total from your database or calculation
+// DB Connection (update your credentials accordingly)
+include('config/connection.php');
+$total = 100; // default
 $tax = 10;
+$bookingId = $_GET['booking_id'] ?? null;
+$_SESSION['booking_id'] = $bookingId;
+// If booking ID exists, try to fetch from DB
+if ($bookingId) {
+    $bookingId = intval($bookingId);
+    $stmt = $conn->prepare("SELECT estimated_cost FROM booking WHERE id = ? AND is_delete = 0");
+    $stmt->bind_param("i", $bookingId);
+    $stmt->execute();
+    $stmt->bind_result($fetched_cost);
+
+    if ($stmt->fetch()) {
+        $total = floatval($fetched_cost);
+        $tax = round($total * 0.10, 2); // Optional: 10% tax
+    }
+    $stmt->close();
+}
+
 $total_amount = $total + $tax;
 
 // Generate UUID v4
 function generateUUIDv4() {
     return sprintf(
         '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), // 32 bits for "time_low"
-        mt_rand(0, 0xffff),                     // 16 bits for "time_mid"
-        mt_rand(0, 0x0fff) | 0x4000,            // 16 bits for "time_hi_and_version"
-        mt_rand(0, 0x3fff) | 0x8000,            // 16 bits for "clk_seq_hi_res/clk_seq_low"
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff) // 48 bits for "node"
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0x0fff) | 0x4000,
+        mt_rand(0, 0x3fff) | 0x8000,
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
     );
 }
 
 $transaction_uuid = generateUUIDv4();
 $product_code = "EPAYTEST";
 
-// Signature generation
+// Signature
 $secret_key = "8gBm/:&EnhH.1/q";
 $signed_field_names = "total_amount,transaction_uuid,product_code";
 $message = "total_amount={$total_amount},transaction_uuid={$transaction_uuid},product_code={$product_code}";
-
-// Generate HMAC-SHA256 and encode in Base64
 $signature = base64_encode(hash_hmac('sha256', $message, $secret_key, true));
 ?>
 
@@ -36,7 +52,6 @@ $signature = base64_encode(hash_hmac('sha256', $message, $secret_key, true));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
     <div class="max-w-md w-full bg-white rounded-lg shadow-md overflow-hidden">
         <div class="bg-green-500 p-4">
@@ -49,7 +64,7 @@ $signature = base64_encode(hash_hmac('sha256', $message, $secret_key, true));
                 <div class="border-t border-b border-gray-200 py-3">
                     <div class="flex justify-between mb-2">
                         <span class="text-gray-600">Product</span>
-                        <span class="font-medium">Sample Product</span>
+                        <span class="font-medium">Ride Booking</span>
                     </div>
                     <div class="flex justify-between mb-2">
                         <span class="text-gray-600">Amount</span>
