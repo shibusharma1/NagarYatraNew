@@ -335,7 +335,7 @@ $nearest_users_str = implode(',', array_column($nearest_users, 'id')); // Store 
               $image = "../admin/" . htmlspecialchars($category['image']);
               ?>
               <img src="<?php echo $image; ?>" alt="<?= htmlspecialchars($category['name']); ?>"
-                style="width: 100%; height: 150px; object-fit: cover;">
+                style="width: 100%; height: 150px; object-fit: contain;">
               <div class="text-center mt-2"><?= htmlspecialchars($category['name']); ?></div>
             </div>
           </div>

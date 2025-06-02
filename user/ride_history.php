@@ -221,6 +221,23 @@ $total_pages = ceil($total_records / $limit);
 <body>
     <?php
     if (isset($_SESSION['paid_via_esewa']) && $_SESSION['paid_via_esewa'] == 1) {
+        // $bookingId = $_SESSION['booking_id'];
+        // $sql = "UPDATE booking SET status = 8 WHERE id = $bookingId";
+
+        // if ($conn->query($sql) === TRUE) {
+        //     $_SESSION['paid_via_esewa'] = 1;
+        //     $sql = "UPDATE booking SET status = 8 WHERE id = ?";
+        //     $stmt = $conn->prepare($sql);
+        //     $stmt->bind_param("i", $booking_id);
+
+        //     if (!$stmt->execute()) {
+        //         echo "<script>console.error('Error: " . addslashes($stmt->error) . "');</script>";
+        //     }
+        //     // header('Location: ride_history.php');
+        // } else {
+        //     echo "Error: " . $conn->error;
+        // }
+
         echo '
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -234,6 +251,7 @@ $total_pages = ceil($total_records / $limit);
 
         // Optionally unset it after showing message
         unset($_SESSION['paid_via_esewa']);
+        unset($_SESSION['booking_id']);
     }
     ?>
     <!-- SweetAlert for cash Received -->
@@ -320,9 +338,13 @@ $total_pages = ceil($total_records / $limit);
 
                                 <?php
                                 if ($_SESSION['role'] == 0 && $booking['status'] == 5): ?>
-                                    <a href="../esewa.php?booking_id=<?= $booking['id']; ?>" class="btn btn-primary"
+                                    <!-- <a href="../esewa.php?booking_id=<?= $booking['id']; ?>" target="_blank" class="btn btn-primary"
                                         style="padding: 5px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; background-color: green; color: #fff;">
-                                        Pay
+                                        Pay via eSewa
+                                    </a> -->
+                                        <a href="update_payment_status.php?booking_id=<?= $booking['id']; ?>" target="_blank" class="btn btn-primary"
+                                        style="padding: 5px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; background-color: green; color: #fff;">
+                                        Pay via eSewa
                                     </a>
                                 <?php elseif ($_SESSION['role'] != 0 && $booking['status'] == 5): ?>
                                     <a href="cash_received.php?booking_id=<?= $booking['id']; ?>" class="btn btn-primary"

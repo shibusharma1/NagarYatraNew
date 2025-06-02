@@ -6,10 +6,11 @@ include('config/connection.php');
 session_start();
 
 
+
 // Check for encoded `data` parameter from eSewa
 if (isset($_GET['data'])) {
     $rawData = $_GET['data'];
-    $bookingId = $_GET['booking_id'];
+    // $bookingId = $_GET['booking_id'];
     $json = base64_decode($rawData);
     $info = json_decode($json, true);
 
@@ -19,23 +20,24 @@ if (isset($_GET['data'])) {
         // echo "<strong>Amount:</strong> Rs. " . $info['total_amount'] . "<br>";
         // echo "<strong>Transaction ID:</strong> " . $info['transaction_uuid'] . "<br>";
         // $bookingId = $_SESSION['booking_id'];
-        $sql = "UPDATE booking SET status = 8 WHERE id = $bookingId";
+        // $sql = "UPDATE booking SET status = 8 WHERE id = $bookingId";
 
-        if ($conn->query($sql) === TRUE) {
-            $_SESSION['paid_via_esewa'] = 1;
-            $sql = "UPDATE booking SET status = 8 WHERE id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $booking_id);
+        // if ($conn->query($sql) === TRUE) {
+        //     $_SESSION['paid_via_esewa'] = 1;
+        //     $sql = "UPDATE booking SET status = 8 WHERE id = ?";
+        //     $stmt = $conn->prepare($sql);
+        //     $stmt->bind_param("i", $booking_id);
 
-            if (!$stmt->execute()) {
-                echo "<script>console.error('Error: " . addslashes($stmt->error) . "');</script>";
-            }
-            header('Location: ride_history.php');
-        } else {
-            echo "Error: " . $conn->error;
-        }
+        //     if (!$stmt->execute()) {
+        //         echo "<script>console.error('Error: " . addslashes($stmt->error) . "');</script>";
+        //     }
+            $_SESSION['paid_via_esewa']=1;
+            header('Location: user/ride_history.php');
+        // } else {
+        //     echo "Error: " . $conn->error;
+        // }
 
-        $conn->close();
+        // $conn->close();
     } else {
         echo "<h2 style='color: orange;'>⚠️ Payment received but status not complete.</h2>";
         echo "<pre>";

@@ -48,10 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
         "i want to cancel" => "Login and cancel your ride before approval.",
 
         // Payment
-        "pay" => "Payments can be made through khalti or cash on delivery.",
-        "payment" => "We support khalti and cash payments after ride completion.",
-        "online payment" => "Yes, you can pay using khalti during checkout.",
-        "how to pay" => "Choose your method during booking.",
+        "pay" => "Payments can be made through eSewa or cash.",
+        "payment" => "We support eSewa and cash payments after ride completion.",
+        "online payment" => "Yes, you can pay using eSewa during checkout.",
+        "how to pay" => "Choose your method during booking i.e eSewa or Cash.",
 
         // Thank You / Ending
         "thank you" => "You're welcome! Feel free to ask anything else.",

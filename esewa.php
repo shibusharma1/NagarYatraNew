@@ -15,7 +15,7 @@ if ($bookingId) {
 
     if ($stmt->fetch()) {
         $total = floatval($fetched_cost);
-        $tax = round($total * 0.10, 2); // Optional: 10% tax
+        $tax = round($total * 0.02, 2); // Optional: 2% tax
     }
     $stmt->close();
 }
@@ -90,7 +90,7 @@ $signature = base64_encode(hash_hmac('sha256', $message, $secret_key, true));
                 <input type="hidden" name="product_code" value="<?php echo $product_code; ?>">
                 <input type="hidden" name="product_service_charge" value="0">
                 <input type="hidden" name="product_delivery_charge" value="0">
-                <input type="hidden" name="success_url" value="http://localhost/NagarYatra/success.php/booking_id=<?= $booking_id ?>">
+                <input type="hidden" name="success_url" value="http://localhost/NagarYatra/success.php">
                 <input type="hidden" name="failure_url" value="http://localhost/NagarYatra/failure.php">
                 <input type="hidden" name="signed_field_names" value="<?php echo $signed_field_names; ?>">
                 <input type="hidden" name="signature" value="<?php echo $signature; ?>">
